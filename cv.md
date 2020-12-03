@@ -29,3 +29,25 @@ Management accounting of the company, financial reporting, сash flow planning a
   JLLC “NTS” (April 2013 – March 2015)
 
 Management accounting of the company, financial reporting, budgeting
+
+---
+
+#### **EDUCATION**
+
+- UpSkill Lab/Front-End (2020)
+  EPAM
+- English courses (B2) (2018)
+  Belhard
+
+- Management Accounting, International Financial Reporting Standards (2012)
+  Belarusian State University Institute of Business and Technology Management
+
+- Accounting, analysis and audit (2006 -2011)
+  Belarusian State Economic University
+
+---
+
+#### **SKILLS**
+
+- HTML, CSS, JavaScript
+- time management, organizational, analytical and communication skills
