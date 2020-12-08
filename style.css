@@ -1,0 +1,57 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header {
+  background-color: rgba(0, 102, 255, 0.185);
+}
+h4 {
+  border: 1px solid black;
+  text-align: left;
+  float: left;
+  width: 20%;
+}
+img {
+  float: right;
+  margin: -150px 10px 5px;
+}
+ul {
+  float: right;
+  width: 70%;
+  margin-block-start: 0em;
+}
+.summary {
+  float: right;
+  width: 70%;
+  margin-bottom: 2em;
+  font-weight: bold;
+}
+.section_summary {
+  height: 5rem;
+}
+.secrion_experience {
+  height: 17rem;
+}
+.section_education {
+  height: 20rem;
+}
+.section_skills {
+  height: 10rem;
+}
+p:first-of-type {
+  font-weight: bold;
+}
+p:nth-of-type(2) {
+  font-size: 80%;
+}
+p:nth-of-type(3) {
+  font-size: 80%;
+}
+address p:first-of-type {
+  font-weight: inherit;
+}
+address p:nth-of-type(2) {
+  font-size: inherit;
+}
+address p:nth-of-type(3) {
+  font-size: inherit;
+}
