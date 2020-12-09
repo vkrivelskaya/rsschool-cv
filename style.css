@@ -1,42 +1,56 @@
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-header {
-  background-color: rgba(0, 102, 255, 0.185);
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 162, 255, 0.767);
+  border-radius: 5px;
+  color: aliceblue;
+  box-shadow: 5px 5px 5px grey;
+  height: 250px;
+  padding: 10px 20px;
 }
-h4 {
+
+.photo {
+  align-self: center;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-h4 {
   border: 1px solid black;
-  text-align: left;
-  float: left;
-  width: 20%;
+  border-radius: 5px;
+  align-self: start;
+  width: 180px;
+  margin-right: 90px;
 }
-img {
-  float: right;
-  margin: -150px 10px 5px;
+
+.section-summary {
+  display: flex;
 }
-ul {
-  float: right;
-  width: 70%;
-  margin-block-start: 0em;
+
+.section-experience {
+  display: flex;
 }
+
+.section-education {
+  display: flex;
+}
+
+.section-skills {
+  display: flex;
+}
+
 .summary {
-  float: right;
-  width: 70%;
-  margin-bottom: 2em;
-  font-weight: bold;
+  width: 730px;
+  padding: 0px 0px 0px 30px;
 }
-.section_summary {
-  height: 5rem;
-}
-.secrion_experience {
-  height: 17rem;
-}
-.section_education {
-  height: 20rem;
-}
-.section_skills {
-  height: 10rem;
-}
+
 p:first-of-type {
   font-weight: bold;
 }
@@ -54,4 +68,8 @@ address p:nth-of-type(2) {
 }
 address p:nth-of-type(3) {
   font-size: inherit;
+}
+
+section.section-skills p {
+  font-weight: inherit;
 }
