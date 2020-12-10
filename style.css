@@ -4,22 +4,30 @@
 
 .header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   background-color: rgba(0, 162, 255, 0.767);
   border-radius: 5px;
   color: aliceblue;
   box-shadow: 5px 5px 5px grey;
-  height: 250px;
   padding: 10px 20px;
+  max-width: 70rem;
+  margin-bottom: 40px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .photo {
   align-self: center;
+  max-width: 10rem;
 }
 
 .container1 {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .header-h4 {
@@ -28,22 +36,27 @@
   align-self: start;
   width: 180px;
   margin-right: 90px;
+  margin-left: 20px;
 }
 
 .section-summary {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .section-experience {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .section-education {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .section-skills {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .summary {
@@ -54,22 +67,66 @@
 p:first-of-type {
   font-weight: bold;
 }
+
 p:nth-of-type(2) {
   font-size: 13px;
 }
+
 p:nth-of-type(3) {
   font-size: 13px;
 }
+
 address p:first-of-type {
   font-weight: inherit;
 }
+
 address p:nth-of-type(2) {
   font-size: inherit;
 }
+
 address p:nth-of-type(3) {
   font-size: inherit;
 }
 
 section.section-skills p {
   font-weight: inherit;
+}
+
+@media only screen and (min-width: 240px) and (max-width: 320px) {
+  .header {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .photo {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .header {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (orientation: landscape) {
+  .section-summary {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .section-experience {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .section-education {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .section-skills {
+    display: flex;
+    flex-wrap: nowrap;
+  }
 }
