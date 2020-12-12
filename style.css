@@ -1,0 +1,101 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: rgba(0, 162, 255, 0.767);
+  border-radius: 5px;
+  color: aliceblue;
+  box-shadow: 5px 5px 5px grey;
+  padding: 10px 20px;
+  margin-bottom: 40px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.photo {
+  align-self: center;
+  max-width: 160px;
+}
+
+.main-info-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  border: 1px solid black;
+  border-radius: 5px;
+  align-self: start;
+  width: 180px;
+  margin-right: 90px;
+  margin-left: 20px;
+}
+
+.section-content {
+  width: 820px;
+}
+
+.summary-section {
+  display: flex;
+  font-weight: bold;
+}
+
+.experience-section {
+  display: flex;
+}
+
+.education-section {
+  display: flex;
+}
+
+.skills-section {
+  display: flex;
+}
+
+.summary {
+  width: 844px;
+  padding-left: 30px;
+}
+
+.bold-line {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 992px) {
+  .summary-section {
+    flex-wrap: wrap;
+  }
+
+  .education-section {
+    flex-wrap: wrap;
+  }
+
+  .experience-section {
+    flex-wrap: wrap;
+  }
+
+  .skills-section {
+    flex-wrap: wrap;
+  }
+
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .page-content {
+    max-width: 992px;
+  }
+}
