@@ -2,6 +2,12 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.page-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+}
+
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -11,7 +17,6 @@
   color: aliceblue;
   box-shadow: 5px 5px 5px grey;
   padding: 10px 20px;
-  max-width: 70rem;
   margin-bottom: 40px;
 }
 
@@ -21,16 +26,16 @@ a {
 
 .photo {
   align-self: center;
-  max-width: 10rem;
+  max-width: 160px;
 }
 
-.container1 {
+.main-info-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
-.header-h4 {
+.section-title {
   border: 1px solid black;
   border-radius: 5px;
   align-self: start;
@@ -39,94 +44,58 @@ a {
   margin-left: 20px;
 }
 
-.section-summary {
+.section-content {
+  width: 820px;
+}
+
+.summary-section {
   display: flex;
-  flex-wrap: wrap;
-}
-
-.section-experience {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.section-education {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.section-skills {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.summary {
-  width: 730px;
-  padding: 0px 0px 0px 30px;
-}
-
-p:first-of-type {
   font-weight: bold;
 }
 
-p:nth-of-type(2) {
-  font-size: 13px;
+.experience-section {
+  display: flex;
 }
 
-p:nth-of-type(3) {
-  font-size: 13px;
+.education-section {
+  display: flex;
 }
 
-address p:first-of-type {
-  font-weight: inherit;
+.skills-section {
+  display: flex;
 }
 
-address p:nth-of-type(2) {
-  font-size: inherit;
+.summary {
+  width: 844px;
+  padding-left: 30px;
 }
 
-address p:nth-of-type(3) {
-  font-size: inherit;
+.bold-line {
+  font-weight: bold;
 }
 
-section.section-skills p {
-  font-weight: inherit;
-}
+@media only screen and (max-width: 992px) {
+  .summary-section {
+    flex-wrap: wrap;
+  }
 
-@media only screen and (min-width: 240px) and (max-width: 320px) {
+  .education-section {
+    flex-wrap: wrap;
+  }
+
+  .experience-section {
+    flex-wrap: wrap;
+  }
+
+  .skills-section {
+    flex-wrap: wrap;
+  }
+
   .header {
-    font-size: 13px;
-    margin-bottom: 10px;
+    flex-wrap: wrap;
   }
 
-  .photo {
-    width: 80px;
-  }
-}
-
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-  .header {
-    margin-bottom: 10px;
-  }
-}
-
-@media only screen and (min-width: 768px) and (orientation: landscape) {
-  .section-summary {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .section-experience {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .section-education {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .section-skills {
-    display: flex;
-    flex-wrap: nowrap;
+  .page-content {
+    max-width: 992px;
   }
 }
