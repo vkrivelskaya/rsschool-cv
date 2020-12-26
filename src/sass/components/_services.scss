@@ -1,0 +1,43 @@
+.our-services {
+    background-color: #F2F2F2;
+    border-bottom: 6px solid #FFFFFF;
+    padding: 59px 0px 26px 0px;
+}
+
+.our-services-wrapper {
+    max-width: $content-width;
+    margin:auto;
+
+    p {
+        color: #767E9E
+    }
+}
+
+.layout-3-colum {
+    margin: 0px 40px;
+    @include flex(31.91%);
+}
+
+.services-item {
+    max-width: 300px;
+    display:flex;
+    justify-content: space-between;
+    
+    .service-item-description {
+        overflow: hidden;
+    
+        p {
+            @include font($size:1.2rem, $height:2.2rem, $weight:normal, $style: normal);
+            text-align: justify;
+            color: #767E9E;
+            margin: 0px 0px 20px 20px;
+            height: 77px;
+        }
+    }   
+}
+
+.service-description {
+    @include font ($size:1.8rem, $height: 3.0rem, $weight: 300, $style: normal);
+    color :$color-text-add;
+    margin: 18px 44px 50px 40px;
+  }

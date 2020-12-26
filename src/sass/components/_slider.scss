@@ -1,0 +1,25 @@
+.slider {
+  background-color: $color-additional;
+  border-bottom: 6px solid #EA676B;
+}
+
+.slider-wrapper {
+  max-width: $content-width;
+  max-height: 594px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.arrow-left {
+  position: absolute;
+  top: 283px;
+  left: 38px;
+  cursor: pointer;
+}
+
+.arrow-right {
+  position: absolute;
+  top: 283px;
+  right: 38px;
+  cursor: pointer;
+}

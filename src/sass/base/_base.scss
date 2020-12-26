@@ -1,0 +1,35 @@
+html {
+font-size: 10px;
+}
+
+body {
+  @extend %font; 
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0px 0px 0px 40px;
+  text-transform: uppercase;
+  @include font($size: 2.5rem, $height: 3.0rem, $weight: bold, $style: normal);
+  color:  $color-light;
+  span {
+    color: $color-additional;
+  }
+}
+
+h2 {
+  @include font ($size:3.0rem, $height: 3.6rem, $weight: 900, $style: normal);
+  color:$color-text;
+  margin: 0px 0px 0px 40px;
+  
+}
+
+h4 {
+  @include font ($size:1.8rem, $height: 1.8rem, $weight: 900, $style: normal);
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+  color: $color-text;
+  margin:0px 0px 7px 20px;
+}
+
+

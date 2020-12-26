@@ -1,0 +1,16 @@
+@mixin font($size, $height, $weight, $style) {
+    font-size: $size;
+    line-height: $height;
+    font-weight: $weight;
+    font-style: $style;
+       
+}
+
+@mixin flex ($width) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    >* {
+        flex-basis: $width;
+    }
+}
