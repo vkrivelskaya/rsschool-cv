@@ -1,43 +1,82 @@
 .our-services {
-    background-color: #F2F2F2;
-    border-bottom: 6px solid #FFFFFF;
-    padding: 59px 0px 26px 0px;
+  background-color: #f2f2f2;
+  border-bottom: 6px solid #ffffff;
+  padding: 59px 0px 26px 0px;
+  @include media-tablet {
+    padding: 39.62px 0px 25px 0px;
+    border-bottom: none;
+  }
+  @include media-mobile {
+    padding: 25.6px 0px 0px 0px;
+    border-bottom: none;
+  }
 }
 
 .our-services-wrapper {
-    max-width: $content-width;
-    margin:auto;
-
-    p {
-        color: #767E9E
-    }
+  max-width: $content-width;
+  margin: auto;
+  p {
+    color: #767e9e;
+  }
 }
 
 .layout-3-colum {
-    margin: 0px 40px;
-    @include flex(31.91%);
+  margin: 0px 40px;
+  @include flex(31.91%);
+
+  @include media-tablet {
+    margin: 0px 75px 0px 42px;
+    @include flex(46.13%);
+  }
+  @include media-mobile {
+    margin: 0px 43px 0px 33px;
+    @include flex(100%);
+  }
 }
 
 .services-item {
-    max-width: 300px;
-    display:flex;
-    justify-content: space-between;
-    
-    .service-item-description {
-        overflow: hidden;
-    
-        p {
-            @include font($size:1.2rem, $height:2.2rem, $weight:normal, $style: normal);
-            text-align: justify;
-            color: #767E9E;
-            margin: 0px 0px 20px 20px;
-            height: 77px;
-        }
-    }   
+  width: 300px;
+  display: flex;
+
+  .service-item-description {
+    overflow: hidden;
+
+    p {
+      @include font(
+        $size: 1.2rem,
+        $height: 2.2rem,
+        $weight: normal,
+        $style: normal
+      );
+      text-align: justify;
+      color: #767e9e;
+      margin: 0px 0px 20px 20px;
+      max-height: 77px;
+      min-height: 30px;
+      padding-bottom: 11px;
+      @include media-tablet {
+        margin: 0px 0px 39px 20px;
+      }
+      @include media-mobile {
+        margin: 0px 0px 15px 20px;
+      }
+      @include media-small-mobile {
+        margin: 0px 0px 15px 20px;
+        max-height: 105px;
+      }
+    }
+  }
 }
 
 .service-description {
-    @include font ($size:1.8rem, $height: 3.0rem, $weight: 300, $style: normal);
-    color :$color-text-add;
-    margin: 18px 44px 50px 40px;
+  @include font($size: 1.8rem, $height: 3rem, $weight: 300, $style: normal);
+  color: $color-text-add;
+  margin: 18px 44px 47px 40px;
+  @include media-tablet {
+    padding-bottom: 9px;
+    margin: 18px 41px 28px 42px;
   }
+  @include media-mobile {
+    margin: 18px 29px 25px 33px;
+  }
+}
