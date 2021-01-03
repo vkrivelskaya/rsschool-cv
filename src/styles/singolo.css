@@ -1172,44 +1172,44 @@ a:hover {
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  background-image: url("/singolo/src/img/icons/ico-facebook.svg");
+  background-image: url("../assets/img/icons/ico-facebook.svg");
 }
 .contact-icons .facebook:hover {
   cursor: pointer;
-  background-image: url("/singolo/src/img/icons/ico-facebook hover.svg");
+  background-image: url("../assets/img/icons/ico-facebook hover.svg");
   transition: all 0.3s ease-in-out;
 }
 .contact-icons .google {
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  background-image: url("/singolo/src/img/icons/ico-google-plus.svg");
+  background-image: url("../assets/img/icons/ico-google-plus.svg");
 }
 .contact-icons .google:hover {
   cursor: pointer;
-  background-image: url("/singolo/src/img/icons/ico-google-plus hover.svg");
+  background-image: url("../assets/img/icons/ico-google-plus hover.svg");
   transition: all 0.3s ease-in-out;
 }
 .contact-icons .twitter {
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  background-image: url("/singolo/src/img/icons/ico-twitter.svg");
+  background-image: url("../assets/img/icons/ico-twitter.svg");
 }
 .contact-icons .twitter:hover {
   cursor: pointer;
-  background-image: url("/singolo/src/img/icons/ico-twitter hover.svg");
+  background-image: url("../assets/img/icons/ico-twitter hover.svg");
   transition: all 0.3s ease-in-out;
 }
 .contact-icons .linkedin {
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  background-image: url("/singolo/src/img/icons/ico-linkedin.svg");
+  background-image: url("../assets/img/icons/ico-linkedin.svg");
 }
 .contact-icons .linkedin:hover {
   cursor: pointer;
-  background-image: url("/singolo/src/img/icons/ico-linkedin hover.svg");
+  background-image: url("../assets/img/icons/ico-linkedin hover.svg");
   transition: all 0.3s ease-in-out;
 }
 

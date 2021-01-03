@@ -12,13 +12,13 @@
     justify-content: center;
   }
   .copyright {
-    @include font($size:1.3rem, $height:1.8rem, $weight:900, $style: normal);
+    @include font($size: 1.3rem, $height: 1.8rem, $weight: 900, $style: normal);
     color: $color-text;
     margin: 8px 0px 7px 40px;
     @include media-mobile {
       display: none;
     }
-  }  
+  }
 }
 
 .contact-icons {
@@ -29,10 +29,10 @@
     width: 32px;
     height: 32px;
     margin-right: 8px;
-    background-image: url("/singolo/src/img/icons/ico-facebook.svg");
+    background-image: url("../assets/img/icons/ico-facebook.svg");
     &:hover {
       cursor: pointer;
-      background-image: url("/singolo/src/img/icons/ico-facebook hover.svg");
+      background-image: url("../assets/img/icons/ico-facebook hover.svg");
       transition: all 0.3s ease-in-out;
     }
   }
@@ -41,10 +41,10 @@
     width: 32px;
     height: 32px;
     margin-right: 8px;
-    background-image: url("/singolo/src/img/icons/ico-google-plus.svg");
+    background-image: url("../assets/img/icons/ico-google-plus.svg");
     &:hover {
       cursor: pointer;
-      background-image: url("/singolo/src/img/icons/ico-google-plus hover.svg");
+      background-image: url("../assets/img/icons/ico-google-plus hover.svg");
       transition: all 0.3s ease-in-out;
     }
   }
@@ -53,10 +53,10 @@
     width: 32px;
     height: 32px;
     margin-right: 8px;
-    background-image: url("/singolo/src/img/icons/ico-twitter.svg");
+    background-image: url("../assets/img/icons/ico-twitter.svg");
     &:hover {
       cursor: pointer;
-      background-image: url("/singolo/src/img/icons/ico-twitter hover.svg");
+      background-image: url("../assets/img/icons/ico-twitter hover.svg");
       transition: all 0.3s ease-in-out;
     }
   }
@@ -65,14 +65,11 @@
     width: 32px;
     height: 32px;
     margin-right: 8px;
-    background-image: url("/singolo/src/img/icons/ico-linkedin.svg");
+    background-image: url("../assets/img/icons/ico-linkedin.svg");
     &:hover {
       cursor: pointer;
-      background-image: url("/singolo/src/img/icons/ico-linkedin hover.svg");
+      background-image: url("../assets/img/icons/ico-linkedin hover.svg");
       transition: all 0.3s ease-in-out;
     }
   }
 }
-
-  
-
