@@ -23,8 +23,8 @@ function scroll (event) {
 }
 
 function goToAnchor(anchorId) {
-    const elTop = document.querySelector(anchorId).offsetTop;
     closeModalWindow();
+    const elTop = document.querySelector(anchorId).offsetTop;
     window.scrollTo({
         top: elTop - headerHeight,
         behavior: "smooth"
@@ -66,7 +66,13 @@ function wrap(el, wrapper) {
 }
 
 hamburger.addEventListener('click', () => {
-    openModalWindow();
+    const activeModal = document.querySelector('.modal-window');
+    if (activeModal !== null) {
+        closeModalWindow();
+    }
+    else {
+        openModalWindow();
+    }
 }) 
 
 //Slides

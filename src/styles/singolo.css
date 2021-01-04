@@ -544,11 +544,11 @@ h4 {
   margin-right: 10px;
   margin-bottom: 16px;
   padding: 5px;
+  color: #767E9E;
   font-size: 1.2rem;
   line-height: 1.2rem;
   font-weight: normal;
   font-style: normal;
-  color: #767E9E;
 }
 @media (max-width: 1019.5px) {
   .portfolio-items span {
@@ -880,12 +880,12 @@ h4 {
 
 .slide.prev {
   z-index: 800;
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 
 .slide.next {
   z-index: 800;
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 
 .arrow-left {
