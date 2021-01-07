@@ -1,13 +1,12 @@
 .footer {
-  background-color: $color-base-blue;
+  background-color: $base-blue;
   padding: 22px 0px;
 }
 
-.footer-wrapper {
-  max-width: $content-width;
-  margin: auto;
+.footer-wrapper {  
   display: flex;
   justify-content: space-between;
+  padding: 0px 36px 0px 40px;
 
   @include media-mobile {
     justify-content: center;
@@ -15,8 +14,8 @@
 
   .copyright {
     @include font($size: 1.3rem, $height: 1.8rem, $weight: 900, $style: normal);
-    color: $color-grey;
-    margin: 8px 0px 7px 40px;
+    color: $grey;
+    margin: 8px 0px 7px;
 
     @include media-mobile {
       display: none;
@@ -27,7 +26,8 @@
 .contact-icons {
   list-style: none;
   display: flex;
-  margin: 0px 36px 0px 0px;
+  margin: 0px;
+  padding: 0px;
 
   .facebook {
     width: 32px;
