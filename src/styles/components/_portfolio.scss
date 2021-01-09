@@ -1,14 +1,14 @@
 .portfolio {
   background-color: $base-blue;
-  border-bottom: 6px solid #323746;
+  border-bottom: 6px solid $very-dark-gray;
   padding: 59px 0px 48px;
 
-  @include media-tablet {
+  @include media-desktop {
     padding: 59px 0px 45px 0px;
-    border-bottom: 7.6px solid #323746;
+    border-bottom: 7.6px solid $very-dark-gray;
   }
 
-  @include media-mobile {
+  @include media-tablet{
     padding: 42px 0px 28px;
     border-bottom: none;
   }
@@ -17,11 +17,11 @@
 .portfolio-wrapper {
   padding: 0px 40px;
 
-  @include media-tablet {
+  @include media-desktop {
     padding: 0px 39px;
   }
 
-  @include media-mobile {
+  @include media-tablet {
     padding: 0px 30px;
   }
 }
@@ -29,20 +29,20 @@
 .portfolio-filters {
   margin-bottom: 16px;
 
-  @include media-tablet {
+  @include media-desktop {
     margin-bottom: 28px;
   }
 
-  @include media-mobile {
+  @include media-tablet {
     margin-bottom: 25px;
   }
 
   .tag {
     display: inline-block;
-    border: 1px solid $light-grey;
+    border: 1px solid $dark-blue;
     border-radius: 5px;       
     padding: 5px;
-    color: $light-grey;
+    color: $dark-blue;
     @include font(
       $size: 1.2rem,
       $height: 1.2rem,
@@ -54,7 +54,7 @@
       margin-right: 10px; 
     }      
 
-    @include media-small-mobile {      
+    @include media-mobile {      
       font-size: 1.1rem;
 
       &:not(:last-child) {
@@ -63,8 +63,8 @@
     }      
 
     &:hover {
-      color: #dedede;
-      border: 1px solid #bbbbbb;
+      color: $light-gray;
+      border: 1px solid $gray;
       transition: all 0.3s ease-in-out;
       cursor: pointer;
     }
@@ -74,14 +74,14 @@
 .portfolio-description {
   margin: 0px 0px 12.82px 0px;
   @include font($size: 1.8rem, $height: 3rem, $weight: 300, $style: normal);
-  color: $light-grey;
+  color: $dark-blue;
 
-  @include media-tablet {
+  @include media-desktop {
     margin: 0px 0px 12px 0px;
     padding-right: 60px;
   }
 
-  @include media-mobile {
+  @include media-tablet {
     margin: 0px 0px 10px 0px;
     padding-right: 10px;
   }
@@ -105,36 +105,40 @@
       display: none;
     }
 
-    @include media-tablet {
+    @include media-desktop {
+      width: 30%;
+      
       &:not(:nth-child(3n)){
         margin-right: 20px;
       }
+
       &:nth-child(3n){
         margin-right: 0px;
       }
-      width: 30%;
-
+     
       &:nth-child(n + 13) {
         display: none;
       }
     }
 
-    @include media-mobile {      
+    @include media-tablet { 
+      width: 44%;     
       margin-bottom: 14px;
+
       &:not(:nth-child(2n)){
         margin-right: 13px;
       }
       &:nth-child(2n){
         margin-right: 0px;
       }
-      width: 44%;
+      
 
       &:nth-child(n + 9) {
         display: none;
       }
     }
 
-    @include media-small-mobile {
+    @include media-mobile {
       width: 43%;
 
       &:nth-child(n + 9) {
@@ -145,7 +149,7 @@
 }
 
 .tag.active {
-  color: #dedede;
-  border: 1px solid #bbbbbb;
+  color: $light-gray;
+  border: 1px solid $gray;
   transition: all 0.5s ease;
 }
