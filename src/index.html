@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple-Singolo</title>
+    <link rel="stylesheet" href="styles/singolo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script defer src="singolo.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-wrapper container">
+            <span class="hamburger">
+                <span class="hamburger-line"></span>
+            </span>
+            <h1>Singolo <span class="asterisk" >*</span></h1>
+            <nav class="navigation">
+                <ul class="navigation-items">
+                    <li class="navigation-link">
+                        <a class="active-link" href="#home" onclick="goToAnchor(event,'#home')">Home</a>    
+                    </li>
+                    <li class="navigation-link">
+                        <a href="#services" onclick="goToAnchor(event, '#services')">Services</a>
+                    </li>
+                    <li class="navigation-link">
+                        <a href="#portfolio" onclick="goToAnchor(event,'#portfolio')">Portfolio</a>
+                    </li>
+                    <li class="navigation-link">
+                        <a href="#contact" onclick="goToAnchor(event,'#contact')">About</a>
+                    </li>
+                    <li class="navigation-link">
+                        <a href="#contact" onclick="goToAnchor(event,'#contact')">Contact</a>
+                    </li>
+                </ul>
+            </nav>        
+        </div>
+
+        <div class="side-bar">
+            <div class="side-bar-menu">
+                <div class="side-bar-menu-content">
+                    <div class="header-logo">
+                        <span class="hamburger active">
+                            <span class="hamburger-line"></span>
+                        </span>
+                        <h1 class="logo">Singolo <span class="asterisk" >*</span></h1>
+                    </div>
+                    <nav class="navigation">
+                        <ul class="navigation-items">
+                            <li class="navigation-link">
+                                <a class="active-link" href="#home" onclick="goToAnchor(event,'#home')">Home</a>    
+                            </li>
+                            <li class="navigation-link">
+                                <a href="#services" onclick="goToAnchor(event, '#services')">Services</a>
+                            </li>
+                            <li class="navigation-link">
+                                <a href="#portfolio" onclick="goToAnchor(event,'#portfolio')">Portfolio</a>
+                            </li>
+                            <li class="navigation-link">
+                                <a href="#contact" onclick="goToAnchor(event,'#contact')">About</a>
+                            </li>
+                            <li class="navigation-link">
+                                <a href="#contact" onclick="goToAnchor(event,'#contact')">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>        
+    </header>
+
+    <main>
+        <div id="home" class="slider">
+            <div class="slider-navigation">
+                <div class="slider-navigation-arrows">
+                    <img class="arrow-left" src="assets/img/slider/arrow-left.svg" alt="Left arrow">
+                    <img class="arrow-right" src="assets/img/slider/arrow-right.svg" alt="Right arrow">
+                </div>
+            </div>
+            <div class="slide slide-1 initial">
+                <div class="slide-wrapper">
+                    <img class="phones" src="assets/img/slider/slider.png" alt="Phones">
+                </div>
+            </div>
+            <div class="slide slide-2">
+                <div class="slide-wrapper">
+                    <img class="phones" src="assets/img/slider/slide-2.png" alt="Phones">
+                </div>                    
+            </div>  
+            <div class="slide slide-1">
+                <div class="slide-wrapper">
+                    <img class="phones" src="assets/img/slider/slider.png" alt="Phones">
+                </div>
+            </div>
+            <div class="slide slide-2">
+                <div class="slide-wrapper">
+                    <img class="phones" src="assets/img/slider/slide-2.png" alt="Phones">
+                </div>                    
+            </div>                                
+        </div>
+
+        <section id="services" class="services-section">
+            <div class="services-section-wrapper container">
+                <h2>Our Services</h2>
+                <p class="services-description">
+                    Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                    condimentum. Duis mollis, non commodo luctus, nisi erat
+                    porttitor ligula, eget lacinia odio sem nec elit. Fusce dapibus,
+                    tellus ac cursus commodo, tortor mauris condimentum nibh.
+                </p>
+                <div class="services-items-container">
+                    <div class="service-item">
+                        <span class="service-icon"><img src="assets/img/service/services-item-1.svg" alt="Custom Design icon"></span>
+                        <div class="service-item-description">
+                            <h4>Custom Design</h4>
+                            <p class="service-item-text">
+                                Curabitur vestibulum eget mauris quis laoreet. Phasellus in quam laoreet,
+                                viverra lacus ut, ultrices velit.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-icon"><img src="assets/img/service/services-item-2.svg" alt="Innovative ideas icon"></span>
+                        <div class="service-item-description">
+                            <h4>Inovative Ideas</h4>
+                            <p class="service-item-text">
+                                Quisque luctus, quam eget molestie commodo, lacus purus cursus purus,
+                                nec rutrum tellus dolor id lorem.
+                            </p>
+                        </div>  
+                    </div>
+                    <div class="service-item">
+                        <span class="service-icon"><img src="assets/img/service/services-item-3.svg" alt="Love is the answer icon"></span>
+                        <div class="service-item-description">
+                            <h4>Love Is The Answer</h4>
+                            <p class="service-item-text">
+                                Nulla sed nunc et tortor luctus faucibus. Morbi at aliquet turpis,
+                                et consequat felis. Quisque condimentum.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-icon"><img src="assets/img/service/services-item-4.svg" alt="Responsive layout icon"></span>
+                        <div class="service-item-description">
+                            <h4>Responsive Layout</h4>
+                            <p class="service-item-text">
+                                Sed porttitor placerat rhoncus. In at nunc tellus. 
+                                Maecenas blandit nunc ligula. Praesent elit leo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-icon"><img src="assets/img/service/services-item-5.svg" alt="24 / 7 Support icon"></span>
+                        <div class="service-item-description">
+                            <h4>24 / 7 Support</h4>
+                            <p class="service-item-text">
+                                Vivamus vel quam lacinia, tincidunt dui non, vehicula nisi.
+                                Nulla a sem erat. Pellentesque egestas venenatis lorem .
+                            </p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-icon"><img src="assets/img/service/services-item-6.svg" alt="Feel like a star icon"></span>
+                        <div class="service-item-description">
+                            <h4>Feel Like A Star</h4>
+                            <p class="service-item-text">
+                                Quisque hendrerit purus dapibus, ornare nibh vitae, viverra nibh.
+                                Fusce vitae aliquam tellus.
+                            </p>
+                        </div>
+                    </div>              
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio">
+            <div class="portfolio-wrapper container">
+                <h2>Portfolio</h2>
+                <p class="portfolio-description">
+                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+                    eget lacinia odio sem nec elit.
+                </p>
+                <div class="portfolio-filters">
+                    <span class="tag active">All</span>
+                    <span class="tag">Web Design</span>
+                    <span class="tag">Graphic Design</span>
+                    <span class="tag">Artwork</span>
+                </div>
+                <div class="portfolio-examples-container">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-1.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-2.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-3.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-4.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-5.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-6.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-7.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-8.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-9.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-10.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-11.png" alt="Portfolio example">
+                    <img class="portfolio-example" src="assets/img/portfolio/portfolio-12.png" alt="Portfolio example">
+                </div>
+            </div>
+        </section>      
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="footer-wrapper container">
+            <p class="copyright">&copy Copyright 2013 </p>
+            <ul class="contact-icons">
+                <li class="facebook button">
+                    <a href="#"></a>
+                </li>
+                <li class="google button">
+                    <a href="#"></a>
+                </li>
+                <li class="twitter button">
+                    <a href="#"></a>
+                </li>
+                <li class="linkedin button">
+                    <a href="#"></a>
+                </li>
+            </ul>
+        </div>
+    </footer>    
+</body>
+</html>
