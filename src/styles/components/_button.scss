@@ -8,7 +8,11 @@
     color: $dark-gray;
     cursor: pointer;
     box-shadow: 0 0 10px;
-    border: 1px $grey solid;
+    border: 1px $gray solid;
+
+        &:active {
+        transform: translateY(-1px)        
+        }
 
     @include media-mobile {
         @include font($size: 1.8rem, $height: 2.6rem, $weight: 700);
@@ -44,16 +48,21 @@
 .display {
     background-color: $black;
     border-radius: 7px;
-    width: 100%;
+    max-width: 94%;
     height: 100%;
     text-align: right;
-    @include font($size: 4rem, $height: 2.6rem, $weight: normal);
+    @include font($size: 4.05rem, $height: 2.6rem, $weight: normal);
     color: $whiteSmoke;
     border: 0;  
-    padding: 0px;  
+    padding: 0px 10px;    
     
     @include media-mobile {
+        max-width: 91.5%;
         @include font($size: 2.8rem, $height: 2.6rem, $weight: normal);
     }
+}
+
+input, button {
+    font-family: "Open Sans", Verdana, sans-serif; 
 }
 

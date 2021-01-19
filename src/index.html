@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+    <script defer src="calc.js"></script>   
 </head>
 <body>
     <header>
@@ -17,13 +18,13 @@
         <div class="wrapper">
             <div class="container calculator">
                 <div class="display-area">
-                    <input class="display"  type="text" value="0" placeholder="0000000000000" disabled>
+                    <input class="display"  type="text" placeholder="00000000000" maxlength="10" value="0" disabled>
                 </div>             
                 <div class="button CE-btn">
-                    <button class="btn clean" >CE</button>
+                    <button class="btn clean CE" >CE</button>
                 </div>
                 <div class="button C-btn">
-                    <button class="btn clean">C</button>
+                    <button class="btn clean C">C</button>
                 </div>
                 <div class="button division-btn">
                     <button class="btn operation ">/</button>
@@ -32,7 +33,7 @@
                     <button class="btn operation">*</button>
                 </div>
                 <div class="button seven-btn">
-                    <button class="btn number ">7</button>
+                    <button class="btn number">7</button>
                 </div>
                 <div class="button eight-btn">
                     <button class="btn number">8</button>
@@ -71,7 +72,7 @@
                     <button class="btn  number">0</button>
                 </div>
                 <div class="button dot-btn">
-                    <button class="btn  operation">.</button>
+                    <button class="btn  decimal">.</button>
                 </div>                      
             </div>
         </div>
