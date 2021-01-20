@@ -35,6 +35,7 @@ body {
   font-style: normal;
   font-weight: 700;
   line-height: 2.6rem;
+  font-family: "Open Sans", Verdana, sans-serif;
   color: #404040;
   cursor: pointer;
   box-shadow: 0 0 10px;
@@ -43,7 +44,7 @@ body {
 .btn:active {
   transform: translateY(-1px);
 }
-@media (max-width: 375px) {
+@media (max-width: calc(375px + 0.5px)) {
   .btn {
     font-size: 1.8rem;
     font-style: normal;
@@ -83,11 +84,21 @@ body {
   font-style: normal;
   font-weight: normal;
   line-height: 2.6rem;
+  font-family: "Open Sans", Verdana, sans-serif;
   color: #F5F5F5;
   border: 0;
   padding: 0px 10px;
 }
-@media (max-width: 375px) {
+@media (max-width: calc(375px + 0.5px)) {
+  .display {
+    max-width: 92%;
+    font-size: 2.95rem;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 2.6rem;
+  }
+}
+@media (max-width: 320px) {
   .display {
     max-width: 91.5%;
     font-size: 2.8rem;
@@ -95,10 +106,6 @@ body {
     font-weight: normal;
     line-height: 2.6rem;
   }
-}
-
-input, button {
-  font-family: "Open Sans", Verdana, sans-serif;
 }
 
 .container {
@@ -112,7 +119,7 @@ input, button {
   padding: 50px 30px;
   box-shadow: 0 0 5px #808080;
 }
-@media (max-width: 375px) {
+@media (max-width: calc(375px + 0.5px)) {
   .container {
     padding: 40px 30px;
   }

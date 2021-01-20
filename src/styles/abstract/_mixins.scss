@@ -14,7 +14,7 @@
 }
   
 @mixin media-mobile {
-    @media (max-width: $mobile-width) { @content; }
+    @media (max-width: calc(#{$mobile-width} + 0.5px)) { @content; }
 }
 
 @mixin media-small-mobile {

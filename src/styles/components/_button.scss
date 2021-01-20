@@ -5,6 +5,7 @@
     height: 100%;
     padding: 20px 5px;
     @include font($size: 2.6rem, $height: 2.6rem, $weight: 700);
+    font-family: "Open Sans", Verdana, sans-serif; 
     color: $dark-gray;
     cursor: pointer;
     box-shadow: 0 0 10px;
@@ -52,17 +53,20 @@
     height: 100%;
     text-align: right;
     @include font($size: 4.05rem, $height: 2.6rem, $weight: normal);
+    font-family: "Open Sans", Verdana, sans-serif; 
     color: $whiteSmoke;
     border: 0;  
-    padding: 0px 10px;    
-    
+    padding: 0px 10px;
+
     @include media-mobile {
+        max-width: 92%;
+        @include font($size: 2.95rem, $height: 2.6rem, $weight: normal);
+    }  
+    
+    @include media-small-mobile {
         max-width: 91.5%;
         @include font($size: 2.8rem, $height: 2.6rem, $weight: normal);
     }
 }
 
-input, button {
-    font-family: "Open Sans", Verdana, sans-serif; 
-}
 

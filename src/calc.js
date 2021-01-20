@@ -10,8 +10,8 @@ const classes = {
     NUMBER: 'number',
     OPERATION: 'operation',
     CE: 'CE',
-    C: 'C',
-}
+    C: 'C',    
+};
 
 const calculator = document.querySelector(selectors.CALCULATOR);
 const buttons = calculator.querySelectorAll(selectors.BUTTONS);
@@ -31,7 +31,7 @@ function clickNumber(btn) {
         display.value = btn.innerText;
         isOperationClicked = false;              
     }
-};
+}
 
 function clickOperation(btn) {
     if (isOperationClicked) {
@@ -39,8 +39,7 @@ function clickOperation(btn) {
         return;
     }
     const numberOnDisplay = display.value;
-
-    if (operationResult) {
+    
         switch (operation) {
             case '+':                
                 operationResult += parseFloat(numberOnDisplay);
@@ -57,19 +56,20 @@ function clickOperation(btn) {
             case '/':               
                 operationResult /= parseFloat(numberOnDisplay);
                 display.value = operationResult;
-                break;
-            case '=':                
-                display.value = operationResult;
-                operation = '';           
-                break;               
-        }  
+                break;        
+            default:
+                operationResult = parseFloat(numberOnDisplay);
+                operation = btn.outerText;                 
+        }
+
+    if (btn.outerText === '=') {
+        display.value = operationResult;
+        operation = ''; 
     } else {
-        operationResult = parseFloat(numberOnDisplay);
         operation = btn.outerText;
     }
-    operation = btn.outerText;
     isOperationClicked = true;
-};
+}
 
 function clickClean(btn) {
     const CEButton = btn.className.includes(classes.CE);
@@ -77,7 +77,7 @@ function clickClean(btn) {
 
     if (CEButton) {
         display.value = 0;
-        operation = '=';       
+        isOperationClicked = true;       
         
     } else if (CButton) {
         operationResult = 0;
@@ -85,13 +85,17 @@ function clickClean(btn) {
         operation = '';
         display.value = 0;
     }
-};
+}
 
 function clickDecimal (btn) {
-    if (!display.value.includes('.')) {
+    if (isOperationClicked) {
+        display.value = '0' + btn.innerText;
+        isOperationClicked = false;                
+        
+    } else if (!display.value.includes('.')) {
         display.value += btn.innerText;
         isOperationClicked = false;
-    }
+    } 
 } 
 
 function init() {
@@ -103,8 +107,9 @@ function init() {
         } else if (e.target.className.includes(classes.CLEAN)) {
             clickClean(e.target);   
         } else if (e.target.className.includes(classes.DECIMAL)) {
-            clickDecimal(e.target);          
+            clickDecimal(e.target);                   
         }
     });
 }
- init();
+
+init();
