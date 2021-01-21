@@ -16,19 +16,27 @@ const classes = {
 const calculator = document.querySelector(selectors.CALCULATOR);
 const buttons = calculator.querySelectorAll(selectors.BUTTONS);
 const display = document.querySelector(selectors.DISPLAY);
+const displayLength = 13;
 let isOperationClicked = false;
 let operationResult = 0;
 let operation = '';
 
-function clickNumber(btn) {    
-    if (!isOperationClicked) {
-        if (display.value === '0') {
-            display.value = btn.innerText;
-        } else {
-            display.value += btn.innerText;
+function showOnDisplay(output, append=false) {
+    if (append) {
+        if (display.value.length == displayLength){
+            return;
         }
+        display.value += output;
     } else {
-        display.value = btn.innerText;
+        display.value = output.toString().substring(0, displayLength);
+    }
+}
+
+function clickNumber(btn) {  
+    if (!isOperationClicked) { 
+        showOnDisplay(btn.innerText, display.value !== '0');
+    } else {
+        showOnDisplay(btn.innerText);        
         isOperationClicked = false;              
     }
 }
@@ -43,19 +51,19 @@ function clickOperation(btn) {
         switch (operation) {
             case '+':                
                 operationResult += parseFloat(numberOnDisplay);
-                display.value = operationResult;                
+                showOnDisplay(operationResult);                              
                 break;
             case '-':                
                 operationResult -= parseFloat(numberOnDisplay);
-                display.value = operationResult;                
+                showOnDisplay(operationResult);                               
                 break;
             case '*':                
                 operationResult *= parseFloat(numberOnDisplay);
-                display.value = operationResult;
+                showOnDisplay(operationResult);                 
                 break;
             case '/':               
                 operationResult /= parseFloat(numberOnDisplay);
-                display.value = operationResult;
+                showOnDisplay(operationResult);
                 break;        
             default:
                 operationResult = parseFloat(numberOnDisplay);
@@ -63,7 +71,7 @@ function clickOperation(btn) {
         }
 
     if (btn.outerText === '=') {
-        display.value = operationResult;
+        showOnDisplay(operationResult);
         operation = ''; 
     } else {
         operation = btn.outerText;
@@ -76,24 +84,24 @@ function clickClean(btn) {
     const CButton = btn.className.includes(classes.C);     
 
     if (CEButton) {
-        display.value = 0;
+        showOnDisplay(0);
         isOperationClicked = true;       
         
     } else if (CButton) {
         operationResult = 0;
         isOperationClicked = false;
         operation = '';
-        display.value = 0;
+        showOnDisplay(0);
     }
 }
 
 function clickDecimal (btn) {
     if (isOperationClicked) {
-        display.value = '0' + btn.innerText;
+        showOnDisplay('0' + btn.innerText);
         isOperationClicked = false;                
         
     } else if (!display.value.includes('.')) {
-        display.value += btn.innerText;
+        showOnDisplay(btn.innerText, true);
         isOperationClicked = false;
     } 
 } 
