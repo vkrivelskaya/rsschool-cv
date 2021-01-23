@@ -7,7 +7,7 @@
                          "one-btn two-btn three-btn result-btn"
                          "zero-btn zero-btn dot-btn result-btn";                        
                          grid-template-columns: 21% 21% 21% 21%;
-                         grid-template-rows:  1.2fr 1fr 1fr 1fr 1fr 1fr;
+                         grid-template-rows: 1.2fr 1fr 1fr 1fr 1fr 1fr;
                          grid-gap: 15px;        
     background-color: $gray; 
     border-radius: 7px;  
@@ -98,9 +98,3 @@
 .dot-btn {
     grid-area: dot-btn;
 }
-
-
-
-
-
-

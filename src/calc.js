@@ -1,6 +1,5 @@
 const selectors = {
     CALCULATOR: '.calculator',
-    BUTTONS: '.btn', 
     DISPLAY: '.display'
 };
 
@@ -13,40 +12,38 @@ const classes = {
     C: 'C',    
 };
 
-const calculator = document.querySelector(selectors.CALCULATOR);
-const buttons = calculator.querySelectorAll(selectors.BUTTONS);
-const display = document.querySelector(selectors.DISPLAY);
+const displayElement = document.querySelector(selectors.DISPLAY);
 const displayLength = 13;
 let isOperationClicked = false;
 let operationResult = 0;
 let operation = '';
 
-function showOnDisplay(output, append=false) {
-    if (append) {
-        if (display.value.length == displayLength){
+function showOnDisplay(output, isAddition=false) {
+    if (isAddition) {
+        if (displayElement.value.length === displayLength){
             return;
         }
-        display.value += output;
+        displayElement.value += output;
     } else {
-        display.value = output.toString().substring(0, displayLength);
+        displayElement.value = output.toString().substring(0, displayLength);
     }
 }
 
-function clickNumber(btn) {  
-    if (!isOperationClicked) { 
-        showOnDisplay(btn.innerText, display.value !== '0');
-    } else {
-        showOnDisplay(btn.innerText);        
-        isOperationClicked = false;              
+function onNumberClick({innerText}) { 
+    if (isOperationClicked) { 
+        showOnDisplay(innerText);        
+        isOperationClicked = false;  
+    } else {        
+        showOnDisplay(innerText, displayElement.value !== '0');            
     }
 }
 
-function clickOperation(btn) {
+function onOperationClick({outerText}) {
     if (isOperationClicked) {
-        operation = btn.outerText;
+        operation = outerText;
         return;
     }
-    const numberOnDisplay = display.value;
+    const numberOnDisplay = displayElement.value;
     
         switch (operation) {
             case '+':                
@@ -67,19 +64,19 @@ function clickOperation(btn) {
                 break;        
             default:
                 operationResult = parseFloat(numberOnDisplay);
-                operation = btn.outerText;                 
+                operation = outerText;                 
         }
 
-    if (btn.outerText === '=') {
+    if (outerText === '=') {
         showOnDisplay(operationResult);
         operation = ''; 
     } else {
-        operation = btn.outerText;
+        operation = outerText;
     }
     isOperationClicked = true;
 }
 
-function clickClean(btn) {
+function onCleanClick(btn) {
     const CEButton = btn.className.includes(classes.CE);
     const CButton = btn.className.includes(classes.C);     
 
@@ -95,27 +92,31 @@ function clickClean(btn) {
     }
 }
 
-function clickDecimal (btn) {
+function onDecimalClick ({innerText}) {
     if (isOperationClicked) {
-        showOnDisplay('0' + btn.innerText);
+        showOnDisplay('0' + innerText);
         isOperationClicked = false;                
         
-    } else if (!display.value.includes('.')) {
-        showOnDisplay(btn.innerText, true);
+    } else if (!displayElement.value.includes('.')) {
+        showOnDisplay(innerText, true);
         isOperationClicked = false;
     } 
 } 
 
 function init() {
-    calculator.addEventListener('click', (e) => {
-        if (e.target.className.includes(classes.NUMBER)) {
-            clickNumber(e.target);                            
-        } else if (e.target.className.includes(classes.OPERATION)) {
-            clickOperation(e.target);                   
-        } else if (e.target.className.includes(classes.CLEAN)) {
-            clickClean(e.target);   
-        } else if (e.target.className.includes(classes.DECIMAL)) {
-            clickDecimal(e.target);                   
+    const calculatorElement = document.querySelector(selectors.CALCULATOR);
+         
+    calculatorElement.addEventListener('click', (e) => {
+        const target = e.target;
+
+        if (target.className.includes(classes.NUMBER)) {
+            onNumberClick(target);                            
+        } else if (target.className.includes(classes.OPERATION)) {
+            onOperationClick(target);                   
+        } else if (target.className.includes(classes.CLEAN)) {
+            onCleanClick(target);   
+        } else if (target.className.includes(classes.DECIMAL)) {
+            onDecimalClick(target);                   
         }
     });
 }

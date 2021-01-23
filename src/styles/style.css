@@ -3,17 +3,21 @@ html {
   font-family: "Open Sans", Verdana, sans-serif;
 }
 
-.wrapper {
-  max-width: 400px;
-  margin: auto;
-  padding: 0px 30px 10px;
-}
-
 body {
   font-size: 2.4rem;
   font-style: normal;
   font-weight: normal;
   line-height: 2.6rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 400px;
+  margin: auto;
+  padding: 0px 30px 10px;
 }
 
 .title {
@@ -30,7 +34,7 @@ body {
   border-radius: 7px;
   width: 100%;
   height: 100%;
-  padding: 20px 5px;
+  padding: 20px 15px;
   font-size: 2.6rem;
   font-style: normal;
   font-weight: 700;
@@ -50,34 +54,35 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: 2.6rem;
-    padding: 0px;
+    padding: 10px 0px;
   }
 }
 @media (max-width: 320px) {
   .btn {
-    padding: 0px;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.6rem;
+    padding: 10px 5px;
   }
 }
 
 .clean:hover {
   background-color: #960018;
-  transition: all 0.3s ease-out;
 }
 
 .number:hover {
   background-color: #808000;
-  transition: all 0.3s ease-out;
 }
 
 .operation:hover {
   background-color: #ab6303;
-  transition: all 0.3s ease-out;
 }
 
 .display {
   background-color: #202020;
   border-radius: 7px;
-  max-width: 94%;
+  max-width: 100%;
   height: 100%;
   text-align: right;
   font-size: 4.05rem;
@@ -91,7 +96,6 @@ body {
 }
 @media (max-width: calc(375px + 0.5px)) {
   .display {
-    max-width: 92%;
     font-size: 2.95rem;
     font-style: normal;
     font-weight: normal;
@@ -100,7 +104,6 @@ body {
 }
 @media (max-width: 320px) {
   .display {
-    max-width: 91.5%;
     font-size: 2.8rem;
     font-style: normal;
     font-weight: normal;
