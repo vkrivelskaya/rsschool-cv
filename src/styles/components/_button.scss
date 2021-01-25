@@ -1,0 +1,60 @@
+.btn {
+    background-color: $white-smoke;
+    border-radius: 7px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 15px;
+    @include font($size: 2.6rem, $height: 2.6rem, $weight: 700);
+    font-family: "Open Sans", Verdana, sans-serif; 
+    color: $dark-gray;
+    cursor: pointer;
+    box-shadow: 0 0 10px;
+    border: 1px $gray solid;
+
+    &:active {
+    transform: translateY(-1px)        
+    }
+
+    @include media-mobile {
+        @include font($size: 2.4rem, $height: 2.6rem, $weight: 700);
+        padding: 10px 0px;         
+    }
+
+    @include media-small-mobile {
+        @include font($size: 1.8rem, $height: 2.6rem, $weight: 700);
+        padding: 10px 5px;         
+    }
+}
+
+.clean:hover {
+    background-color: $red;
+}
+
+.number:hover {
+    background-color: $green;  
+}
+
+.operation:hover {
+    background-color: $braun;
+}
+
+.display {
+    background-color: $black;
+    border-radius: 7px;
+    max-width: 100%;
+    height: 100%;
+    text-align: right;
+    @include font($size: 4.05rem, $height: 2.6rem, $weight: normal);
+    font-family: "Open Sans", Verdana, sans-serif; 
+    color: $white-smoke;
+    border: 0;  
+    padding: 0px 10px;
+
+    @include media-mobile {
+        @include font($size: 3.4rem, $height: 2.6rem, $weight: normal);
+    }  
+    
+    @include media-small-mobile {
+        @include font($size: 2.6rem, $height: 2.6rem, $weight: normal);
+    }
+}

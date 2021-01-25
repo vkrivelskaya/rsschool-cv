@@ -1,0 +1,212 @@
+html {
+  font-size: 10px;
+  font-family: "Open Sans", Verdana, sans-serif;
+}
+
+body {
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 2.6rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 400px;
+  margin: auto;
+  padding: 0px 30px 10px;
+}
+
+.title {
+  text-align: center;
+  font-size: 3.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.6rem;
+  margin: 20px 0px 10px;
+}
+
+.btn {
+  background-color: #F5F5F5;
+  border-radius: 7px;
+  width: 100%;
+  height: 100%;
+  padding: 20px 15px;
+  font-size: 2.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.6rem;
+  font-family: "Open Sans", Verdana, sans-serif;
+  color: #404040;
+  cursor: pointer;
+  box-shadow: 0 0 10px;
+  border: 1px #808080 solid;
+}
+.btn:active {
+  transform: translateY(-1px);
+}
+@media (max-width: calc(375px + 0.5px)) {
+  .btn {
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.6rem;
+    padding: 10px 0px;
+  }
+}
+@media (max-width: 320px) {
+  .btn {
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.6rem;
+    padding: 10px 5px;
+  }
+}
+
+.clean:hover {
+  background-color: #960018;
+}
+
+.number:hover {
+  background-color: #808000;
+}
+
+.operation:hover {
+  background-color: #ab6303;
+}
+
+.display {
+  background-color: #202020;
+  border-radius: 7px;
+  max-width: 100%;
+  height: 100%;
+  text-align: right;
+  font-size: 4.05rem;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 2.6rem;
+  font-family: "Open Sans", Verdana, sans-serif;
+  color: #F5F5F5;
+  border: 0;
+  padding: 0px 10px;
+}
+@media (max-width: calc(375px + 0.5px)) {
+  .display {
+    font-size: 3.4rem;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 2.6rem;
+  }
+}
+@media (max-width: 320px) {
+  .display {
+    font-size: 2.6rem;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 2.6rem;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-areas: "display-area display-area display-area display-area" "CE-btn C-btn division-btn multiplication-btn" "seven-btn eight-btn nine-btn subtraction-btn" "four-btn five-btn six-btn addition-btn" "one-btn two-btn three-btn result-btn" "zero-btn zero-btn dot-btn result-btn";
+  grid-template-columns: 21% 21% 21% 21%;
+  grid-template-rows: 1.2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+  background-color: #808080;
+  border-radius: 7px;
+  padding: 50px 30px;
+  box-shadow: 0 0 5px #808080;
+}
+@media (max-width: calc(375px + 0.5px)) {
+  .container {
+    padding: 40px 30px;
+  }
+}
+@media (max-width: 320px) {
+  .container {
+    grid-gap: 10px;
+  }
+}
+
+.display-area {
+  grid-area: display-area;
+}
+
+.CE-btn {
+  grid-area: CE-btn;
+}
+
+.C-btn {
+  grid-area: C-btn;
+}
+
+.division-btn {
+  grid-area: division-btn;
+}
+
+.multiplication-btn {
+  grid-area: multiplication-btn;
+}
+
+.seven-btn {
+  grid-area: seven-btn;
+}
+
+.eight-btn {
+  grid-area: eight-btn;
+}
+
+.nine-btn {
+  grid-area: nine-btn;
+}
+
+.subtraction-btn {
+  grid-area: subtraction-btn;
+}
+
+.four-btn {
+  grid-area: four-btn;
+}
+
+.five-btn {
+  grid-area: five-btn;
+}
+
+.six-btn {
+  grid-area: six-btn;
+}
+
+.addition-btn {
+  grid-area: addition-btn;
+}
+
+.one-btn {
+  grid-area: one-btn;
+}
+
+.two-btn {
+  grid-area: two-btn;
+}
+
+.three-btn {
+  grid-area: three-btn;
+}
+
+.result-btn {
+  grid-area: result-btn;
+}
+
+.zero-btn {
+  grid-area: zero-btn;
+}
+
+.dot-btn {
+  grid-area: dot-btn;
+}
+
+/*# sourceMappingURL=style.css.map */

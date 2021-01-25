@@ -1,0 +1,100 @@
+.container {    
+    display: grid;
+    grid-template-areas: "display-area display-area display-area display-area"
+                         "CE-btn C-btn division-btn multiplication-btn"
+                         "seven-btn eight-btn nine-btn subtraction-btn"
+                         "four-btn five-btn six-btn addition-btn"
+                         "one-btn two-btn three-btn result-btn"
+                         "zero-btn zero-btn dot-btn result-btn";                        
+                         grid-template-columns: 21% 21% 21% 21%;
+                         grid-template-rows: 1.2fr 1fr 1fr 1fr 1fr 1fr;
+                         grid-gap: 15px;        
+    background-color: $gray; 
+    border-radius: 7px;  
+    padding: 50px 30px; 
+    box-shadow: 0 0 5px $gray;
+
+    @include media-mobile {
+        padding: 40px 30px;   
+    }
+    
+    @include media-small-mobile {
+        grid-gap: 10px; 
+    }
+}
+
+.display-area {
+    grid-area: display-area;
+}
+
+.CE-btn {
+    grid-area: CE-btn;
+}
+
+.C-btn {
+    grid-area: C-btn;
+}
+
+.division-btn {
+    grid-area: division-btn;
+}
+
+.multiplication-btn {
+    grid-area: multiplication-btn;
+}
+
+.seven-btn {
+    grid-area: seven-btn;
+}
+
+.eight-btn {
+    grid-area: eight-btn;
+}
+
+.nine-btn {
+    grid-area: nine-btn;
+}
+
+.subtraction-btn {
+    grid-area: subtraction-btn;
+}
+
+.four-btn {
+    grid-area: four-btn;
+}
+
+.five-btn {
+    grid-area: five-btn;
+}
+
+.six-btn {
+    grid-area: six-btn;
+}
+
+.addition-btn {
+    grid-area: addition-btn;
+}
+
+.one-btn {
+    grid-area: one-btn;
+}
+
+.two-btn {
+    grid-area: two-btn;
+}
+
+.three-btn {
+    grid-area: three-btn;
+}
+
+.result-btn {
+    grid-area: result-btn;
+}
+
+.zero-btn {
+    grid-area: zero-btn;
+}
+
+.dot-btn {
+    grid-area: dot-btn;
+}
