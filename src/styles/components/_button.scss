@@ -16,7 +16,7 @@
     }
 
     @include media-mobile {
-        @include font($size: 1.8rem, $height: 2.6rem, $weight: 700);
+        @include font($size: 2.4rem, $height: 2.6rem, $weight: 700);
         padding: 10px 0px;         
     }
 
@@ -26,7 +26,7 @@
     }
 }
 
-.clean:hover{
+.clean:hover {
     background-color: $red;
 }
 
@@ -51,10 +51,10 @@
     padding: 0px 10px;
 
     @include media-mobile {
-        @include font($size: 2.95rem, $height: 2.6rem, $weight: normal);
+        @include font($size: 3.4rem, $height: 2.6rem, $weight: normal);
     }  
     
     @include media-small-mobile {
-        @include font($size: 2.8rem, $height: 2.6rem, $weight: normal);
+        @include font($size: 2.6rem, $height: 2.6rem, $weight: normal);
     }
 }

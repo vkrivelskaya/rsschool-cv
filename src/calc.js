@@ -8,25 +8,20 @@ const classes = {
     DECIMAL: 'decimal',
     NUMBER: 'number',
     OPERATION: 'operation',
-    CE: 'CE',
-    C: 'C',    
+    CE: 'CE btn',
+    C: 'C btn',    
 };
 
 const displayElement = document.querySelector(selectors.DISPLAY);
-const displayLength = 13;
 let isOperationClicked = false;
 let operationResult = 0;
 let operation = '';
 
-function showOnDisplay(output, isAddition=false) {
-    if (isAddition) {
-        if (displayElement.value.length === displayLength){
-            return;
-        }
-        displayElement.value += output;
-    } else {
-        displayElement.value = output.toString().substring(0, displayLength);
-    }
+function showOnDisplay(output, isAddition = false) {
+    const displayLength = 11;
+    const valueToStore = isAddition ? displayElement.value + output : output;
+
+    displayElement.value = valueToStore.toString().substring(0, displayLength);
 }
 
 function onNumberClick({innerText}) { 
@@ -38,69 +33,63 @@ function onNumberClick({innerText}) {
     }
 }
 
+function getOperationResultOnOperationClick () {
+    const numberOnDisplay = displayElement.value;
+    
+    switch (operation) {
+        case '+':                
+            return operationResult + parseFloat(numberOnDisplay);
+        case '-':                
+            return operationResult - parseFloat(numberOnDisplay);
+        case '*':                
+            return operationResult * parseFloat(numberOnDisplay);
+        case '/':               
+            return operationResult / parseFloat(numberOnDisplay);
+        default:
+            return parseFloat(numberOnDisplay);  
+    }
+}
+
 function onOperationClick({outerText}) {
     if (isOperationClicked) {
         operation = outerText;
+        if (operation === '=') {
+            showOnDisplay(operationResult);
+        }
         return;
     }
-    const numberOnDisplay = displayElement.value;
-    
-        switch (operation) {
-            case '+':                
-                operationResult += parseFloat(numberOnDisplay);
-                showOnDisplay(operationResult);                              
-                break;
-            case '-':                
-                operationResult -= parseFloat(numberOnDisplay);
-                showOnDisplay(operationResult);                               
-                break;
-            case '*':                
-                operationResult *= parseFloat(numberOnDisplay);
-                showOnDisplay(operationResult);                 
-                break;
-            case '/':               
-                operationResult /= parseFloat(numberOnDisplay);
-                showOnDisplay(operationResult);
-                break;        
-            default:
-                operationResult = parseFloat(numberOnDisplay);
-                operation = outerText;                 
-        }
 
-    if (outerText === '=') {
-        showOnDisplay(operationResult);
-        operation = ''; 
-    } else {
-        operation = outerText;
-    }
+    operationResult = getOperationResultOnOperationClick();
+    showOnDisplay(operationResult);
+    operation = outerText === '=' ? '' : outerText;
     isOperationClicked = true;
 }
 
 function onCleanClick(btn) {
-    const CEButton = btn.className.includes(classes.CE);
-    const CButton = btn.className.includes(classes.C);     
-
-    if (CEButton) {
-        showOnDisplay(0);
-        isOperationClicked = true;       
-        
-    } else if (CButton) {
+    const isCEButton = btn.className.includes(classes.CE);
+    const isCButton = btn.className.includes(classes.C);     
+    
+    if (isCButton) {
         operationResult = 0;
-        isOperationClicked = false;
-        operation = '';
-        showOnDisplay(0);
+        operation = '';        
     }
+
+    console.log (operationResult);
+
+    showOnDisplay(0);
+    isOperationClicked = isCEButton;
 }
 
-function onDecimalClick ({innerText}) {
+function onDecimalClick ({ innerText }) {
     if (isOperationClicked) {
-        showOnDisplay('0' + innerText);
-        isOperationClicked = false;                
-        
-    } else if (!displayElement.value.includes('.')) {
-        showOnDisplay(innerText, true);
-        isOperationClicked = false;
+        showOnDisplay('0' + innerText); 
     } 
+
+    if (!displayElement.value.includes('.')) {
+        showOnDisplay(innerText, true);
+    } 
+
+    isOperationClicked = false; 
 } 
 
 function init() {
