@@ -1,0 +1,52 @@
+html {
+    font-size: 10px;
+
+    @include media-mobile {
+        font-size: 7px;
+    }
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    color: $whitesmoke;
+}
+
+.time {
+    font-size: 7rem;
+}
+
+.greeting-line {
+    font-size: 4rem;
+    margin-bottom: 40px;
+}
+
+.focus-question, .focus{
+    font-size: 3rem;
+    margin: 10px 0px;
+}
+
+.slogan {
+    font-size: 3.5rem;
+    font-weight: 600;
+}
+
+.morning {
+    background-image: url(../img/morning.jpg);
+    background-size: cover;
+    color: $black;
+}
+
+.evening {
+    background-image: url(../img/evening.jpg);
+    background-size: cover; 
+}
+
+.afternoon {
+    background-image: url(../img/afternoon.jpg);
+    background-size: cover;
+}
