@@ -14,54 +14,60 @@ const selectors = {
 const nameElement = document.querySelector(selectors.NAME);
 const focusElement = document.querySelector(selectors.FOCUS);
 
-function addZeroFirstFormat(value){
+function addZeroToFormat(value) {
   return value < 10 ? '0' + value : value;
 }
 
-function showTime() {
+function updateTime() {
   const timeElement = document.querySelector(selectors.TIME);
   let currentTime = new Date();
   let hour = currentTime.getHours();
-  let min = addZeroFirstFormat(currentTime.getMinutes());
-  let sec = addZeroFirstFormat(currentTime.getSeconds());
+  let min = addZeroToFormat(currentTime.getMinutes());
+  let sec = addZeroToFormat(currentTime.getSeconds());
 
   timeElement.innerHTML = `${hour}:${min}:${sec}`;
-  setTimeout(showTime, 1000);
+  setTimeout(updateTime, 1000);
 }
 
-function setGreetingLine() {
+function updateGreetingLine(dayPart, dayPartClass) {  
   const greetingElement = document.querySelector(selectors.GREETING);
+
+  greetingElement.textContent = `Good ${dayPart}, `;
+  document.body.classList.add(dayPartClass); 
+}
+
+function setGreetingLine() {  
   let currentTime = new Date();
-  let hour = currentTime.getHours();
+  const hour = currentTime.getHours();
+  let dayPart = 'Evening';
+  let dayPartClass = classes.EVENING;
 
   if (hour < 12) {
-    greetingElement.textContent = 'Good Morning, ';
-    document.body.classList.add(classes.MORNING);    
+    dayPart = 'Morning';
+    dayPartClass = classes.MORNING;    
   } else if (hour < 18) {
-    greetingElement.textContent = 'Good Afternoon, ';
-    document.body.classList.add(classes.AFTERNOON); 
-  } else {
-    greetingElement.textContent = 'Good Evening, ';
-    document.body.classList.add(classes.EVENING);
-  }
+    dayPart = 'Afternoon';
+    dayPartClass = classes.AFTERNOON;    
+  } 
+
+  updateGreetingLine(dayPart, dayPartClass);
 }
 
-function getName() {
-  const nameItem = localStorage.getItem('name');
-
-  nameElement.textContent = nameItem ? nameItem : '(your name)';  
+function updateName() {
+  nameElement.textContent = localStorage.getItem('name') || '(your name)';  
 }
 
-function getFocus() {
-  const focusItem = localStorage.getItem('focus');
-
-  focusElement.textContent = focusItem ? focusItem : '(your focus)';  
+function updateFocus() {
+  focusElement.textContent = localStorage.getItem('focus') || '(your focus)';  
 }
 
-function setItem(e, key) {
+function saveToLocalStorage(e, key) {
   const element = e.target;
-  if (e.type === 'keypress') {
-    if (e.which == 13 || e.keyCode == 13) {
+  const enterKeyCode = 13;
+
+  if (e.type === 'keydown') {
+    if (e.keyCode === enterKeyCode) {
+      localStorage.setItem(key, element.innerText);
       element.blur();
     }
   } else {
@@ -69,23 +75,23 @@ function setItem(e, key) {
   }
 }
 
-function setName(e) {
-  setItem(e, 'name');
+function saveName(e) {
+  saveToLocalStorage(e, 'name');
 }
 
-function setFocus(e) {
-  setItem(e, 'focus');
+function saveFocus(e) {
+  saveToLocalStorage(e, 'focus');
 }
 
 function init() {
-  nameElement.addEventListener('keypress', setName);
-  nameElement.addEventListener('blur', setName);
-  focusElement.addEventListener('keypress', setFocus);
-  focusElement.addEventListener('blur', setFocus);
-  showTime();
+  nameElement.addEventListener('keydown', saveName);
+  nameElement.addEventListener('blur', saveName);
+  focusElement.addEventListener('keydown', saveFocus);
+  focusElement.addEventListener('blur', saveFocus);
+  updateTime();
   setGreetingLine();
-  getName();
-  getFocus();
+  updateName();
+  updateFocus();
 }
 
 init();
