@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.time-buttons, .sound-picker {
+  height: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+}
+
+.btn {
+  cursor: pointer;
+  transition: all 0.5s ease;
+  box-shadow: 0 0 10px;
+}
+
+.minutes-btn {
+  color: #C0C0C0;
+  width: 30%;
+  height: 10%;
+  background: none;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid #C0C0C0;
+  padding: 0 5px;
+}
+.minutes-btn:hover {
+  background: #C0C0C0;
+  color: #000000;
+}
+@media (max-width: calc(768px + 1px)) {
+  .minutes-btn {
+    width: 50%;
+  }
+}
+@media (max-width: calc(375px + 1px)) {
+  .minutes-btn {
+    width: 60%;
+  }
+}
+
+.sound-btn {
+  border: none;
+  height: 115px;
+  width: 115px;
+  padding: 30px;
+  border-radius: 50%;
+}
+.sound-btn:hover {
+  filter: invert(0%) sepia(1%) saturate(3%) hue-rotate(326deg) brightness(96%) contrast(104%);
+}
+.sound-btn:nth-child(1n) {
+  background-color: #4972a1;
+  background-image: url(../assets/img/rain.svg);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.sound-btn:nth-child(2n) {
+  background: #a14f49;
+  background-image: url(../assets/img/beach.svg);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media (max-width: calc(375px + 1px)) {
+  .sound-btn {
+    height: 80px;
+    width: 80px;
+  }
+}
+@media (max-width: 320px) {
+  .sound-btn {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.player-container {
+  position: relative;
+  height: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+}
+@media (max-width: calc(768px + 1px)) {
+  .player-container {
+    height: 60%;
+  }
+}
+
+.track-outline, .moving-outline {
+  position: absolute;
+  height: 50%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  pointer-events: none;
+}
+.track-outline circle, .moving-outline circle {
+  transition: all 0.2s ease-in-out;
+}
+@media (max-width: calc(768px + 1px)) {
+  .track-outline, .moving-outline {
+    height: 40%;
+  }
+}
+@media (max-width: calc(375px + 1px)) {
+  .track-outline, .moving-outline {
+    height: 25%;
+  }
+}
+
+.play {
+  position: absolute;
+  height: 20%;
+  top: 30%;
+  left: 40%;
+  cursor: pointer;
+}
+@media (max-width: calc(768px + 1px)) {
+  .play {
+    height: 15%;
+    top: 33%;
+  }
+}
+@media (max-width: calc(375px + 1px)) {
+  .play {
+    height: 10%;
+    top: 35%;
+  }
+}
+
+.replay {
+  position: absolute;
+  top: 67%;
+  height: 10%;
+  cursor: pointer;
+}
+@media (max-width: calc(768px + 1px)) {
+  .replay {
+    height: 10%;
+    top: 65%;
+  }
+}
+@media (max-width: 320px) {
+  .replay {
+    top: 65%;
+  }
+}
+
+.time-display {
+  color: #C0C0C0;
+  position: absolute;
+  font-size: 3rem;
+  bottom: 10%;
+}
+@media (max-width: calc(375px + 1px)) {
+  .time-display {
+    font-size: 2rem;
+  }
+}
+
+.video {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+/*# sourceMappingURL=style.css.map */

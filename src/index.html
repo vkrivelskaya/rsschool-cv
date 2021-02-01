@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation App</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script defer src="main.js"></script>   
+</head>
+<body>
+    <div class="app">
+        <div class="video-container">
+            <video class="video" loop >
+                <source src="./assets/video/rain.mp4"  type="video/mp4">
+            </video>
+        </div>
+        <div class="time-buttons">
+            <button class="minutes-btn btn" data-time="120">2 Minutes</button>
+            <button class="minutes-btn btn" data-time="300">5 Minutes</button>
+            <button class="minutes-btn btn" data-time="600">10 Minutes</button>
+        </div>
+        <div class="player-container">
+            <audio class="song">
+                <source src="assets/audio/rain.mp3"/>
+            </audio>
+            <div class="player">
+            </div>
+                <img class="play" src="assets/img/play.svg" class="play" alt="Play button"></img>
+                <svg class="track-outline" width="453" height="453" viewBox="0 0 453 453" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="226.5" cy="226.5" r="216.5" stroke="#4972a1" stroke-width="20"/>
+                </svg>
+                <svg class="moving-outline" width="453" height="453" viewBox="0 0 453 453" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="226.5" cy="226.5" r="216.5" stroke="#C0C0C0" stroke-width="20"/>
+                </svg>
+                <img class="replay" src="assets/img/replay.svg" class="replay" alt="Replay button"></img>              
+            <h3 class="time-display">0:00</h3>      
+        </div>
+        <div class="sound-picker">
+            <button class="sound-btn btn" data-sound="assets/audio/rain.mp3" data-video="assets/video/rain.mp4" ></button>
+            <button class="sound-btn btn" data-sound="assets/audio/beach.mp3" data-video="assets/video/beach.mp4"></button>
+        </div>
+    </div>    
+</body>
+</html>
