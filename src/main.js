@@ -1,7 +1,6 @@
 const selectors = {
     TIME_BTN: '.time-buttons',
     SOUND_BTN: '.sound-picker',
-    TIME_BTN: '.time-buttons',
     SONG: '.song',
     VIDEO: '.video',
     PLAY: '.play',
@@ -10,90 +9,96 @@ const selectors = {
     OUTLINE: '.moving-outline circle',
 };
 
-const song = document.querySelector(selectors.SONG);
-const video = document.querySelector(selectors.VIDEO);
-const play = document.querySelector(selectors.PLAY);
-const replay = document.querySelector(selectors.REPLAY);
-const timeDisplay = document.querySelector(selectors.TIME_DISPLAY);
+const songElement = document.querySelector(selectors.SONG);
+const videoElement = document.querySelector(selectors.VIDEO);
+const playButtonElement = document.querySelector(selectors.PLAY);
+const replayButtonElement = document.querySelector(selectors.REPLAY);
+const timeDisplayElement = document.querySelector(selectors.TIME_DISPLAY);
 let duration = 600;
 
-function checkPlaying() {
-    if (song.paused) {
-        song.play();
-        video.play();
-        play.src = "assets/img/pause.svg";
+function pauseSong() {
+    songElement.pause();
+    videoElement.pause();
+    playButtonElement.src = "assets/img/play.svg";
+}
+
+function playSong() {
+    songElement.play();
+    videoElement.play();
+    playButtonElement.src = "assets/img/pause.svg";
+}
+
+function updatePlaying() {
+    if (songElement.paused) {
+        playSong();
     } else {
-        song.pause();
-        video.pause();
-        play.src = "assets/img/play.svg";
+        pauseSong();
     }    
 }
 
 function restartSong(e) {    
-    song.currentTime = 0;
-    song.play();
+    songElement.currentTime = 0;
+    songElement.play();
 }
 
-function pickSound(){
+function pickSound() {
     const sound = document.querySelector(selectors.SOUND_BTN);
 
     sound.addEventListener("click", function(e) {
-        song.src = e.target.getAttribute("data-sound");
-        video.src = e.target.getAttribute("data-video");
-        checkPlaying(song);
+        songElement.src = e.target.getAttribute("data-sound");
+        videoElement.src = e.target.getAttribute("data-video");
+        updatePlaying();
     });
 }
 
-function addZeroFirstFormat(value){
+function addZeroToFormat(value) {
     return value < 10 ? '0' + value : value;
 } 
 
 function pickSoundDuration() {
-    const timeSelect = document.querySelector(selectors.TIME_BTN);
+    const timeButtonsContainerElement = document.querySelector(selectors.TIME_BTN);
 
-    timeSelect.addEventListener("click", function(e) {
+    timeButtonsContainerElement.addEventListener("click", function(e) {
         duration = e.target.getAttribute("data-time");
-        timeDisplay.textContent = 
-            `${Math.floor(duration / 60)}:${addZeroFirstFormat(Math.floor(duration % 60))}`;
+        timeDisplayElement.textContent = 
+            `${Math.floor(duration / 60)}:${addZeroToFormat(Math.floor(duration % 60))}`;
     });
 }
 
-function upDateProgressBar() {
+function updateProgressBar() {
     const outline = document.querySelector(selectors.OUTLINE);
     const outlineLength = outline.getTotalLength();
-    const currentTime = song.currentTime;
-    let progress = outlineLength - (currentTime / duration) * outlineLength;
+    const currentTime = songElement.currentTime;
+    const progress = outlineLength - (currentTime / duration) * outlineLength;
 
     outline.style.strokeDashoffset = outlineLength;
     outline.style.strokeDasharray = outlineLength;
     outline.style.strokeDashoffset = progress;  
 }
 
-function upDateTime() {
-    const currentTime = song.currentTime;
+function updateTime() {
+    const currentTime = songElement.currentTime;
     const countDown = duration - currentTime;
     const seconds = Math.floor(countDown % 60);
-    const minutes = Math.floor(countDown / 60);
-    timeDisplay.textContent = `${minutes}:${addZeroFirstFormat(seconds)}`;
+    const minutes = Math.floor(countDown / 60);  
 
-    if (currentTime >= duration) {
-        song.pause();
-        song.currentTime = 0;
-        play.src = "assets/img/play.svg";;
-        video.pause();
+    if (countDown < 0) {
+        pauseSong();
+        songElement.currentTime = 0;
+    } else {
+        timeDisplayElement.textContent = `${minutes}:${addZeroToFormat(seconds)}`;
     }
 
-    upDateProgressBar(); 
+    updateProgressBar(); 
 }
 
 function init() {
-    play.addEventListener("click", checkPlaying); 
-    replay.addEventListener("click", restartSong);
-    song.addEventListener("timeupdate", upDateTime);
+    playButtonElement.addEventListener("click", updatePlaying); 
+    replayButtonElement.addEventListener("click", restartSong);
+    songElement.addEventListener("timeupdate", updateTime);
     pickSound();
     pickSoundDuration();       
 }
 
 init();
-
     

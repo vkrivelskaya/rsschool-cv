@@ -134,7 +134,7 @@ body {
   position: absolute;
   height: 20%;
   top: 30%;
-  left: 40%;
+  left: 35%;
   cursor: pointer;
 }
 @media (max-width: calc(768px + 1px)) {
