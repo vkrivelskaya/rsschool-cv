@@ -1,0 +1,88 @@
+.player-container {
+    position: relative;
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+
+    @include media-tablet {
+        height: 60%;
+    }
+}
+
+.track-outline, .moving-outline {
+    position: absolute;
+    height: 50%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    pointer-events: none;
+
+    circle {
+        transition: all 0.2s ease-in-out;
+    }
+
+    @include media-tablet {
+        height: 40%;
+    }
+
+    @include media-mobile {
+        height: 25%;
+    }
+} 
+
+.play {
+    position: absolute;
+    height: 20%;
+    top: 30%;
+    left: 35%;
+    cursor: pointer;    
+
+    @include media-tablet {
+        height: 15%;
+        top: 33%;
+    }
+
+    @include media-mobile {
+        height: 10%;
+        top: 35%;
+    }
+}
+
+.replay {
+    position: absolute;
+    top: 67%;
+    height: 10%;
+    cursor: pointer;   
+
+    @include media-tablet {
+        height: 10%;
+        top: 65%;
+    }
+
+    @include media-small-mobile {
+        top: 65%;
+    }
+}
+
+.time-display {
+    color: $silver;
+    position: absolute;
+    font-size: 3rem;
+    bottom: 10%;
+
+    @include media-mobile {
+        font-size: 2rem;
+    }
+}
+
+.video {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    min-width: 100%;        
+    min-height: 100%;
+    z-index: -1;
+}
