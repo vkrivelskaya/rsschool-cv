@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
-    background-color: v(base, #65737e);
+    background-color: v(base, $grey);
 }
 
 .wrapper {
@@ -10,9 +10,13 @@ body {
     justify-content: space-between;
     flex: 1;
     align-items: center;
-
+    
     @include media-tablet {
         padding-top: 15px;
+    }
+
+    @include media-mobile {
+        flex-direction: column;
     }
 }
 
@@ -20,7 +24,7 @@ body {
     text-align: center;
     font-size: 2.5rem;
     margin: 40px;
-    color: v(color, #c0c5ce);
+    color: v(color, $light-grey);
 
     @include media-mobile { 
         font-size: 2rem;
@@ -34,7 +38,8 @@ body {
 
 .filters-title {
     font-size: 2rem;
-    color: v(color, #c0c5ce);
+    color: v(color, $light-grey);
+    margin-top: 0px;
 
     @include media-small-mobile {
         font-size: 1.5rem;

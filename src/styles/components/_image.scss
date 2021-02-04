@@ -1,9 +1,6 @@
 .image {
-    //max-width: 60%;
     height: auto;
     justify-self: left;
     width: v(spacing, 50%);
-    filter: blur(v(blur, 0px));
-    filter: sepia(v(sepia, 0%));
-    filter: hue-rotate(v(hue-rotate, 0deg));
+    filter: blur(v(blur, 0px)) sepia(v(sepia, 0%)) hue-rotate(v(hue-rotate, 0deg)) Invert(v(invert));    
 }
