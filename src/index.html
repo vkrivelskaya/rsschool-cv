@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables and JS</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script defer src="main.js"></script> 
+</head>
+<body>
+    <h1 class="headline">Update CSS Variables with JS</h1>
+    <div class="wrapper">
+        <div class="controls">
+            <h2 class="filters-title" >Photo filters:</h2>
+            <label class="filter">Headline color:
+                <input type="color" name="color" value="#c0c5ce">
+            </label>
+            <label class="filter">Background color:
+                <input type="color" name="base" value="#65737e">
+            </label>
+            <label class="filter">Photo size:
+                <input type="range" name="spacing" min="20" max="80" value="50" data-sizing="%">
+            </label>
+            <label class="filter">Blur:
+                <input type="range" name="blur" min="0" max="6" value="0" data-sizing="px">
+            </label>
+            <label class="filter">Sepia:
+                <input type="range" name="sepia" min="0" max="100" value="0" data-sizing="%">
+            </label>
+            <label class="filter">Hue:
+                <input type="range" name="hue-rotate" min="0" max="360" value="0" data-sizing="deg">
+            </label>
+            <label class="filter">Inversion:
+                <input type="range" name="invert" min="0" max="100" value="0" data-sizing="%">
+            </label>
+        </div>
+        <img class="image" src="https://source.unsplash.com/7bwQXzbF6KE/800x500" alt="Random image">          
+    </div>    
+</body>
+</html>
