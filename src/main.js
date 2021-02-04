@@ -8,8 +8,8 @@ const classes = {
 }
 
 function playSound(keyCode) {
-    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
-    const key = document.querySelector(`div[data-key="${keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key='${keyCode}']`);
+    const key = document.querySelector(`div[data-key='${keyCode}']`);
     if (!audio) return;
     
     key.classList.add(classes.PLAYING);

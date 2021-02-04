@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     border: 2px solid $black;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     margin: 5px;    
     padding: 10px 5px;
     transition: all .07s ease;
@@ -48,7 +48,7 @@
 .sound {
     font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     color: $yellow;
 
     @include media-tablet {
