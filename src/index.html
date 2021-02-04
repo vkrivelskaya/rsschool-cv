@@ -9,35 +9,30 @@
     <script defer src="main.js"></script> 
 </head>
 <body>
-    <h1>Update CSS Variables with <span class='hl'>JS</span></h1>
+    <h1 class="headline">Update CSS Variables with JS</h1>
     <div class="wrapper">
         <div class="controls">
-            <h2>Photo filters</h2>
-            <label>Background color:
-                <input type="color" name="base" value="#008C8C">
+            <h2 class="filters-title" >Photo filters:</h2>
+            <label class="filter">Headline color:
+                <input type="color" name="base" value="#c0c5ce">
             </label>
-            <label>Photo size:
+            <label class="filter">Background color:
+                <input type="color" name="base" value="#65737e">
+            </label>
+            <label class="filter">Photo size:
                 <input type="range" name="spacing" min="20" max="90" value="50" data-sizing="%">
             </label>
-            <label>Blur:
+            <label class="filter">Blur:
                 <input type="range" name="blur" min="0" max="6" value="0" data-sizing="px">
             </label>
-            <label>Inversion:
-                <input type="range" name="invert" min="0" max="100" value="0" data-sizing="%">
-            </label>
-            <label>Sepia:
+            <label class="filter">Sepia:
                 <input type="range" name="sepia" min="0" max="100" value="0" data-sizing="%">
             </label>
-            <label>Saturation:
-                <input type="range" name="saturate" min="0" max="100" value="100" data-sizing="%">
-            </label>
-            <label>Hue:
+            <label class="filter">Hue:
                 <input type="range" name="hue-rotate" min="0" max="360" value="0" data-sizing="deg">
             </label>
         </div>
-        <div class="image">
-            <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
-        </div>    
+        <img class="image" src="https://source.unsplash.com/7bwQXzbF6KE/800x500" alt="Random image">          
     </div>    
 </body>
 </html>

@@ -1,0 +1,42 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+    background-color: v(base, #65737e);
+}
+
+.wrapper {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    align-items: center;
+
+    @include media-tablet {
+        padding-top: 15px;
+    }
+}
+
+.headline {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 40px;
+    color: v(color, #c0c5ce);
+
+    @include media-mobile { 
+        font-size: 2rem;
+        margin: 25px 15px 0px;
+    }
+
+    @include media-small-mobile {
+        font-size: 1.7rem;
+    }
+}
+
+.filters-title {
+    font-size: 2rem;
+    color: v(color, #c0c5ce);
+
+    @include media-small-mobile {
+        font-size: 1.5rem;
+    }
+}

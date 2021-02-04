@@ -1,0 +1,24 @@
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center; 
+    align-self: flex-start;
+
+    @include media-mobile {
+        font-size: 1.3rem;
+    }
+}
+
+.filter {
+    padding: 10px;    
+    font-size: 1.3rem;
+
+    @include media-mobile {
+        padding: 5px;
+    }
+
+    @include media-small-mobile {
+        font-size: 1.2rem;
+    }
+}
