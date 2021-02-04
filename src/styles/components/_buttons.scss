@@ -1,0 +1,62 @@
+.key {
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $black;
+    border-radius: 0.5rem;
+    margin: 5px;    
+    padding: 10px 5px;
+    transition: all .07s ease;
+    width: 10rem;
+    text-align: center;
+    color: $white;
+    background: $transparent-black;
+    text-shadow: 0 0 3px $black;    
+    font-family: 'Roboto', sans-serif;
+
+    @include media-tablet {
+        margin: 4px;
+        padding: 20px 15px;
+        width: 8.5rem;
+    }
+
+    @include media-mobile {
+        width: 7rem;
+        padding: 15px 5px;
+    }    
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: $yellow;
+    box-shadow: 0 0 1rem $yellow;
+}
+
+.letter {
+    font-size: 2rem;   
+
+    @include media-tablet {
+        font-size: 4rem;
+    }
+
+    @include media-mobile {
+        font-size: 2rem;
+    }
+}
+  
+.sound {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: $yellow;
+
+    @include media-tablet {
+        font-size: 1.5rem;
+    }
+
+    @include media-mobile {
+        font-size: 1rem;
+    }
+}
+  
