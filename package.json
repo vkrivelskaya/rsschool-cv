@@ -1,0 +1,23 @@
+{
+  "name": "rsschool",
+  "version": "1.0.0",
+  "description": "- [General info](#general-info)\r - [Technologies](#technologies)\r - [Setup](#setup)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkrivelskaya/rsschool-cv.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vkrivelskaya/rsschool-cv/issues"
+  },
+  "homepage": "https://github.com/vkrivelskaya/rsschool-cv#readme",
+  "devDependencies": {
+    "webpack": "^5.22.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
