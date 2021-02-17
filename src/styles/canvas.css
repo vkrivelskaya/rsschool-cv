@@ -437,6 +437,25 @@ body {
   height: 50px;
   background-color: #730aa2;
 }
+@media (max-width: calc(768px + 1px)) {
+  .picker .display {
+    height: 20px;
+  }
+}
+@media (max-width: calc(768px + 1px)) {
+  .picker {
+    font-size: 0.7rem;
+    width: 120px;
+  }
+}
+@media (max-width: calc(375px + 1px)) {
+  .picker {
+    top: 5px;
+    left: 5px;
+    width: 70px;
+    padding: 5px;
+  }
+}
 
 .slider {
   display: block;

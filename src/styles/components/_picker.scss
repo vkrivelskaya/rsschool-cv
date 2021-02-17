@@ -13,7 +13,7 @@
         height: 50px;
         background-color:$purple;
 
-        @include media-mobile {
+        @include media-tablet {
             height: 20px;
         }
     }
@@ -24,7 +24,6 @@
     }
 
     @include media-mobile {
-        font-size: 0.5rem;
         top:5px;
         left: 5px;
         width: 70px;
