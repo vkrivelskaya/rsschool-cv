@@ -1,0 +1,13 @@
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-size: 12px;
+}
+
+body{
+    display: flex;
+    background: $gray;
+    min-height: 100vh;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}

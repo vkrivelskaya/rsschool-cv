@@ -1,0 +1,65 @@
+.player {
+    max-width: 750px;
+    box-shadow: 10px 5px 10px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+
+    &:fullscreen {
+        max-width: none;
+        width: 100%;
+    }
+
+    &:hover {
+        .player-controls {
+            transform: translateY(0);
+        }
+        .progress {
+            height: 15px;
+        }
+    }
+
+    .video {
+        width: 100%;
+    }
+}
+
+.player-controls {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translateY(100%) translateY(-5px);
+    transition: all .3s;
+    flex-wrap: wrap;
+    background: rgba(0,0,0,0.1);
+}
+
+.player-controls > * {
+    flex: 1;
+}
+
+.progress {
+    flex: 10;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 100%;
+    transition: height 0.3s;
+    background: rgba(0,0,0,0.5);
+    cursor: ew-resize;
+    
+
+    .progress-filled {
+        width: 50%;
+        background: $yellow;
+        flex: 0;
+        flex-basis: 0%;
+    }
+
+    .timer {
+        color: white;
+        align-self: right;
+        font-size: 1rem;        
+    }
+}
+  
