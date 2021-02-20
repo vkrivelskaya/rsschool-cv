@@ -9,20 +9,20 @@ const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev;
 const optimization = () => {
     const config = {
-      splitChunks: {
-        chunks: 'all'
-      }
+        splitChunks: {
+            chunks: 'all'
+        }
     }
   
     if (isProd) {
-      config.minimizer = [
-        new OptimizeCssAssetWebpackPlugin(),
-        new TerserWebpackPlugin()
-      ]
+        config.minimizer = [
+            new OptimizeCssAssetWebpackPlugin(),
+            new TerserWebpackPlugin()
+        ]
     }
   
     return config
-  }
+}
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),

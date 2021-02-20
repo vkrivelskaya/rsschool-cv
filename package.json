@@ -1,7 +1,7 @@
 {
-  "name": "rsschool",
+  "name": "rsschool-cv",
   "version": "1.0.0",
-  "description": "- [General info](#general-info)\r - [Technologies](#technologies)\r - [Setup](#setup)",
+  "description": "This project is a Canvas App",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",

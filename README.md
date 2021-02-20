@@ -20,5 +20,4 @@ Project is created with:
 
 ## Setup
 
-To compile the project, use command: sass src/styles/canvas.scss src/styles/canvas.css
-To run the project use src/index.html
+To run the project use command:  npm run dev
