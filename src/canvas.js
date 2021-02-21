@@ -18,11 +18,9 @@ function initCanvas() {
 
 function pickSliderValue(e) {
     const displayElement = document.querySelector(selectors.DISPLAY);
-    const values = {};   
-
-    for (let element of document.querySelectorAll(selectors.SLIDER)) {
-        values[element.id] = element.value;
-    }    
+    const values = Array.from(document.querySelectorAll(selectors.SLIDER))
+    .reduce((acc, {id, value}) => ({ ...acc, [id]: value }), {}); 
+    
     color = `rgb(${values.red}, ${values.green}, ${values.blue})`;
     width = values.width;
     displayElement.style.background = color;
