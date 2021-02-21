@@ -417,11 +417,6 @@ ul {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-  font-size: 12px;
-}
-
 body {
   display: flex;
   background: #808080;
@@ -429,6 +424,7 @@ body {
   background-size: cover;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 }
 
 .player {

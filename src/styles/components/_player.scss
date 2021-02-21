@@ -28,7 +28,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    transform: translateY(100%) translateY(-5px);
+    transform: translateY(100%);
     transition: all .3s;
     flex-wrap: wrap;
     background: rgba(0,0,0,0.1);
@@ -46,20 +46,18 @@
     flex-basis: 100%;
     transition: height 0.3s;
     background: rgba(0,0,0,0.5);
-    cursor: ew-resize;
-    
+    cursor: ew-resize;    
 
     .progress-filled {
-        width: 50%;
         background: $yellow;
         flex: 0;
-        flex-basis: 0%;
     }
 
     .timer {
-        color: white;
-        align-self: right;
-        font-size: 1rem;        
+        color: $white;
+        right: 0;
+        font-size: 0.7rem; 
+        position: absolute; 
+        z-index: 1;      
     }
-}
-  
+}  

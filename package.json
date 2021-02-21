@@ -1,9 +1,9 @@
 {
   "name": "rsschool",
   "version": "1.0.0",
-  "description": "https://vkrivelskaya.github.io/rsschool-cv/cv",
+  "description": "This project is a Custom Video Player",
   "private": true,
-    "scripts": {
+  "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
