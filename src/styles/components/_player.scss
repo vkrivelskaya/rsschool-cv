@@ -9,10 +9,11 @@
         width: 100%;
     }
 
-    &:hover {
+    &:hover {        
         .player-controls {
             transform: translateY(0);
         }
+
         .progress {
             height: 15px;
         }

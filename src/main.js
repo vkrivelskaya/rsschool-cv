@@ -16,15 +16,15 @@ const classes = {
 };
 
 const videoElement = document.querySelector(selectors.VIDEO);
-const playButton = document.querySelector(selectors.PLAY);
+const playButtonElement = document.querySelector(selectors.PLAY);
 const progressElement = document.querySelector(selectors.PROGRESS);
 
 function setTime() {
     const timerElement = document.querySelector(selectors.TIMER);    
     const minutes = Math.floor(videoElement.currentTime / 60);
     const seconds = Math.floor(videoElement.currentTime - minutes * 60);  
-    const minuteValue = minutes < 10 ? '0' + minutes : minutes;
-    const secondValue = seconds < 10 ? '0' + seconds : seconds;
+    const minuteValue = minutes < 10 ? `0${minutes}` : minutes;
+    const secondValue = seconds < 10 ? `0${seconds}` : seconds;
 
     timerElement.textContent = `${minuteValue} : ${secondValue}`;
 }
@@ -34,11 +34,8 @@ function togglePlayPauseVideoState() {
         videoElement.play();
     } else {
         videoElement.pause();
-    }    
-}
-
-function togglePlayButton() {        
-    playButton.textContent = videoElement.paused ? '▶' : '❚ ❚';
+    }   
+    playButtonElement.textContent = videoElement.paused ? '▶' : '❚ ❚'; 
 }
 
 function toggleFullscreen() {
@@ -73,24 +70,39 @@ function initControlElement(e) {
 
     if (target.className.includes(classes.PLAY_BTN) ) {
         togglePlayPauseVideoState();
-        togglePlayButton();        
-    } else if (target.className.includes(classes.FULL_SCREEN_BUTTON)) {
+        return;      
+    }
+    
+    if (target.className.includes(classes.FULL_SCREEN_BUTTON)) {
         toggleFullscreen();
-    } else if (target.className.includes(classes.SKIP_BTN)) {
+        return;
+    } 
+
+    if (target.className.includes(classes.SKIP_BTN)) {
         skipVideo(e.target.dataset.skip);
-    } else if (target.className.includes(classes.PROGRESS)) {
+        return;
+    } 
+    
+    if (target.className.includes(classes.PROGRESS)) {
         updateVideoCurrentTime(e);
-    } else if (target.name.includes('volume')) {        
+        return;
+    } 
+    
+    if (target.name.includes('volume')) {        
         updateVolume(target.value);
-    } else if (target.name.includes('playbackRate')) {        
+        return;
+    } 
+    
+    if (target.name.includes('playbackRate')) {        
         updatePlaybackRate(target.value);
+        return;
     } 
 }
 
 function updateProgressElement() {
     const progressBar = document.querySelector(selectors.PROGRESS_FILLED);
-    const percent = (videoElement.currentTime / videoElement.duration) * 100;
-    progressBar.style.flexBasis = `${percent}%`;
+    const playedVideoDurationPercent = (videoElement.currentTime / videoElement.duration) * 100;
+    progressBar.style.flexBasis = `${playedVideoDurationPercent}%`;
     setTime();
 }
 
@@ -104,15 +116,14 @@ function listenProgressElementChanges() {
 
 function listenVideoElementChanges() {
     videoElement.addEventListener('click', togglePlayPauseVideoState);
-    videoElement.addEventListener('click', togglePlayButton);
     videoElement.addEventListener('timeupdate', updateProgressElement);
 }
 
 function init() { 
-    const playerControlsContainer = document.querySelector(selectors.CONTROLS);
+    const playerControlsContainerElement = document.querySelector(selectors.CONTROLS);
 
     listenVideoElementChanges();
-    playerControlsContainer.addEventListener('click', initControlElement); 
+    playerControlsContainerElement.addEventListener('click', initControlElement); 
     listenProgressElementChanges();   
 }
 
