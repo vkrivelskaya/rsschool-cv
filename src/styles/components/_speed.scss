@@ -1,4 +1,4 @@
-.speed {
+.speed-bar {
     background: $light-gray;
     flex: 1;
     display: flex;
@@ -8,7 +8,7 @@
     box-shadow: 10px 5px 10px rgba(0,0,0,0.6);
     overflow: hidden;
   
-    .speed-bar {
+    .speed {
         width: 100%;
         background: linear-gradient(-170deg, $light-gray 0%, $dark-blue 100%);
         box-shadow: 10px 5px 10px rgba(0,0,0,0.6);;

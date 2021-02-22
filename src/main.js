@@ -7,37 +7,33 @@ const selectors = {
 const speedElement = document.querySelector(selectors.SPEED);
 const speedBarElement = document.querySelector(selectors.SPEED_BAR);
 const videoElement = document.querySelector(selectors.VIDEO);
-let coordinateY = 0;
 
-function updateSpeed() {
-    if (coordinateY <= speedElement.offsetHeight) {
-        const speedBarFillPercent = coordinateY / speedElement.offsetHeight;
+function updateSpeed(coordinateY) {
+    if (coordinateY <= speedBarElement.offsetHeight) {
+        const speedElementFillPercent = coordinateY / speedBarElement.offsetHeight;
         const minSpeed = 0.4;
         const maxSpeed = 10;
-        const speedBarElementHeight = Math.round(speedBarFillPercent * 100) + '%';
-        const playbackRate = speedBarFillPercent * (maxSpeed - minSpeed) + minSpeed;
+        const speedElementHeight = Math.round(speedElementFillPercent * 100) + '%';
+        const playbackRate = speedElementFillPercent * (maxSpeed - minSpeed) + minSpeed;
 
-        speedBarElement.style.height = speedBarElementHeight;
-        speedBarElement.textContent = playbackRate.toFixed(1) + '×';
+        speedElement.style.height = speedElementHeight;
+        speedElement.textContent = playbackRate.toFixed(1) + '×';
         videoElement.playbackRate = playbackRate;
     }    
 }
 
-function determineMouseCoordinates(e) {    
-    coordinateY = e.offsetY;
-    updateSpeed();    
+function determineMouseCoordinates(e) {   
+    updateSpeed(e.offsetY);    
 }
 
 function determineTouchCoordinates(e) {
-    const touchItem = e.touches[0];
-    e.preventDefault();    
-    coordinateY = touchItem.clientY; 
-    updateSpeed();
+    e.preventDefault(); 
+    updateSpeed(e.touches[0].clientY);
 }
 
 function init() {
-    speedElement.addEventListener('mousemove', determineMouseCoordinates);
-    speedElement.addEventListener('touchmove', determineTouchCoordinates);
+    speedBarElement.addEventListener('mousemove', determineMouseCoordinates);
+    speedBarElement.addEventListener('touchmove', determineTouchCoordinates);
 }
 
 init(); 
