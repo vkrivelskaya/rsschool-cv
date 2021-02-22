@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: $dark-gray url('https://unsplash.it/1500/900?image=1021') bottom center;
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+.wrapper {
+    max-width: 800px;
+    display: flex;
+
+    @include media-tablet {
+        max-width: 750px;
+    }
+
+    @include media-mobile {
+        max-width: 600px;
+    }
+
+    @include media-small-mobile {
+        max-width: 400px;
+    }
+}  

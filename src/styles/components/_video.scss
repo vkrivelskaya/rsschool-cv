@@ -1,0 +1,16 @@
+.video {
+    max-width: 650px;
+    box-shadow: 10px 5px 10px rgba(0,0,0,0.6);
+
+    @include media-tablet {
+        max-width: 600px;
+    }
+
+    @include media-mobile {
+        max-width: 270px;
+    }
+
+    @include media-small-mobile {
+        max-width: 230px;
+    }
+}
