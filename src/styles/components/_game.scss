@@ -1,0 +1,69 @@
+.game {
+    width: 600px;
+    height: 370px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    @include media-mobile {
+        width: 370px;
+        height: 350px
+    }
+
+    @include media-small-mobile {
+        width: 340px;
+        height: 320px
+    }
+}
+
+.hole {
+    flex: 1 0 33.33%;
+    overflow: hidden;
+    position: relative;
+
+    @include media-mobile {
+        flex: 1 0 40%;
+    }
+
+    &:after {
+        display: block;
+        background: url("../assets/img/dirt.svg") bottom center no-repeat;
+        background-size: contain;
+        content: '';
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        z-index: 1;
+        bottom: -30px;
+
+        @include media-mobile {
+            height: 65px;
+        }
+
+        @include media-mobile {
+            height: 55px;
+        }
+    }
+}
+
+.mole {
+    background: url("../assets/img/mole.svg") bottom center no-repeat;
+    background-size: 60%;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    transition:all 0.4s;
+
+    @include media-mobile {
+        background-size: 40%;
+    }
+
+    @include media-small-mobile {
+        background-size: 30%;
+    }
+}
+  
+.hole.up .mole {
+    top: 0;
+}

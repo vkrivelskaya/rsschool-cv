@@ -1,0 +1,23 @@
+html {
+    font-size: 10px;
+    background: $yellow;
+}
+
+body {
+    font-family: 'Amatic SC', cursive;
+}
+
+.heading {
+    text-align: center;
+    font-size: 10rem;
+    line-height: 1;
+    margin-bottom: 5px;
+
+    @include media-mobile {
+        font-size: 5rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 4rem;
+    }
+}
