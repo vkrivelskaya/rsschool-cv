@@ -49,7 +49,7 @@ module.exports = {
             }
         }),
         new CleanWebpackPlugin(),
-        new ESLintPlugin(options),
+        new ESLintPlugin(),
         new MiniCssExtractPlugin({
             filename: 'style.css'
         }),

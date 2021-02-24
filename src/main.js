@@ -41,7 +41,7 @@ function getRandomHole(holes) {
     const newHole = holes[holesRandomElementIndex];    
 
     if (newHole === lastHole) {
-      return getRandomHole(holes);
+        return getRandomHole(holes);
     }
     lastHole = newHole;
     return newHole;  
@@ -154,7 +154,7 @@ function initLevel() {
         holes.forEach((el) => el.classList.add(classes.NEXT_LEVEL));
         hole7Element.classList.add(classes.ACTIVE);    
         hole8Element.classList.add(classes.ACTIVE);
-    };
+    }
     scoreBoardElement.textContent = localStorage.getItem('score') || '0';   
 }
 
