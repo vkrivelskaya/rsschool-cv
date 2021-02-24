@@ -1,0 +1,60 @@
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    font-size: 3rem;
+    background-color: $light-gray;
+    margin: 15% auto;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2px $very-dark-gray;
+    border: 1px solid $dark-gray;
+    width: 60%;
+    position: relative;
+
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 2px;
+        font-size: 5rem;
+        cursor: pointer;
+        color: $dark-gray;
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    .message {
+        text-align: center;
+    }
+
+    .buttons-container{
+        display: flex;
+        justify-content: space-evenly;
+
+        .button {
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 3px 3px 2px $very-dark-gray
+        }
+    }
+
+    @include media-mobile {
+        font-size: 1.5rem;
+        width: 70%;
+    }
+}
+
+.active {
+    display: block;
+}

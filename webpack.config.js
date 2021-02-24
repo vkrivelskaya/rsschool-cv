@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev;
@@ -48,6 +49,7 @@ module.exports = {
             }
         }),
         new CleanWebpackPlugin(),
+        new ESLintPlugin(options),
         new MiniCssExtractPlugin({
             filename: 'style.css'
         }),
