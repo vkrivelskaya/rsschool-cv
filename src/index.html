@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Canvas</title>    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">     
+</head>
+<body>
+    <canvas id="draw"></canvas>
+    <div class="picker">
+        <label>
+            Red:
+            <input id="red" class="red slider" type="range" min="0" max="255" step="1" value="115">
+        </label>
+        <label>
+            Green:
+            <input id="green" class="green slider" type="range" min="0" max="255" step="1" value="10">
+        </label>
+        <label>
+            Blue:
+            <input id="blue" class="blue slider" type="range" min="0" max="255" step="1" value="162">
+        </label>
+        <div class="display"></div>
+        <label>
+            Width:
+            <input id="width" class="width slider" type="range" min="1" max="100" step="1" value="10px">
+        </label>        
+    </div>    
+</body>
+</html>
