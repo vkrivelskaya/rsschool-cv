@@ -25,6 +25,9 @@ const scoreBoardElement = document.querySelector(selectors.SCORE);
 const modalWindowElement = document.querySelector(selectors.MODAL);
 const hole7Element = document.querySelector(selectors.HOLE_7);
 const hole8Element = document.querySelector(selectors.HOLE_8);
+const minRate = 200;
+const maxRate = 3000;
+const gameDuration = 10000;
 let score = 0;
 let minMoleDisappearanceRate;
 let maxMoleDisappearanceRate;
@@ -60,12 +63,16 @@ function peepMole() {
     }        
 }
 
-function finishGame() {
-    isGameFinished = true;
-    document.querySelectorAll(selectors.UP).forEach((el) => el.classList.remove(classes.UP));
+function saveLevelDataToLocalStorage() {
     localStorage.setItem('score', score);
     localStorage.setItem('min', minMoleDisappearanceRate);
     localStorage.setItem('max', maxMoleDisappearanceRate);
+}
+
+function finishGame() {
+    isGameFinished = true;
+    document.querySelectorAll(selectors.UP).forEach((el) => el.classList.remove(classes.UP));
+    saveLevelDataToLocalStorage();
     clearTimeout(timerId);
     modalWindowElement.classList.add(classes.ACTIVE);
 }
@@ -73,20 +80,20 @@ function finishGame() {
 function startLevel() {
     isGameFinished = false;
     peepMole();
-    setTimeout(finishGame, 10000);
+    setTimeout(finishGame, gameDuration);
 }
 
 function startGame() {    
-    score = localStorage.getItem('score') || 0;
-    minMoleDisappearanceRate = localStorage.getItem('min') || 200;
-    maxMoleDisappearanceRate = localStorage.getItem('max') || 3000;
+    score = +(localStorage.getItem('score') || 0);
+    minMoleDisappearanceRate = localStorage.getItem('min') || minRate;
+    maxMoleDisappearanceRate = localStorage.getItem('max') || maxRate;
     startLevel();     
 }
 
 function whackMole(e) {
     if(!e.isTrusted) return;
     if (e.target.className.includes(classes.MOLE)) {
-        score++; 
+        score += 1; 
         e.target.parentNode.classList.remove(classes.UP);
         scoreBoardElement.textContent = score;
     }    
@@ -111,15 +118,19 @@ function goToNextLevel() {
     startLevel();    
 }
 
-function startNewGame() {
+function cleanUpLevelDataFromLocalStorage() {
     localStorage.removeItem('score');
     localStorage.removeItem('min');
     localStorage.removeItem('max');
+}
+
+function startNewGame() {
+    cleanUpLevelDataFromLocalStorage();
     scoreBoardElement.textContent = 0;
     closeModalWindow();    
     score = 0;
-    minMoleDisappearanceRate = 200;
-    maxMoleDisappearanceRate = 3000;
+    minMoleDisappearanceRate = minRate;
+    maxMoleDisappearanceRate = maxRate;
     startLevel(); 
 }
 
@@ -146,23 +157,23 @@ function determineModalWindowElement(e) {
     }
 }
 
-function initLevel() {
-    minMoleDisappearanceRate = localStorage.getItem('min') || 200;
-    maxMoleDisappearanceRate = localStorage.getItem('max') || 3000;
+function setupInitialLevel() {
+    minMoleDisappearanceRate = localStorage.getItem('min') || minRate;
+    maxMoleDisappearanceRate = localStorage.getItem('max') || maxRate;
 
-    if (minMoleDisappearanceRate < 200 & maxMoleDisappearanceRate < 3000) {
+    if (minMoleDisappearanceRate < minRate && maxMoleDisappearanceRate < maxRate) {
         holes.forEach((el) => el.classList.add(classes.NEXT_LEVEL));
         hole7Element.classList.add(classes.ACTIVE);    
         hole8Element.classList.add(classes.ACTIVE);
     }
-    scoreBoardElement.textContent = localStorage.getItem('score') || '0';   
+    scoreBoardElement.textContent = +(localStorage.getItem('score') || 0);   
 }
 
 function init() {
     const gameContainerElement = document.querySelector(selectors.GAME);
     const startButtonElement = document.querySelector(selectors.START_BTN);
 
-    initLevel();
+    setupInitialLevel();
     startButtonElement.addEventListener('click', startGame);
     gameContainerElement.addEventListener('click', whackMole);
     modalWindowElement.addEventListener('click', determineModalWindowElement);
