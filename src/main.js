@@ -6,7 +6,7 @@ const selectors = {
 
 const classes = {
     KEYBOARD: 'keyboard',
-    HIDDEN: 'hidden',
+    ACTIVE: 'active',
     KEYBOARD_KEYS: 'keyboard-keys',
     KEY: 'key',
     WIDE_KEY: 'wide-key',
@@ -15,10 +15,25 @@ const classes = {
     DARK_KEY: 'dark-key',
     CHAR_KEY: 'char',
     ACTIVE_KEY: 'active-key',
+    KEYBOARD_ACTIVE: 'keyboard active',
 };
 
+const chars = [
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+    'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm'
+];
+
+const keyLayout = [
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace',
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+    'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'enter',
+    'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '?',
+    'space'
+];
+
 const keyboardInputElement = document.querySelector(selectors.INPUT);
-let capsLock = false;
+let isCapsLock = false;
 
 const keysHandlers = {
     backspace: () => {
@@ -28,7 +43,7 @@ const keysHandlers = {
         keyboardInputElement.value += '\n';
     },
     check_circle: () => {
-        keyboardElement.classList.add(classes.HIDDEN);
+        keyboardElement.classList.remove(classes.ACTIVE);
     },
     space_bar: () => {
         keyboardInputElement.value += ' ';
@@ -37,34 +52,27 @@ const keysHandlers = {
         const buttons = document.querySelectorAll(selectors.CHAR_KEY);
         const capsButton = document.querySelector(selectors.ACTIVATABLE_KEY);
         
-        capsLock = !capsLock;
+        isCapsLock = !isCapsLock;
         buttons.forEach(el => {
-            el.textContent = capsLock ? el.textContent.toUpperCase() : el.textContent.toLowerCase();
+            el.textContent = isCapsLock ? el.textContent.toUpperCase() : el.textContent.toLowerCase();
         });
         capsButton.classList.toggle(classes.ACTIVE_KEY);
     },
-
     default: (e) => {
         keyboardInputElement.value += e.target.innerHTML;
     }
-
 };
 
 let keyboardElement;
 let keyContainerElement;
 
-const createIconHTML = (icon_name) => {
-    return `<span class='material-icons'>${icon_name}</span>`;
+const createIconHTML = (iconName) => {
+    return `<span class='material-icons'>${iconName}</span>`;
 };
 
-function determineKeyValue(e) {    
-    let keyHandler = keysHandlers[e.target.innerText];
-
-    if (keyHandler === undefined) {
-        keyHandler = keysHandlers.default;
-    }
-    
-    if (e.target.parentNode.className !== classes.KEYBOARD) {
+function determineKeyValue(e) {
+    if (e.target.parentNode.className !== classes.KEYBOARD_ACTIVE) {
+        const keyHandler = keysHandlers[e.target.innerText] || keysHandlers.default;
         keyHandler(e);        
     }
 }
@@ -74,28 +82,16 @@ function listenKeyboardClick() {
 }
 
 function createKeys() {
-    const fragment = document.createDocumentFragment();
-    const chars = [
-        'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
-        'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
-        'z', 'x', 'c', 'v', 'b', 'n', 'm'
-    ];
-    const keyLayout = [
-        '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace',
-        'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
-        'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'enter',
-        'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '?',
-        'space'
-    ];
+    const fragment = document.createDocumentFragment();    
     
     keyLayout.forEach(key => {
         const keyElement = document.createElement('button');
-        const insertLineBreak = ['backspace', 'p', 'enter', '?'].indexOf(key) !== -1;
+        const isLineBreakAfterKey = ['backspace', 'p', 'enter', '?'].includes(key);
 
         keyElement.setAttribute('type', 'button');
         keyElement.classList.add(classes.KEY); 
 
-        if (chars.indexOf(key) !== -1) {
+        if (chars.includes(key)) {
             keyElement.classList.add(classes.CHAR_KEY);
         }
 
@@ -121,17 +117,17 @@ function createKeys() {
             break;
 
             case 'done':
-                keyElement.classList.add(classes.WIDE_KEY, classes.DARK_KEY );
+                keyElement.classList.add(classes.WIDE_KEY, classes.DARK_KEY);
                 keyElement.innerHTML = createIconHTML('check_circle');
             break;
 
             default:
-                keyElement.textContent = capsLock ? key.toUpperCase() : key.toLowerCase();
+                keyElement.textContent = isCapsLock ? key.toUpperCase() : key.toLowerCase();
             break;
         }
         fragment.appendChild(keyElement);
 
-        if (insertLineBreak) {
+        if (isLineBreakAfterKey) {
             fragment.appendChild(document.createElement('br'));
         }
     });
@@ -144,14 +140,14 @@ function createKeyboard() {
 
     document.body.appendChild(keyboardElement);
     keyboardElement.appendChild(keyContainerElement);
-    keyboardElement.classList.add(classes.KEYBOARD, classes.HIDDEN);
+    keyboardElement.classList.add(classes.KEYBOARD);
     keyContainerElement.classList.add(classes.KEYBOARD_KEYS);
     createKeys();
     listenKeyboardClick();
 }
 
 function showKeyboard() {
-    keyboardElement.classList.remove(classes.HIDDEN);
+    keyboardElement.classList.add(classes.ACTIVE);
 }
 
 function init() {

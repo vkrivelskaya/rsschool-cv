@@ -6,11 +6,12 @@
     padding: 5px 0;
     background: $green;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    transition: bottom 0.4s;
+    transition: all 0.4s;
+    display: none;
 }
 
-.hidden {
-    bottom: -100%;
+.active {
+    display:block;
 }
 
 .keyboard-keys {
@@ -67,8 +68,6 @@
     }      
 }
 
-.active-key {
-    &::after {
-        background-color: $lime-green;
-    }
+.active-key::after {
+    background-color: $lime-green;    
 }
