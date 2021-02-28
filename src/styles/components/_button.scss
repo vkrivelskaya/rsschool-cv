@@ -1,0 +1,17 @@
+.start {
+    font-size: 5rem;
+    border-radius: 5px;
+    border: 2px solid;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 4px 4px 2px $very-dark-gray;
+    display:block;
+    margin:0 auto;
+
+    @include media-mobile {
+        font-size: 3.5rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 3rem;
+    }
+}
