@@ -5,8 +5,8 @@ const selectors = {
     SCORE:'.score',
     MODAL: '.modal',
     UP: '.up',
-    HOLE_7: '.hole7',
-    HOLE_8: '.hole8',
+    HOLE_7: '.hole-7',
+    HOLE_8: '.hole-8',
 };
 
 const classes = {
@@ -84,7 +84,7 @@ function startLevel() {
 }
 
 function startGame() {    
-    score = +(localStorage.getItem('score') || 0);
+    score = Number(localStorage.getItem('score') || 0);
     minMoleDisappearanceRate = localStorage.getItem('min') || minRate;
     maxMoleDisappearanceRate = localStorage.getItem('max') || maxRate;
     startLevel();     
@@ -166,7 +166,7 @@ function setupInitialLevel() {
         hole7Element.classList.add(classes.ACTIVE);    
         hole8Element.classList.add(classes.ACTIVE);
     }
-    scoreBoardElement.textContent = +(localStorage.getItem('score') || 0);   
+    scoreBoardElement.textContent = Number(localStorage.getItem('score') || 0);   
 }
 
 function init() {
