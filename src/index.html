@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raindrops</title>
+</head>
+<body>
+    <header>        
+        <div class="wrapper">
+            <h1 class="heading">Raindrops</h1>
+            <button class="play-button">►</button>
+        </div>
+    </header>
+    <main>
+        <div class="start-modal-window">
+            <div class="modal-content">
+                <h3 class="modal-window-heading">Raindrops</h3>
+                <div class="buttons-container">
+                    <button class="play">Play</button>
+                    <button class="how-to-play">How to play</button>                    
+                </div>            
+                <span class="close">&times;</span>
+            </div>
+        </div>
+        <div class="finish-modal-window">
+            <div class="modal-content">
+                <div class="results">
+                    <div class="score-container">
+                        <span class="star"></span>
+                        <h3 class="score-heading">Score:</h3>
+                        <span class="score">0</span>
+                    </div>
+                    <div class="statistics-container">
+                        <h3>Game score of the best players</h3>
+                        <div class="player-1">Player 1: 766</div>
+                        <div class="player-2">Player 2: 545</div>
+                        <div class="player-3">Player 3: 467</div>                
+                    </div>
+                </div>            
+                <span class="close">&times;</span>
+            </div>
+        </div>
+        <div class="calculator-field">
+            <div class="score-container">
+                <span class="star"></span>
+                <h3 class="score-heading">Score:</h3>
+                <span class="score">0</span>
+            </div>
+            <div class="calculator">
+                <div class="display-area">
+                    <input class="display" type="text" placeholder="00000000000" value="0" disabled>
+                </div>             
+                <div class="CE-btn button-container">
+                    <button class="clean CE btn" >Delete</button>
+                </div>
+                <div class="C-btn button-container">
+                    <button class="clean C btn">Clear</button>
+                </div>                
+                <div class="seven-btn button-container">
+                    <button class="number btn">7</button>
+                </div>
+                <div class="eight-btn button-container">
+                    <button class="number btn">8</button>
+                </div>
+                <div class="nine-btn button-container">
+                    <button class="number btn">9</button>
+                </div>
+                <div class="four-btn button-container">
+                    <button class="number btn">4</button>
+                </div>
+                <div class="five-btn button-container">
+                    <button class="number btn">5</button>
+                </div>
+                <div class="six-btn button-container">
+                    <button class="number btn">6</button>
+                </div>
+                <div class="one-btn button-container">
+                    <button class="number btn">1</button>
+                </div>
+                <div class="two-btn button-container">
+                    <button class="number btn">2</button>
+                </div>
+                <div class="three-btn button-container">
+                    <button class="number btn">3</button>
+                </div>
+                <div class="result-btn button-container">
+                    <button class="operation btn">Enter</button>
+                </div>
+                <div class="zero-btn button-container">
+                    <button class="number btn">0</button>
+                </div>
+                <div class="dot-btn button-container">
+                    <button class="decimal btn">.</button>
+                </div>                      
+            </div>
+        </div>
+        <div class="game-field">
+            <div class="drop">
+                <div class="operation-container">
+                    <span class="operation">+</span>
+                </div>
+                <div class="numbers-container">
+                    <span class="number-1">11</span>
+                    <span class="number-2">10</span>
+                </div>
+            </div>
+            <div class="rocks"></div>
+        </div>
+        <audio src="assets/audio/rain.mp3"></audio>
+    </main>    
+</body>
+</html>
