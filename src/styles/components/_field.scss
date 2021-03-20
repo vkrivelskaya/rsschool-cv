@@ -2,7 +2,6 @@
     flex-grow: 20;
     background: linear-gradient( $white, $light-grayish-cyan);
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     position: relative;
     overflow: hidden;
@@ -20,7 +19,11 @@
         font-size: 2rem;
 
         @include media-desktop {
-            height: 3%;
+            height: 5%;
+        }
+
+        @include media-tablet {
+            width: 13%;
         }
 
         @include media-mobile {
@@ -65,16 +68,12 @@
         height: 80px;
         font-size: 1.8rem;
         font-weight: bold;
-        border-radius: 50%;
         align-self: center;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        .numbers-container {
-            display: flex;
-            flex-direction: column;
-        }
+        color: $black;
+        position: absolute;
 
         @include media-desktop {
             width: 100px;
@@ -102,6 +101,11 @@
     }
 }
 
+.numbers-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .waves {
     height: 20px;
     overflow: hidden;
@@ -111,7 +115,7 @@
         top: 80%;
         background-color: $very-soft-blue; 
         border-radius: 110%;  
-        animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+        animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) 1s infinite alternate, swell 7s ease 1s infinite alternate;
         
         @include media-desktop {
             left: -30%;
@@ -133,7 +137,7 @@
         top: 80%;
         background-color: $soft-blue; 
         border-radius: 120%;
-        animation: wave 5s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 5s ease -1.25s infinite;
+        animation: wave 5s cubic-bezier( 0.36, 0.45, 0.63, 0.53) 1s infinite alternate, swell 5s ease 1s infinite alternate;
        
         @include media-desktop {
             left: -90%;
@@ -196,9 +200,27 @@
 }
 
 .correct-answer {
-    background-image: url("../assets/images/water.png");
-    background-size: cover;
+    background: url("../assets/images/water.png") no-repeat;
+    background-size: contain;
     width: 70px;
     height: 70px;
-    display: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $black;
+    position: absolute;
+}
+
+.drop-field {
+    display: flex;
+    overflow: hidden;
+    height: 70%;
+
+    .sector {
+        flex: 20%;  
+        position: relative;      
+    }
 }
