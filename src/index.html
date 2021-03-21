@@ -17,7 +17,7 @@
                         <button class="play button">Play</button>
                         <button class="how-to-play button">How to play</button>                    
                     </div>            
-                    <span class="close">&times;</span>
+                    <span class="start-window-close close">&times;</span>
                 </div>
             </div>
             <div class="finish-modal-window">
@@ -26,7 +26,7 @@
                         <div class="score-container">
                             <span class="star"></span>
                             <h3 class="score-heading">Score:</h3>
-                            <span class="score">0</span>
+                            <span class="finish-score score">0</span>
                         </div>
                         <div class="statistics-container">
                             <h3>Game score of the best players:</h3>
@@ -37,7 +37,7 @@
                             </ul>             
                         </div>
                     </div>            
-                    <span class="close">&times;</span>
+                    <span class="finish-window-close close">&times;</span>
                 </div>
             </div>
             <div class="game-field">                
@@ -59,7 +59,7 @@
                 <div class="calculator-score-container">
                     <span class="star"></span>
                     <h3 class="calculator-score-heading">Score:</h3>
-                    <span class="score">0</span>
+                    <span class="calculator-score score">0</span>
                 </div>                
                 <div class="calculator">
                     <div class="display-area">
@@ -107,7 +107,9 @@
                 </div>
             </div>            
         </div>
-        <audio src="assets/audio/rain.mp3"></audio>
+        <audio class="rain" src="assets/audio/rain.mp3"></audio>
+        <audio class="mistake" src="assets/audio/mistake.mp3"></audio>
+        <audio class="correct-answer" src="assets/audio/correct.mp3"></audio>
     </main>    
 </body>
 </html>

@@ -1,4 +1,4 @@
-export const selectors = {
+export const dropSelectors = {
     PLAY_BTN: '.play-button',
     SECTOR_1: '.sector-1',
     SECTOR_2: '.sector-2',
@@ -7,7 +7,7 @@ export const selectors = {
     SECTOR_5: '.sector-5',
     WAVE_1: '.wave1',
     WAVE_2: '.wave2',
-    DROP_FIELD: '.drop-field',
+    DROP_FIELD: '.drop-field',    
 };
 
 const classes = {
@@ -16,17 +16,16 @@ const classes = {
 };
 
 const operations = ['+', '-'];
-const sector_1 = document.querySelector(selectors.SECTOR_1);
-const sector_2 = document.querySelector(selectors.SECTOR_2);
-const sector_3 = document.querySelector(selectors.SECTOR_3);
-const sector_4 = document.querySelector(selectors.SECTOR_4);
-const sector_5 = document.querySelector(selectors.SECTOR_5);
+const sector_1 = document.querySelector(dropSelectors.SECTOR_1);
+const sector_2 = document.querySelector(dropSelectors.SECTOR_2);
+const sector_3 = document.querySelector(dropSelectors.SECTOR_3);
+const sector_4 = document.querySelector(dropSelectors.SECTOR_4);
+const sector_5 = document.querySelector(dropSelectors.SECTOR_5);
 const sectors = [sector_1, sector_2, sector_3, sector_4, sector_5];
 const redColor = '#FF0000';
-const waveElement_1 = document.querySelector(selectors.WAVE_1);
-const waveElement_2 = document.querySelector(selectors.WAVE_2);
-const dropField = document.querySelector(selectors.DROP_FIELD);
-
+const waveElement_1 = document.querySelector(dropSelectors.WAVE_1);
+const waveElement_2 = document.querySelector(dropSelectors.WAVE_2);
+const dropField = document.querySelector(dropSelectors.DROP_FIELD);
 export class Drop {
     constructor(game, dropId) {
         this.game = game;
@@ -36,7 +35,7 @@ export class Drop {
         this.number1 = Math.round(Math.random() * (this.max - this.min) + this.min);
         this.number2 = Math.round(Math.random() * (this.max - this.min) + this.min);
         this.operation = operations[Math.round(Math.random() * (operations.length - 1))];
-        this.playButtonElement = document.querySelector(selectors.PLAY_BTN);
+        this.playButtonElement = document.querySelector(dropSelectors.PLAY_BTN);
         this.sector = sectors[Math.round(Math.random() * (sectors.length - 1))];
         this.result = eval(`${this.number1} ${this.operation} ${this.number2}`);
         this.dropElement = null;
@@ -85,7 +84,6 @@ export class Drop {
         if (this.isDestroyed) {
             return;
         }
-
         this.game.notifyDestroyDrop(this, success);
         if (success) {
             this.dropElement.classList.add(classes.CORRECT_ANSWER);
@@ -96,8 +94,12 @@ export class Drop {
         }
         this.isDestroyed = true;
         setTimeout(() => {
-            this.dropElement.remove();
+            this.kill();
         }, 1000);        
+    }
+
+    kill() {
+        this.dropElement.remove(); 
     }
 
     static animate({timing, draw, duration}) {
