@@ -16,9 +16,13 @@
                          "seven-btn eight-btn nine-btn C-btn"
                          "four-btn five-btn six-btn C-btn"
                          "one-btn two-btn three-btn result-btn"
-                         "zero-btn zero-btn CE-btn result-btn";                        
+                         "zero-btn subtraction-btn CE-btn result-btn";                        
                          grid-template-columns: 25% 25% 25% 25%;
                          grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+
+    @include media-big-mobile {
+        border: 5px solid $beige;
+    }
                          
     @include media-mobile {
         border: 3px solid $beige;
@@ -80,6 +84,10 @@
     grid-area: zero-btn;
 }
 
+.subtraction-btn {
+    grid-area: subtraction-btn;
+}
+
 .btn, .display {
     height: 100%;
     width: 100%;
@@ -89,6 +97,14 @@
     font-size: 2rem;
 
     @include media-tablet {
+        font-size: 1.8rem;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.2rem;
+    }
+
+    @include media-mobile {
         font-size: 1rem;
     }
 
@@ -102,13 +118,18 @@
     padding: 10px 20px;
 
     @include media-tablet {
-        font-size: 2rem;
+        font-size: 1.8rem;
         padding: 10px 12px;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.4rem;
+        padding: 10px 5px;
     }
 
     @include media-mobile {
         font-size: 1.3rem;
-        padding: 10px 0px;
+        padding: 7px 0px;
     }
 }
 
@@ -117,10 +138,10 @@
     padding: 15px 0px;
 
     @include media-tablet {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
-    @include media-mobile {
+    @include media-big-mobile {
         font-size: 1rem;
         padding: 0;
     }
@@ -148,6 +169,11 @@
         width: 25px;
         height: 25px;
 
+        @include media-big-mobile {
+            width: 18px;
+            height: 18px;
+        }
+
         @include media-mobile {
             width: 15px;
             height: 15px;
@@ -160,6 +186,10 @@
 
     @include media-desktop {
         margin-bottom: 60px;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.7rem;
     }
 
     @include media-mobile {

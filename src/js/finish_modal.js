@@ -8,6 +8,7 @@ export const finishModalWindowSelectors = {
 export const finishModalWindowClasses = {
     ACTIVE: 'active',
 };
+
 const finishModalWindowElement = document.querySelector(finishModalWindowSelectors.FINISH_WINDOW);
 const finishModalScoreElement = document.querySelector(finishModalWindowSelectors.FINISH_SCORE);
 const finishModalCloseElement = document.querySelector(finishModalWindowSelectors.FINISH_WINDOW_CLOSE);
@@ -17,7 +18,6 @@ export class FinishModal {
         finishModalWindowElement.classList.add(finishModalWindowClasses.ACTIVE);
         finishModalScoreElement.textContent = localStorage.getItem('score');
         finishModalCloseElement.addEventListener('click', this.closeFinishModalWindow.bind(this));
-
     }
 
     closeFinishModalWindow() {

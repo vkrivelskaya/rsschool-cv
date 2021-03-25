@@ -2,25 +2,22 @@ export const startModalWindowSelectors = {
     START_WINDOW: '.start-modal-window',
     CLOSE_BTN: '.start-window-close',
     PLAY_BTN: '.play',
-    HOW_T0_PLAY_BTN: '.how-to-play',
+    HOW_T0_PLAY_BTN: '.how-to-play', 
 };
 
 export const startModalWindowClasses = {
     ACTIVE: 'active',
 };
-
-const startModalWindowElement = document.querySelector(startModalWindowSelectors.START_WINDOW);
-
 export class StartModal {
     constructor () {
-
+        this.startModalWindowElement = document.querySelector(startModalWindowSelectors.START_WINDOW);
     }
 
     openStartModalWindow() {
-        startModalWindowElement.classList.add(startModalWindowClasses.ACTIVE);
+        this.startModalWindowElement.classList.add(startModalWindowClasses.ACTIVE);
     }
 
     closeStartModalWindow() {
-        startModalWindowElement.classList.remove(startModalWindowClasses.ACTIVE);
+        this.startModalWindowElement.classList.remove(startModalWindowClasses.ACTIVE);
     }
 }

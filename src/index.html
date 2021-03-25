@@ -16,7 +16,27 @@
                     <div class="buttons-container">
                         <button class="play button">Play</button>
                         <button class="how-to-play button">How to play</button>                    
-                    </div>            
+                    </div> 
+                    <form class="conditions-container">
+                        <h4 class="conditions-container-heading">Additional conditions:</h4>
+                        <label class="conditions">
+                            <input type="radio" value="division-by-two" name="conditions">
+                            Division by 2
+                        </label><br>                    
+                        <label class="conditions">
+                            <input type="radio" value="addition-within-ten" name="conditions">
+                            Addition within 10                        
+                        </label><br>
+                        <label class="conditions">
+                            <input type="radio" value="default" name="conditions">
+                            Without restrictions                        
+                        </label> 
+                    </form>                    
+                    <div class="message">
+                        <p>! If the result of the calculation turns out to be a fractional number,
+                         you must enter as an answer an integer number, obtained according to the rules
+                         of mathematical rounding</p>
+                    </div>           
                     <span class="start-window-close close">&times;</span>
                 </div>
             </div>
@@ -29,7 +49,7 @@
                             <span class="finish-score score">0</span>
                         </div>
                         <div class="statistics-container">
-                            <h3>Game score of the best players:</h3>
+                            <h3>Game scores of the best players:</h3>
                             <ul class="players">
                                 <li class="player-1 player">Player 1: 766</li>
                                 <li class="player-2 player">Player 2: 545</li>
@@ -41,7 +61,7 @@
                 </div>
             </div>
             <div class="game-field">                
-                <button class="play-button">►</button>
+                <button class="restart-button">↺</button>
                 <div class="drop-field">
                     <div class="sector-1 sector"></div>
                     <div class="sector-2 sector"></div>
@@ -103,6 +123,9 @@
                     </div>
                     <div class="zero-btn button-container">
                         <button class="number btn">0</button>
+                    </div> 
+                    <div class="subtraction-btn button-container">
+                        <button class="number btn">-</button>
                     </div>                  
                 </div>
             </div>            

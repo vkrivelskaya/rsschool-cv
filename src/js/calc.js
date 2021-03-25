@@ -18,16 +18,23 @@ export const displayOperations = {
     REPLACE: 3
 };
 
-
-export class Calc {
+const displayElement = document.querySelector(selectors.DISPLAY);
+export class Calc {    
     constructor() {
-        this.displayElement = document.querySelector(selectors.DISPLAY);
         this.game = null;
+        this.calcArray = ['Digit1', 'Digit2', 'Digit3','Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Enter', 'Backspace', 'Delete', 'Minus'];
+    }
+
+    static getButtons() {
+        const btnContainer = document.querySelectorAll('.btn');
+        const buttons = [];
+        btnContainer.forEach((el) => buttons[el.outerText] = el);
+        return buttons;
     }
 
     showOnDisplay(output, operation = displayOperations.ADD) {
-        const displayElementLength = 15;
-        let valueToStore = this.displayElement.value;
+        const displayElementLength = 10;
+        let valueToStore = displayElement.value;
         switch (operation) {
             case displayOperations.ADD: {
                 valueToStore += output;
@@ -42,7 +49,7 @@ export class Calc {
                 break;
             }
         }
-        this.displayElement.value = valueToStore.toString().substring(0, displayElementLength);
+        displayElement.value = valueToStore.toString().substring(0, displayElementLength);
     }
 
     onNumberClick({innerText}) { 
@@ -61,7 +68,7 @@ export class Calc {
     } 
     
     onOperationClick() {
-        this.game.checkResult(this.displayElement.value);
+        this.game.checkResult(displayElement.value);
         this.showOnDisplay('', displayOperations.REPLACE);
     }
 
@@ -77,8 +84,21 @@ export class Calc {
         } 
     }
 
+    onKeyDown(e) {
+        if (this.calcArray.includes(e.code)) {
+            if (e.code === 'Enter') {
+                this.onOperationClick();
+            } else if (e.code === 'Backspace' || e.code === 'Delete') {
+                this.showOnDisplay('', displayOperations.REMOVE);
+            } else {
+                this.showOnDisplay(e.key);
+            }   
+        }             
+    }       
+
     init() {
         const calculatorElement = document.querySelector(selectors.CALCULATOR);
         calculatorElement.addEventListener('click', this.determineClickedButton.bind(this));
+        window.addEventListener('keydown', this.onKeyDown.bind(this));
     }
 }

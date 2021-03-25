@@ -104,3 +104,19 @@
 .active {
     display: block;
 }
+
+.message {
+    font-size: 1.5rem;
+    text-align: justify;
+    border: 1px solid $black;
+    padding: 0px 5px;
+}
+
+.conditions-container {
+    font-size: 1.7rem;
+    padding-bottom: 10px;
+
+    .conditions-container-heading {
+        margin-bottom: 10px;
+    }
+}
