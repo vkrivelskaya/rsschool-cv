@@ -1,23 +1,25 @@
 import 'regenerator-runtime/runtime';
 import './styles/style.scss';
+
 import { Calc } from './js/calc';
 import { Game, DemoGame, gameMode } from './js/game';
 import { StartModal } from './js/start_modal';
-import { dropSelectors } from './js/drop';
-import { startModalWindowSelectors } from './js/start_modal';
+import { dropSelectors } from './js/constants/selectors';
+import { startModalWindowSelectors } from './js/constants/selectors';
 
-const restartButtonElement = document.querySelector(dropSelectors.RESTART_BTN);
-const playButtonElement = document.querySelector(startModalWindowSelectors.PLAY_BTN);
-const howToPlayButtonElement = document.querySelector(startModalWindowSelectors.HOW_T0_PLAY_BTN);
-const closeButtonModalElement = document.querySelector(startModalWindowSelectors.CLOSE_BTN);
-const radioButtons = document.querySelectorAll('[type="radio"]');
+const RESTART_BUTTON_ELEMENT = document.querySelector(dropSelectors.RESTART_BTN);
+const PLAY_BUTTON_ELEMENT = document.querySelector(startModalWindowSelectors.PLAY_BTN);
+const HOW_TO_PLAY_BUTTON_ELEMENT = document.querySelector(startModalWindowSelectors.HOW_T0_PLAY_BTN);
+const CLOSE_BUTTON_MODAL_ELEMENT = document.querySelector(startModalWindowSelectors.CLOSE_BTN);
+const RADIO_BUTTONS = document.querySelectorAll('[type="radio"]');
 
-let calc;
-let startModalWindow;
-let currentGame;
+const environment = {
+    currentGame: null,
+    calc: null,    
+};
 
 function getGameMode() {
-    const checkedRadioButtons = Array.from(radioButtons).filter((el) => el.checked);
+    const checkedRadioButtons = Array.from(RADIO_BUTTONS).filter((el) => el.checked);
     if (checkedRadioButtons.length === 0) {
         return gameMode.DEFAULT;
     } 
@@ -33,45 +35,48 @@ function getGameMode() {
     return gameMode.DEFAULT;    
 }
 
-function openStartModalWindow() {
+function openStartModalWindow(startModalWindow) {
     startModalWindow.openStartModalWindow();
-    playButtonElement.addEventListener('click', onPlayGame);
 }
 
-function onRestartButtonClick() {
-    if (currentGame && currentGame.isActive) {
-        currentGame.stopGame(false);
-        currentGame = null;
+function onRestartButtonClick(startModalWindow) {
+    if (environment.currentGame && environment.currentGame.isActive) {
+        environment.currentGame.stopGame(false);
+        environment.currentGame = null;
     }           
-    openStartModalWindow();
+    openStartModalWindow(startModalWindow);
 }
 
-function startGame(isDemo = false) {
+function startGame(isDemo = false, startModalWindow) {
     const gameClass = isDemo ? DemoGame: Game;
 
     startModalWindow.closeStartModalWindow();
-    currentGame = new gameClass(getGameMode());
-    calc.game = currentGame;
-    currentGame.resetScore(); 
-    currentGame.start();
+    environment.currentGame = new gameClass(getGameMode());
+    if(environment.calc === null) {
+        environment.calc = new Calc();
+        environment.calc.init();
+    }
+    environment.calc.setCurrentGame(environment.currentGame);
+    environment.currentGame.resetScore(); 
+    environment.currentGame.start();
 }
 
-function onPlayGame() {
-    startGame(); 
-}
-
-function onDemoGamePlay() {
-    startGame(true);
+function onDemoGamePlay(startModalWindow) {
+    startGame(true, startModalWindow);
 } 
 
+function onPlayGame(startModalWindow) {
+    startGame(false, startModalWindow); 
+}
+
 function init() {
-    howToPlayButtonElement.addEventListener('click', onDemoGamePlay);
-    calc = new Calc();
-    calc.init();
-    startModalWindow = new StartModal();
-    openStartModalWindow();
-    restartButtonElement.addEventListener('click', onRestartButtonClick); 
-    closeButtonModalElement.addEventListener('click', startModalWindow.closeStartModalWindow.bind(startModalWindow));
+    const startModalWindow = new StartModal();
+
+    HOW_TO_PLAY_BUTTON_ELEMENT.addEventListener('click', onDemoGamePlay.bind(this, startModalWindow));  
+    openStartModalWindow(startModalWindow);    
+    PLAY_BUTTON_ELEMENT.addEventListener('click', onPlayGame.bind(this, startModalWindow));
+    RESTART_BUTTON_ELEMENT.addEventListener('click', onRestartButtonClick.bind(this, startModalWindow)); 
+    CLOSE_BUTTON_MODAL_ELEMENT.addEventListener('click', startModalWindow.closeStartModalWindow.bind(startModalWindow));
 }
 
 init();

@@ -1,13 +1,6 @@
-export const startModalWindowSelectors = {
-    START_WINDOW: '.start-modal-window',
-    CLOSE_BTN: '.start-window-close',
-    PLAY_BTN: '.play',
-    HOW_T0_PLAY_BTN: '.how-to-play', 
-};
+import { startModalWindowSelectors } from './constants/selectors';
+import { startModalWindowClasses } from './constants/classes';
 
-export const startModalWindowClasses = {
-    ACTIVE: 'active',
-};
 export class StartModal {
     constructor () {
         this.startModalWindowElement = document.querySelector(startModalWindowSelectors.START_WINDOW);

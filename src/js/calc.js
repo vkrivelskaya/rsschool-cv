@@ -1,16 +1,5 @@
-export const selectors = {
-    DISPLAY: '.display',
-    CALCULATOR: '.calculator',
-};
-
-export const classes = {
-   NUMBER: 'number',
-   OPERATION: 'operation',
-   CLEAN: 'clean',
-   CE: 'CE-button',
-   C: 'C-button',
-
-};
+import { calcSelectors } from './constants/selectors';
+import { calcClasses } from './constants/classes';
 
 export const displayOperations = {
     ADD: 1,
@@ -18,15 +7,19 @@ export const displayOperations = {
     REPLACE: 3
 };
 
-const displayElement = document.querySelector(selectors.DISPLAY);
 export class Calc {    
     constructor() {
+        this.displayElement = document.querySelector(calcSelectors.DISPLAY);
         this.game = null;
         this.calcArray = ['Digit1', 'Digit2', 'Digit3','Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Enter', 'Backspace', 'Delete', 'Minus'];
     }
 
+    setCurrentGame(game) {
+        this.game = game;
+    }
+
     static getButtons() {
-        const btnContainer = document.querySelectorAll('.btn');
+        const btnContainer = document.querySelectorAll(calcSelectors.BTN);
         const buttons = [];
         btnContainer.forEach((el) => buttons[el.outerText] = el);
         return buttons;
@@ -34,7 +27,7 @@ export class Calc {
 
     showOnDisplay(output, operation = displayOperations.ADD) {
         const displayElementLength = 10;
-        let valueToStore = displayElement.value;
+        let valueToStore = this.displayElement.value;
         switch (operation) {
             case displayOperations.ADD: {
                 valueToStore += output;
@@ -49,7 +42,7 @@ export class Calc {
                 break;
             }
         }
-        displayElement.value = valueToStore.toString().substring(0, displayElementLength);
+        this.displayElement.value = valueToStore.toString().substring(0, displayElementLength);
     }
 
     onNumberClick({innerText}) { 
@@ -57,8 +50,8 @@ export class Calc {
     }
 
     onCleanClick(btn) {
-        const isCEButton = btn.className.includes(classes.CE);
-        const isCButton = btn.className.includes(classes.C); 
+        const isCEButton = btn.className.includes(calcClasses.CE);
+        const isCButton = btn.className.includes(calcClasses.C); 
 
         if (isCButton) {
             this.showOnDisplay('', displayOperations.REPLACE);
@@ -68,18 +61,18 @@ export class Calc {
     } 
     
     onOperationClick() {
-        this.game.checkResult(displayElement.value);
+        this.game.checkResult(this.displayElement.value);
         this.showOnDisplay('', displayOperations.REPLACE);
     }
 
     determineClickedButton(e) {
         const target = e.target;
 
-        if (target.className.includes(classes.NUMBER)) {
+        if (target.className.includes(calcClasses.NUMBER)) {
             this.onNumberClick(target);                            
-        } else if (target.className.includes(classes.OPERATION)) {
+        } else if (target.className.includes(calcClasses.OPERATION)) {
             this.onOperationClick(target);                   
-        } else if (target.className.includes(classes.CLEAN)) {
+        } else if (target.className.includes(calcClasses.CLEAN)) {
             this.onCleanClick(target);   
         } 
     }
@@ -97,7 +90,7 @@ export class Calc {
     }       
 
     init() {
-        const calculatorElement = document.querySelector(selectors.CALCULATOR);
+        const calculatorElement = document.querySelector(calcSelectors.CALCULATOR);
         calculatorElement.addEventListener('click', this.determineClickedButton.bind(this));
         window.addEventListener('keydown', this.onKeyDown.bind(this));
     }

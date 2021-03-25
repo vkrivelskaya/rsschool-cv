@@ -1,15 +1,7 @@
 import { Drop, DropDiv2, DropAddWithin10 } from './drop';
 import { FinishModal } from './finish_modal';
 import { Calc } from './calc';
-
-export const gameSelectors = {
-    RAIN_AUDIO: '.rain',    
-    CALC_SCORE: '.calculator-score',
-    WAVE_1: '.wave1',
-    WAVE_2: '.wave2',
-    DROP_FIELD: '.drop-field', 
-    FINISH_SCORE: '.finish-score',
-};
+import { gameSelectors } from './constants/selectors';
 
 export const gameMode = {
     DEFAULT: 1,
@@ -17,22 +9,23 @@ export const gameMode = {
     ADDITION_WITHIN_10: 3,
 };
 
-const maxFailCount = 3;
-const rainAudioElement = document.querySelector(gameSelectors.RAIN_AUDIO);
-const scoreCalculatorElement = document.querySelector(gameSelectors.CALC_SCORE);
-const scoreFinishModalWindowElement = document.querySelector(gameSelectors.FINISH_SCORE);
-const waveElement_1 = document.querySelector(gameSelectors.WAVE_1);
-const waveElement_2 = document.querySelector(gameSelectors.WAVE_2);
-const dropField = document.querySelector(gameSelectors.DROP_FIELD);
-const wave1Height = waveElement_1.offsetTop;
-const wave2Height = waveElement_2.offsetTop;
-const dropFieldHeight = dropField.clientHeight;
+const MAX_FAIL_COUNT = 3;
+const RAIN_AUDIO_ELEMENT = document.querySelector(gameSelectors.RAIN_AUDIO);
+const SCORE_CALCULATOR_ELEMENT = document.querySelector(gameSelectors.CALC_SCORE);
+const SCORE_FINISH_MODAL_WINDOW_ELEMENT = document.querySelector(gameSelectors.FINISH_SCORE);
+const WAVE_ELEMENT_1 = document.querySelector(gameSelectors.WAVE_1);
+const WAVE_ELEMENT_2 = document.querySelector(gameSelectors.WAVE_2);
+const DROP_FIELD = document.querySelector(gameSelectors.DROP_FIELD);
+const WAVE_ELEMENT_1_HEIGHT = WAVE_ELEMENT_1.offsetTop;
+const WAVE_ELEMENT_2_HEIGHT = WAVE_ELEMENT_2.offsetTop;
+const DROP_FIELD_HEIGHT = DROP_FIELD.clientHeight;
+
 let dropElement;
 let score = 0;
 
 export class Game {
     constructor(gameMode) {
-        this.speed = 15_000;
+        this.speed = 14_000;
         this.drops = [];
         this.failCounter = 0;
         this.isActive = false;
@@ -45,8 +38,8 @@ export class Game {
 
     resetScore() {
         score = 0;
-        scoreCalculatorElement.textContent = score;
-        scoreFinishModalWindowElement.textContent = score;
+        SCORE_CALCULATOR_ELEMENT.textContent = score;
+        SCORE_FINISH_MODAL_WINDOW_ELEMENT.textContent = score;
         localStorage.removeItem('score');  
     }
 
@@ -59,8 +52,8 @@ export class Game {
 
     async start() {
         this.isActive = true;
-        const interval = 3_000;           
-        rainAudioElement.play();
+        const interval = 5_000;           
+        RAIN_AUDIO_ELEMENT.play();
         let dropClass = Drop;
         switch (this.gameMode) {
             case gameMode.DIVISION_BY_2:
@@ -80,13 +73,13 @@ export class Game {
 
     addScore() {
         score = score === 0 ? 10 : score + 1;
-        scoreCalculatorElement.textContent = score;
+        SCORE_CALCULATOR_ELEMENT.textContent = score;
     }
 
     subScore() {
         if (score > 0) {
             score -= 1;
-            scoreCalculatorElement.textContent = score;
+            SCORE_CALCULATOR_ELEMENT.textContent = score;
         }  
     }
 
@@ -94,23 +87,24 @@ export class Game {
         this.isActive = false;
         this.drops.forEach((el) => el.kill());
         this.drops.splice(0, this.drops.length);
-        rainAudioElement.pause();
+        RAIN_AUDIO_ELEMENT.pause();
                     
-        waveElement_1.style.top = wave1Height + 'px';
-        waveElement_2.style.top = wave2Height + 'px';
-        dropField.style.height = dropFieldHeight + 'px';
+        WAVE_ELEMENT_1.style.top = WAVE_ELEMENT_1_HEIGHT + 'px';
+        WAVE_ELEMENT_2.style.top = WAVE_ELEMENT_2_HEIGHT + 'px';
+        DROP_FIELD.style.height = DROP_FIELD_HEIGHT + 'px';
+
         if (showResult) {
             const finishModalWindow = new FinishModal();
             finishModalWindow.openFinishModalWindow();
-            scoreFinishModalWindowElement.textContent = score;
+            SCORE_FINISH_MODAL_WINDOW_ELEMENT.textContent = score;
             localStorage.setItem('score', score);
         }
     }
 
     raiseWaves() {
-        waveElement_1.style.top = waveElement_1.offsetTop / 1.1 + 'px';
-        waveElement_2.style.top = waveElement_2.offsetTop / 1.1 + 'px';
-        dropField.style.height = dropField.clientHeight / 1.1 + 'px';        
+        WAVE_ELEMENT_1.style.top = WAVE_ELEMENT_1.offsetTop / 1.1 + 'px';
+        WAVE_ELEMENT_2.style.top = WAVE_ELEMENT_2.offsetTop / 1.1 + 'px';
+        DROP_FIELD.style.height = DROP_FIELD.clientHeight / 1.1 + 'px';        
     }
 
     notifyDestroyDrop(drop, success) {
@@ -125,6 +119,7 @@ export class Game {
                 this.addScore();
                 if (drop.isSuperDrop) {
                     this.drops.forEach((el) => el.kill());
+                    this.drops.splice(0, this.drops.length);
                 }
             }
         } else {
@@ -134,7 +129,7 @@ export class Game {
                 this.subScore();
             }
 
-            if (this.failCounter === maxFailCount) {
+            if (this.failCounter === MAX_FAIL_COUNT) {
                 this.stopGame();
             }
         }
@@ -146,8 +141,7 @@ export class Game {
     }    
 }
 
-export class DemoGame extends Game {
-    
+export class DemoGame extends Game {    
     createDrop(dropClass, dropIndex) {    
         const calcButtons = Calc.getButtons();
         const drop = super.createDrop(dropClass, dropIndex);

@@ -1,26 +1,20 @@
-export const finishModalWindowSelectors = {
-    FINISH_WINDOW: '.finish-modal-window',
-    FINISH_SCORE: '.finish-score',
-    FINISH_WINDOW_CLOSE: '.finish-window-close',
-
-};
-
-export const finishModalWindowClasses = {
-    ACTIVE: 'active',
-};
-
-const finishModalWindowElement = document.querySelector(finishModalWindowSelectors.FINISH_WINDOW);
-const finishModalScoreElement = document.querySelector(finishModalWindowSelectors.FINISH_SCORE);
-const finishModalCloseElement = document.querySelector(finishModalWindowSelectors.FINISH_WINDOW_CLOSE);
+import { finishModalWindowSelectors } from './constants/selectors';
+import { finishModalWindowClasses } from './constants/classes';
 
 export class FinishModal {
+    constructor() {
+        this.finishModalWindowElement = document.querySelector(finishModalWindowSelectors.FINISH_WINDOW);
+        this.finishModalScoreElement = document.querySelector(finishModalWindowSelectors.FINISH_SCORE);
+        this.finishModalCloseElement = document.querySelector(finishModalWindowSelectors.FINISH_WINDOW_CLOSE); 
+    }
+
     openFinishModalWindow() {
-        finishModalWindowElement.classList.add(finishModalWindowClasses.ACTIVE);
-        finishModalScoreElement.textContent = localStorage.getItem('score');
-        finishModalCloseElement.addEventListener('click', this.closeFinishModalWindow.bind(this));
+        this.finishModalWindowElement.classList.add(finishModalWindowClasses.ACTIVE);
+        this.finishModalScoreElement.textContent = localStorage.getItem('score');
+        this.finishModalCloseElement.addEventListener('click', this.closeFinishModalWindow.bind(this));
     }
 
     closeFinishModalWindow() {
-        finishModalWindowElement.classList.remove(finishModalWindowClasses.ACTIVE);
+        this.finishModalWindowElement.classList.remove(finishModalWindowClasses.ACTIVE);
     }         
 }
