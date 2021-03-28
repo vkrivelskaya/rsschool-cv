@@ -12,17 +12,14 @@ const SECTORS = [SECTOR_1, SECTOR_2, SECTOR_3, SECTOR_4, SECTOR_5];
 const RED_COLOR = '#FF0000';
 const OPERATIONS = ['+', '-', '*', '/' ];
 export class Drop {
-    constructor(game, dropId, isSuperDrop = false, difficulty) {
-        this.game = game;
-        this.dropId = dropId;
-        this.isSuperDrop = isSuperDrop;
-        this.dropClass = this.isSuperDrop ? dropClasses.SUN : dropClasses.DROP;
-        this.difficulty = difficulty;        
-        this.minNumber = 0;
-        this.maxNumber = 10 + 10 * Math.trunc(dropId / 3);
+    constructor(game,dropId, destroyCallback) {  
+        this.game = game;      
+        this.dropId = dropId;  
+        this.destroyCallback = destroyCallback;
         this.number1 = this.getRandomNumber();
         this.number2 = this.getRandomNumber();
-        this.operation = OPERATIONS[Math.round(Math.random() * this.difficulty * (OPERATIONS.length - 1))];        
+        this.operation = this.defineDifficulty();
+        this.dropSuperClass = this.defineDrop();       
         this.sector = SECTORS[Math.round(Math.random() * (SECTORS.length - 1))];
         this.dropElement = null;
         this.isDestroyed = false;
@@ -53,8 +50,27 @@ export class Drop {
         return (num ^ 0) === num;
     }
 
+    defineDrop() {
+        const isSuperDrop = this.dropId % 3 === 0 && this.dropId !== 0;
+
+        return  isSuperDrop ? dropClasses.SUN : dropClasses.DROP;
+    }
+
+    defineDifficulty() {
+        const difficulty = Math.min(0.1 * this.dropId, 1); 
+
+        return  OPERATIONS[Math.round(Math.random() * difficulty * (OPERATIONS.length - 1))];
+    }    
+
+    getMaxNumber() {
+        return 10 + 10 * Math.trunc(this.dropId / 3);
+    }
+
     getRandomNumber() {
-        return Math.round(Math.random() * (this.maxNumber - this.minNumber) + this.minNumber);
+        const minNumber = 0;
+        const maxNumber = this.getMaxNumber();
+
+        return Math.round(Math.random() * (maxNumber - minNumber) + minNumber);
     }
 
     get result() {
@@ -66,7 +82,7 @@ export class Drop {
     }
 
     createDropElement() {
-        const dropElement = `<div id="drop-${this.dropId}" class="${this.dropClass}">
+        const dropElement = `<div id="drop-${this.dropId}" class="${this.dropSuperClass}">
             <div class="operation-container">
                 <span class="operation">${this.operation}</span>
             </div>
@@ -89,9 +105,8 @@ export class Drop {
         if (this.isDestroyed) {
             return;
         }
-        this.game.notifyDestroyDrop(this, success);
+        this.destroyCallback(this, success);        
         
-        this.isDestroyed = true;
         setTimeout(() => {
             this.kill();
         }, 500);        
@@ -102,12 +117,10 @@ export class Drop {
         
         Drop.animate({
             duration: this.game.speed,
-            timing: (timeFraction) => {
-                return timeFraction;
-            },
+            timing: (timeFraction) => timeFraction,
             draw: (progress) => {
                 const coordinate = this.sector.clientHeight - this.dropElement.clientHeight;
-                this.dropElement.style.top = coordinate * progress + 'px';
+                this.dropElement.style.top = `${coordinate * progress}px`;
             }
         }).then(() => {
             this.destroy(); 
@@ -117,7 +130,7 @@ export class Drop {
     checkResult(success) {
         if (success) {
             this.dropElement.classList.add(dropClasses.CORRECT_ANSWER);
-            this.dropElement.classList.remove(this.dropClass);
+            this.dropElement.classList.remove(this.dropSuperClass);
             this.destroy(success);
             CORRECT_ANSWER_AUDIO_ELEMENT.play();
         } else {

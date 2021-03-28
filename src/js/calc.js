@@ -21,9 +21,8 @@ export class Calc {
 
     static getButtons() {
         const btnContainer = document.querySelectorAll(calcSelectors.BTN);
-        const buttons = [];
-        btnContainer.forEach((el) => buttons[el.outerText] = el);
-        return buttons;      
+        
+        return Array.from(btnContainer).reduce((acc, el) => ({...acc, [el.outerText] : el }), {});              
     }
 
     showOnDisplay(output, operation = displayOperations.ADD) {
@@ -63,7 +62,7 @@ export class Calc {
         } 
     } 
     
-    onOperationClick() {
+    onEnterClick() {
         this.game.checkResult(this.displayElement.value);
         this.showOnDisplay('', displayOperations.REPLACE);
     }
@@ -74,7 +73,7 @@ export class Calc {
         if (target.className.includes(calcClasses.NUMBER)) {
             this.onNumberClick(target);                            
         } else if (target.className.includes(calcClasses.OPERATION)) {
-            this.onOperationClick(target);                   
+            this.onEnterClick(target);                   
         } else if (target.className.includes(calcClasses.CLEAN)) {
             this.onCleanClick(target);   
         } 
@@ -84,7 +83,7 @@ export class Calc {
         if (this.calcArray.includes(e.code)) {
             switch (e.code) {
                 case keyCodes.enter: 
-                    this.onOperationClick();
+                    this.onEnterClick();
                     break;
                 
                 case keyCodes.delete:

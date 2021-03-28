@@ -1,8 +1,9 @@
 import { Drop } from './drop';
-import { DropDivision2 } from './dropDivision2';
-import { DropAddWithin10 } from './dropAddWithin10';
-import { FinishModal } from './finish_modal';
+import { DropDivision2 } from './drop-division-2';
+import { DropAddWithin10 } from './drop-add-within-10';
+import { FinishModal } from './finish-modal';
 import { gameSelectors } from './constants/selectors';
+import { dropClasses } from './constants/classes';
 
 export const gameMode = {
     DEFAULT: 1,
@@ -31,6 +32,7 @@ export class Game {
         this.isActive = false;
         this.gameMode = gameMode;
         this.score = 0;
+        this.defineDropClass();
     }
 
     static sleep(ms) {
@@ -44,31 +46,34 @@ export class Game {
         localStorage.removeItem('score');  
     }
 
-    createDrop(dropClass, dropIndex) {
-        dropElement = new dropClass(this, dropIndex, (dropIndex % 3 === 0 && dropIndex !== 0), Math.min(0.1 * dropIndex, 1));
+    createDrop(dropIndex) {
+        dropElement = new this.dropClass(this, dropIndex, this.notifyDestroyDrop.bind(this));
         this.drops.push(dropElement);
         dropElement.fall();
         return dropElement;
+    }
+
+    defineDropClass() {
+        
+        switch (this.gameMode) {
+            case gameMode.DIVISION_BY_2:
+                this.dropClass = DropDivision2;
+                break;
+            case gameMode.ADDITION_WITHIN_10:
+                this.dropClass = DropAddWithin10;
+                break; 
+            default: 
+                this.dropClass = Drop;
+        }
     }
 
     async start() {
         this.isActive = true;
         const interval = 5_000;           
         RAIN_AUDIO_ELEMENT.play();
-        let dropClass = Drop;
-        switch (this.gameMode) {
-            case gameMode.DIVISION_BY_2:
-                dropClass = DropDivision2;
-                break;
-            case gameMode.ADDITION_WITHIN_10:
-                dropClass = DropAddWithin10;
-                break; 
-            default: 
-                dropClass = Drop;
-        }
 
         for (let i = 0; this.isActive; i++) {
-            this.createDrop(dropClass, i);
+            this.createDrop(i);
             await Game.sleep(interval);
             this.speed *= 1 / 1.07;
         }
@@ -88,13 +93,13 @@ export class Game {
 
     clearDropField() {
         this.drops.forEach((el) => el.kill());
-        this.drops = null;
+        this.drops.splice(0, this.drops.length);
     }
 
     lowerWaves() {
-        WAVE_ELEMENT_1.style.top = WAVE_ELEMENT_1_HEIGHT + 'px';
-        WAVE_ELEMENT_2.style.top = WAVE_ELEMENT_2_HEIGHT + 'px';
-        DROP_FIELD.style.height = DROP_FIELD_HEIGHT + 'px';
+        WAVE_ELEMENT_1.style.top = `${WAVE_ELEMENT_1_HEIGHT}px`;
+        WAVE_ELEMENT_2.style.top = `${WAVE_ELEMENT_2_HEIGHT}px`;
+        DROP_FIELD.style.height = `${DROP_FIELD_HEIGHT}px`;
     }
 
     stopGame(showResult = true) {
@@ -113,9 +118,9 @@ export class Game {
     }
 
     raiseWaves() {
-        WAVE_ELEMENT_1.style.top = WAVE_ELEMENT_1.offsetTop / 1.1 + 'px';
-        WAVE_ELEMENT_2.style.top = WAVE_ELEMENT_2.offsetTop / 1.1 + 'px';
-        DROP_FIELD.style.height = DROP_FIELD.clientHeight / 1.1 + 'px';        
+        WAVE_ELEMENT_1.style.top = `${WAVE_ELEMENT_1.offsetTop / 1.1}px`;
+        WAVE_ELEMENT_2.style.top = `${WAVE_ELEMENT_2.offsetTop / 1.1}px`;
+        DROP_FIELD.style.height = `${DROP_FIELD.clientHeight / 1.1}px`;        
     }
 
     notifyDestroyDrop(drop, success) {        
@@ -125,9 +130,8 @@ export class Game {
 
         if (success && this.isActive) {            
             this.addScore();
-            if (drop.isSuperDrop) {
-                this.drops.forEach((el) => el.kill());
-                this.drops.splice(0, this.drops.length);
+            if (drop.dropSuperClass === dropClasses.SUN ) {
+                this.clearDropField();
             }            
         } else {
             this.raiseWaves();

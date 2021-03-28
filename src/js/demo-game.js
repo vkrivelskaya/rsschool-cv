@@ -5,9 +5,9 @@ export class DemoGame extends Game {
     constructor(gameMode) {
         super(gameMode);
     }  
-    createDrop(dropClass, dropIndex) {    
+    createDrop(dropIndex) {    
         const calcButtons = Calc.getButtons();
-        const drop = super.createDrop(dropClass, dropIndex);
+        const drop = super.createDrop(dropIndex);
         const demoResult = dropIndex !== 4 ? drop.result : Math.round(Math.random() * (drop.result - 1));
         
         setTimeout(() => {

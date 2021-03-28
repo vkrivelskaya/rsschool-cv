@@ -3,8 +3,8 @@ import './styles/style.scss';
 
 import { Calc } from './js/calc';
 import { Game, gameMode } from './js/game';
-import { DemoGame } from './js/demoGame';
-import { StartModal } from './js/start_modal';
+import { DemoGame } from './js/demo-game';
+import { StartModal } from './js/start-modal';
 import { dropSelectors } from './js/constants/selectors';
 import { startModalWindowSelectors } from './js/constants/selectors';
 import { radioButtons } from './js/constants/constants';
