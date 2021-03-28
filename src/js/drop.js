@@ -20,10 +20,9 @@ export class Drop {
         this.difficulty = difficulty;        
         this.minNumber = 0;
         this.maxNumber = 10 + 10 * Math.trunc(dropId / 3);
-        this.number1 = Math.round(Math.random() * (this.maxNumber - this.minNumber) + this.minNumber);
-        this.number2 = Math.round(Math.random() * (this.maxNumber - this.minNumber) + this.minNumber);
-        this.operation = OPERATIONS[Math.round(Math.random() * this.difficulty * (OPERATIONS.length - 1))];
-        this.playButtonElement = document.querySelector(dropSelectors.PLAY_BTN);
+        this.number1 = this.getRandomNumber();
+        this.number2 = this.getRandomNumber();
+        this.operation = OPERATIONS[Math.round(Math.random() * this.difficulty * (OPERATIONS.length - 1))];        
         this.sector = SECTORS[Math.round(Math.random() * (SECTORS.length - 1))];
         this.dropElement = null;
         this.isDestroyed = false;
@@ -50,14 +49,20 @@ export class Drop {
         });
     }
 
-    static isInteger(num) {
+    static isIntegerNumber(num) {
         return (num ^ 0) === num;
     }
 
+    getRandomNumber() {
+        return Math.round(Math.random() * (this.maxNumber - this.minNumber) + this.minNumber);
+    }
+
     get result() {
-        return Drop.isInteger(eval(`${this.number1} ${this.operation} ${this.number2}`)) 
-        ? eval(`${this.number1} ${this.operation} ${this.number2}`) 
-        : Math.round(eval(`${this.number1} ${this.operation} ${this.number2}`));
+        const operationResult = eval(`${this.number1} ${this.operation} ${this.number2}`);
+
+        return Drop.isIntegerNumber(operationResult) 
+        ? operationResult 
+        : Math.round(operationResult);
     }
 
     createDropElement() {
@@ -97,7 +102,7 @@ export class Drop {
         
         Drop.animate({
             duration: this.game.speed,
-            timing: function(timeFraction) {
+            timing: (timeFraction) => {
                 return timeFraction;
             },
             draw: (progress) => {
@@ -119,21 +124,5 @@ export class Drop {
             this.dropElement.style.color = RED_COLOR;
             MISTAKE_AUDIO_ELEMENT.play();
         }
-    }
-}
-export class DropDiv2 extends Drop {
-    constructor(...args) {
-        super(...args);
-        this.number2 = 2;
-        this.operation = '/';
-    }
-}
-
-export class DropAddWithin10 extends Drop {
-    constructor(...args) {
-        super(...args);
-        this.maxNumber = 10;
-        this.operation = '+';
-        this.number2 = Math.round(Math.random() * (this.maxNumber - this.minNumber) + this.minNumber);
     }
 }

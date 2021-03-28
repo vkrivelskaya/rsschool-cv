@@ -9,7 +9,6 @@ export const finishModalWindowSelectors = {
     FINISH_WINDOW: '.finish-modal-window',
     FINISH_SCORE: '.finish-score',
     FINISH_WINDOW_CLOSE: '.finish-window-close',
-
 };
 
 export const calcSelectors = {

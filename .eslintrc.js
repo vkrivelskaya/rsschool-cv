@@ -11,5 +11,7 @@ module.exports = {
     "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "single"],
+        "default-case": ["error", { "commentPattern": "^skip\\sdefault" }],
+        "keyword-spacing": ["error", { "after": true }]
     }
 };

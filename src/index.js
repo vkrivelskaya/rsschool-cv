@@ -2,10 +2,12 @@ import 'regenerator-runtime/runtime';
 import './styles/style.scss';
 
 import { Calc } from './js/calc';
-import { Game, DemoGame, gameMode } from './js/game';
+import { Game, gameMode } from './js/game';
+import { DemoGame } from './js/demoGame';
 import { StartModal } from './js/start_modal';
 import { dropSelectors } from './js/constants/selectors';
 import { startModalWindowSelectors } from './js/constants/selectors';
+import { radioButtons } from './js/constants/constants';
 
 const RESTART_BUTTON_ELEMENT = document.querySelector(dropSelectors.RESTART_BTN);
 const PLAY_BUTTON_ELEMENT = document.querySelector(startModalWindowSelectors.PLAY_BTN);
@@ -19,20 +21,16 @@ const environment = {
 };
 
 function getGameMode() {
-    const checkedRadioButtons = Array.from(RADIO_BUTTONS).filter((el) => el.checked);
-    if (checkedRadioButtons.length === 0) {
-        return gameMode.DEFAULT;
-    } 
-    switch (checkedRadioButtons[0].value) {
-        case 'division-by-two': 
+    const checkedRadioButtons = Array.from(RADIO_BUTTONS).find((el) => el.checked);
+    
+    switch (checkedRadioButtons?.value) {
+        case radioButtons.divisionByTwo: 
             return gameMode.DIVISION_BY_2;
-        case 'addition-within-ten':
+        case radioButtons.additionWithinTen:
             return gameMode.ADDITION_WITHIN_10;  
-        case 'default':
+        default: 
             return gameMode.DEFAULT;      
-    }
-
-    return gameMode.DEFAULT;    
+    }  
 }
 
 function openStartModalWindow(startModalWindow) {
@@ -40,7 +38,7 @@ function openStartModalWindow(startModalWindow) {
 }
 
 function onRestartButtonClick(startModalWindow) {
-    if (environment.currentGame && environment.currentGame.isActive) {
+    if (environment.currentGame?.isActive) {
         environment.currentGame.stopGame(false);
         environment.currentGame = null;
     }           
@@ -52,7 +50,7 @@ function startGame(isDemo = false, startModalWindow) {
 
     startModalWindow.closeStartModalWindow();
     environment.currentGame = new gameClass(getGameMode());
-    if(environment.calc === null) {
+    if (!environment.calc) {
         environment.calc = new Calc();
         environment.calc.init();
     }

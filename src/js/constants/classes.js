@@ -3,8 +3,7 @@ export const calcClasses = {
     OPERATION: 'operation',
     CLEAN: 'clean',
     CE: 'CE-button',
-    C: 'C-button',
- 
+    C: 'C-button', 
 };
 
 export const startModalWindowClasses = {

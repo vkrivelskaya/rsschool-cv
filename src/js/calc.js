@@ -1,7 +1,8 @@
 import { calcSelectors } from './constants/selectors';
 import { calcClasses } from './constants/classes';
+import { keyCodes } from './constants/constants';
 
-export const displayOperations = {
+const displayOperations = {
     ADD: 1,
     REMOVE: 2,
     REPLACE: 3
@@ -22,7 +23,7 @@ export class Calc {
         const btnContainer = document.querySelectorAll(calcSelectors.BTN);
         const buttons = [];
         btnContainer.forEach((el) => buttons[el.outerText] = el);
-        return buttons;
+        return buttons;      
     }
 
     showOnDisplay(output, operation = displayOperations.ADD) {
@@ -41,6 +42,8 @@ export class Calc {
                 valueToStore = output;
                 break;
             }
+
+            default:
         }
         this.displayElement.value = valueToStore.toString().substring(0, displayElementLength);
     }
@@ -79,13 +82,18 @@ export class Calc {
 
     onKeyDown(e) {
         if (this.calcArray.includes(e.code)) {
-            if (e.code === 'Enter') {
-                this.onOperationClick();
-            } else if (e.code === 'Backspace' || e.code === 'Delete') {
-                this.showOnDisplay('', displayOperations.REMOVE);
-            } else {
-                this.showOnDisplay(e.key);
-            }   
+            switch (e.code) {
+                case keyCodes.enter: 
+                    this.onOperationClick();
+                    break;
+                
+                case keyCodes.delete:
+                case keyCodes.backspace: 
+                    this.showOnDisplay('', displayOperations.REMOVE);
+                    break;
+                default: 
+                    this.showOnDisplay(e.key);
+            }             
         }             
     }       
 
