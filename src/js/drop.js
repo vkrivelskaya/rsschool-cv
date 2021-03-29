@@ -11,9 +11,10 @@ const CORRECT_ANSWER_AUDIO_ELEMENT = document.querySelector(dropSelectors.CORREC
 const SECTORS = [SECTOR_1, SECTOR_2, SECTOR_3, SECTOR_4, SECTOR_5];
 const RED_COLOR = '#FF0000';
 const OPERATIONS = ['+', '-', '*', '/' ];
+
 export class Drop {
-    constructor(game,dropId, destroyCallback) {  
-        this.game = game;      
+    constructor(dropId, destroyCallback) { 
+        this.speed = 14_000;    
         this.dropId = dropId;  
         this.destroyCallback = destroyCallback;
         this.number1 = this.getRandomNumber();
@@ -116,7 +117,7 @@ export class Drop {
         this.createDropElement();
         
         Drop.animate({
-            duration: this.game.speed,
+            duration: this.speed / (this.dropId * 0.3 + 0.5),
             timing: (timeFraction) => timeFraction,
             draw: (progress) => {
                 const coordinate = this.sector.clientHeight - this.dropElement.clientHeight;

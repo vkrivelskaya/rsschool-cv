@@ -26,7 +26,6 @@ let dropElement;
 
 export class Game {
     constructor(gameMode) {
-        this.speed = 14_000;
         this.drops = [];
         this.failCounter = 0;
         this.isActive = false;
@@ -47,7 +46,7 @@ export class Game {
     }
 
     createDrop(dropIndex) {
-        dropElement = new this.dropClass(this, dropIndex, this.notifyDestroyDrop.bind(this));
+        dropElement = new this.dropClass(dropIndex, this.notifyDestroyDrop.bind(this));
         this.drops.push(dropElement);
         dropElement.fall();
         return dropElement;
@@ -69,13 +68,12 @@ export class Game {
 
     async start() {
         this.isActive = true;
-        const interval = 5_000;           
+        const interval = 3_000;           
         RAIN_AUDIO_ELEMENT.play();
 
         for (let i = 0; this.isActive; i++) {
             this.createDrop(i);
             await Game.sleep(interval);
-            this.speed *= 1 / 1.07;
         }
     }
 
