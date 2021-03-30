@@ -31,7 +31,7 @@ export class Game {
         this.isActive = false;
         this.gameMode = gameMode;
         this.score = 0;
-        this.defineDropClass();
+        this.dropClass = this.getDropClass();
     }
 
     static sleep(ms) {
@@ -52,17 +52,15 @@ export class Game {
         return dropElement;
     }
 
-    defineDropClass() {
+    getDropClass() {
         
         switch (this.gameMode) {
             case gameMode.DIVISION_BY_2:
-                this.dropClass = DropDivision2;
-                break;
+                return DropDivision2;
             case gameMode.ADDITION_WITHIN_10:
-                this.dropClass = DropAddWithin10;
-                break; 
+                return  DropAddWithin10;
             default: 
-                this.dropClass = Drop;
+                return Drop;
         }
     }
 
