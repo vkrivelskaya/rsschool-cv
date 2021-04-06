@@ -1,0 +1,140 @@
+.buttons-container {
+    display: flex;
+    margin-bottom: 57px;   
+
+    .button {
+        height: 44px;
+        width: 44px;
+        border: none;
+
+        @include media-desktop {
+            width: 35px;
+            height: 35px;
+        }
+    
+        @include media-tablet {
+            width: 26px;
+            height: 26px;
+        }
+    
+        @include media-big-mobile {
+            width: 18px;
+            height: 18px;
+        }
+    }    
+}
+
+.refresh-button {        
+    border-radius: 3px;
+    background: url("../assets/images/Refresh BG.svg");
+    background-size: contain;
+    margin-right: 10px;        
+}
+
+.language-button {
+    background-color: $grey;
+    border-radius: 3px;
+    width: 71px;
+    height: 44px;
+    border: none;
+    color:  $white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 10px;
+
+    .arrow {
+        background: url("../assets/images/stroke.svg")  right 27% bottom 50% no-repeat;
+        background-size: 70%;
+        width: 9.68px;
+        height: 5.87px;
+
+        @include media-big-mobile {
+            background-size: 60%;
+        }
+    }
+
+    @include media-desktop {
+        width: 57px;
+        height: 35px;
+    }
+
+    @include media-tablet {
+        width: 43px;
+        height: 26px;
+    }
+
+    @include media-big-mobile {
+        width: 28px;
+        height: 18px;
+        font-size: 1.6rem;
+    }
+}    
+
+.temperature {
+    display: flex;
+
+    .temperature-button {           
+        display: flex;
+        align-items: center;            
+        justify-content: center;
+    }
+
+    .fahrenheit-temperature {
+        background-color: $dark-grey;
+        border-radius: 3px 0px 0px 3px;
+
+        .fahrenheit {
+            background: url("../assets/images/fahrenheit.svg") no-repeat;
+            background-size: contain;
+            width: 15px;
+            height: 15px;
+            display: block;
+
+            @include media-desktop {
+                width: 12px;
+                height: 12px;
+            }
+        
+            @include media-tablet {
+                width: 9px;
+                height: 9px;
+            }
+        
+            @include media-big-mobile {
+                width: 6px;
+                height: 6px;
+            }
+        }            
+    }
+
+    .celsius-temperature {
+        background-color: $grey; 
+        border-radius: 0px 3px 3px 0px;           
+
+        .celsius {                
+            background: url("../assets/images/celsius.svg") no-repeat;
+            background-size: contain;
+            width: 17px;
+            height: 15px;
+            display: block;
+
+            @include media-desktop {
+                width: 14px;
+                height: 12px;
+            }
+        
+            @include media-tablet {
+                width: 10px;
+                height: 9px;
+            }
+        
+            @include media-big-mobile {
+                width: 7px;
+                height: 6px;
+            }
+        }
+    }        
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy-weather</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="weather-data-container">
+            <div class="buttons-container">
+                <button class="refresh-button button"></button>
+                <button class="language-button">
+                    <span class="language">EN</span>
+                    <span class="arrow">&nbsp;</span> 
+                </button>
+                <div class="temperature">
+                    <button class="fahrenheit-temperature temperature-button button">
+                        <span class="fahrenheit"></span>
+                    </button>
+                    <button class="celsius-temperature temperature-button button">
+                        <span class="celsius"></span>
+                    </button>
+                </div> 
+            </div>
+            <div class="location">Minsk, Belarus</div>
+            <time class="time"> Monday 28 October 17:23:12</time>
+            <div class="weather-today">
+                <div class="temperature">10</div>
+                <div class="weather-description-container">
+                    <div class="weather-icon"></div>
+                    <div class="weather-description">
+                        <p class="summary">overcast</p>
+                        <p class="apparent-temperature">Feels like: 7°</p>
+                        <p class="wind">Wind: 2 m/s</p>
+                        <p class="humidity">Humidity: 83%</p>
+                    </div>
+                </div>                
+            </div>
+            <div class="weather-forecast-container">
+                <div class="weather-tomorrow">
+                    <div class="day">Tuesday</div>
+                    <div class="weather-forecast">
+                        <div class="forecast-temperature">7°</div>
+                        <div class="forecast-weather-icon"></div>
+                    </div>                    
+                </div>
+                <div class="weather-second-day">
+                    <div class="day">Wednesday</div>
+                    <div class="weather-forecast">
+                        <div class="forecast-temperature">6°</div>
+                        <div class="forecast-weather-icon"></div>
+                    </div>                    
+                </div>
+                <div class="weather-third-day">
+                    <div class="day">Thursday</div>
+                    <div class="weather-forecast">
+                        <div class="forecast-temperature">3°</div>
+                        <div class="forecast-weather-icon"></div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="geolocation-data-container">
+            <form class="search-container" action="https://ipinfo.io/json?token=eb5b90bb77d46a">
+                <input class="input-field" type="search" name="search-input-field" placeholder="Search city">
+                <input class="search-button" type="submit" value="Search">
+            </form> 
+            <div class="map-container">
+                <div class="map"></div> 
+                <div class="coordinates">
+                    <p class="latitude">Latitude: 53°54'</p>
+                    <p class="longitude">Longitude: 27°34'</p>
+                </div>
+            </div>             
+        </div>
+    </div>  
+</body>
+</html>
