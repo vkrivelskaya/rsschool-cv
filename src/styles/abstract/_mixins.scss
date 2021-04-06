@@ -1,0 +1,19 @@
+@mixin media-desktop {
+    @media (max-width: calc(#{$desktop-width})) { @content; }
+}
+  
+@mixin media-tablet {
+    @media (max-width: calc(#{$tablet-width} + 0.5px)) { @content; }
+}
+
+@mixin media-big-mobile {
+    @media (max-width: calc(#{$big-mobile-width} + 0.5px)) { @content; }
+}
+
+@mixin media-mobile {
+    @media (max-width: calc(#{$mobile-width} + 0.5px)) { @content; }
+}
+
+@mixin media-small-mobile {
+    @media (max-width: calc(#{$small-mobile-width} + 0.5px)) { @content; }
+}

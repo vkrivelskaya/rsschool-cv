@@ -1,0 +1,198 @@
+.calculator-field {
+    flex-grow: 1;
+    background-color: $soft-cyan;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calculator {
+    border-radius: 5px;
+    border: 10px solid $beige;
+    box-shadow: 2px 5px 5px $gray;
+    font-weight: bold;
+    display: grid;
+    grid-template-areas: "display-area display-area display-area display-area"
+                         "seven-btn eight-btn nine-btn C-btn"
+                         "four-btn five-btn six-btn C-btn"
+                         "one-btn two-btn three-btn result-btn"
+                         "zero-btn subtraction-btn CE-btn result-btn";                        
+                         grid-template-columns: 25% 25% 25% 25%;
+                         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+
+    @include media-big-mobile {
+        border: 5px solid $beige;
+    }
+                         
+    @include media-mobile {
+        border: 3px solid $beige;
+    }
+}
+
+.display-area {
+    grid-area: display-area;
+}
+
+.CE-btn {
+    grid-area: CE-btn;
+}
+
+.C-btn {
+    grid-area: C-btn;
+}
+
+.seven-btn {
+    grid-area: seven-btn;
+}
+
+.eight-btn {
+    grid-area: eight-btn;
+}
+
+.nine-btn {
+    grid-area: nine-btn;
+}
+
+.four-btn {
+    grid-area: four-btn;
+}
+
+.five-btn {
+    grid-area: five-btn;
+}
+
+.six-btn {
+    grid-area: six-btn;
+}
+.one-btn {
+    grid-area: one-btn;
+}
+
+.two-btn {
+    grid-area: two-btn;
+}
+
+.three-btn {
+    grid-area: three-btn;
+}
+
+.result-btn {
+    grid-area: result-btn;
+}
+
+.zero-btn {
+    grid-area: zero-btn;
+}
+
+.subtraction-btn {
+    grid-area: subtraction-btn;
+}
+
+.btn, .display {
+    height: 100%;
+    width: 100%;
+}
+
+.display {
+    font-size: 2rem;
+
+    @include media-tablet {
+        font-size: 1.8rem;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.2rem;
+    }
+
+    @include media-mobile {
+        font-size: 1rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.9rem;
+    }
+}
+
+.number {
+    font-size: 4rem;
+    padding: 10px 20px;
+
+    @include media-tablet {
+        font-size: 1.8rem;
+        padding: 10px 12px;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.4rem;
+        padding: 10px 5px;
+    }
+
+    @include media-mobile {
+        font-size: 1.3rem;
+        padding: 7px 0px;
+    }
+}
+
+.clean, .operation{
+    font-size: 1.5rem;
+    padding: 15px 0px;
+
+    @include media-tablet {
+        font-size: 1.1rem;
+    }
+
+    @include media-big-mobile {
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.8rem;
+    }
+}
+
+.calculator-score-container {
+    display: flex;
+    font-size: 2.5rem;
+    align-items: baseline;
+    padding: 5px 0px 10px;
+    background-color: $very-light-gray;
+    margin-bottom: 20px;
+    width: 80%;
+    justify-content: center;
+    border-radius: 0 0 50% 50%;
+    border: 3px solid $white;
+
+    .star {
+        background: url("../assets/images/star.png") bottom no-repeat;
+        background-size: contain;
+        width: 25px;
+        height: 25px;
+
+        @include media-big-mobile {
+            width: 18px;
+            height: 18px;
+        }
+
+        @include media-mobile {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .calculator-score-heading {
+        margin: 0 5px;
+    }
+
+    @include media-desktop {
+        margin-bottom: 60px;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.7rem;
+    }
+
+    @include media-mobile {
+        font-size: 1.5rem;
+    }
+}

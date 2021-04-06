@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raindrops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="game">
+            <div class="start-modal-window">
+                <div class="start-modal-content">
+                    <h3 class="modal-window-heading">Raindrops</h3>
+                    <div class="buttons-container">
+                        <button class="play button">Play</button>
+                        <button class="how-to-play button">How to play</button>                    
+                    </div> 
+                    <form class="conditions-container">
+                        <h4 class="conditions-container-heading">Additional conditions:</h4>
+                        <label class="conditions">
+                            <input type="radio" value="division-by-two" name="conditions">
+                            Division by 2
+                        </label><br>                    
+                        <label class="conditions">
+                            <input type="radio" value="addition-within-ten" name="conditions">
+                            Addition within 10                        
+                        </label><br>
+                        <label class="conditions">
+                            <input type="radio" value="default" name="conditions">
+                            Without restrictions                        
+                        </label> 
+                    </form>                    
+                    <div class="message">
+                        <p>! If the result of the calculation turns out to be a fractional number,
+                         you must enter as an answer an integer number, obtained according to the rules
+                         of mathematical rounding</p>
+                    </div>           
+                    <span class="start-window-close close">&times;</span>
+                </div>
+            </div>
+            <div class="finish-modal-window">
+                <div class="finish-modal-content">
+                    <div class="results">
+                        <div class="score-container">
+                            <span class="star"></span>
+                            <h3 class="score-heading">Score:</h3>
+                            <span class="finish-score score">0</span>
+                        </div>
+                        <div class="statistics-container">
+                            <h3>Game scores of the best players:</h3>
+                            <ul class="players">
+                                <li class="player-1 player">Player 1: 766</li>
+                                <li class="player-2 player">Player 2: 545</li>
+                                <li class="player-3 player">Player 3: 467</li>
+                            </ul>             
+                        </div>
+                    </div>            
+                    <span class="finish-window-close close">&times;</span>
+                </div>
+            </div>
+            <div class="game-field">                
+                <button class="restart-button">↺</button>
+                <div class="drop-field">
+                    <div class="sector-1 sector"></div>
+                    <div class="sector-2 sector"></div>
+                    <div class="sector-3 sector"></div>
+                    <div class="sector-4 sector"></div>                    
+                    <div class="sector-5 sector"></div>
+                </div>
+                <div class="rocks"></div>
+                <div class="waves">
+                    <div class="wave1"></div>
+                    <div class="wave2"></div>
+                </div>
+            </div>
+            <div class="calculator-field">
+                <div class="calculator-score-container">
+                    <span class="star"></span>
+                    <h3 class="calculator-score-heading">Score:</h3>
+                    <span class="calculator-score score">0</span>
+                </div>                
+                <div class="calculator">
+                    <div class="display-area">
+                        <input class="display" type="text" value="" disabled>
+                    </div>             
+                    <div class="CE-btn button-container">
+                        <button class="clean CE-button btn" >Delete</button>
+                    </div>
+                    <div class="C-btn button-container">
+                        <button class="clean C-button btn">Clear</button>
+                    </div>                
+                    <div class="seven-btn button-container">
+                        <button class="number btn">7</button>
+                    </div>
+                    <div class="eight-btn button-container">
+                        <button class="number btn">8</button>
+                    </div>
+                    <div class="nine-btn button-container">
+                        <button class="number btn">9</button>
+                    </div>
+                    <div class="four-btn button-container">
+                        <button class="number btn">4</button>
+                    </div>
+                    <div class="five-btn button-container">
+                        <button class="number btn">5</button>
+                    </div>
+                    <div class="six-btn button-container">
+                        <button class="number btn">6</button>
+                    </div>
+                    <div class="one-btn button-container">
+                        <button class="number btn">1</button>
+                    </div>
+                    <div class="two-btn button-container">
+                        <button class="number btn">2</button>
+                    </div>
+                    <div class="three-btn button-container">
+                        <button class="number btn">3</button>
+                    </div>
+                    <div class="result-btn button-container">
+                        <button class="operation btn">Enter</button>
+                    </div>
+                    <div class="zero-btn button-container">
+                        <button class="number btn">0</button>
+                    </div> 
+                    <div class="subtraction-btn button-container">
+                        <button class="number btn">-</button>
+                    </div>                  
+                </div>
+            </div>            
+        </div>
+        <audio class="rain" src="assets/audio/rain.mp3"></audio>
+        <audio class="mistake" src="assets/audio/mistake.mp3"></audio>
+        <audio class="correct-answer" src="assets/audio/correct.mp3"></audio>
+    </main>    
+</body>
+</html>

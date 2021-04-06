@@ -1,0 +1,306 @@
+.game-field {
+    flex-grow: 20;
+    background: linear-gradient( $white, $light-grayish-cyan);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+    .restart-button {
+        color: $white;
+        background-color: $soft-blue;
+        opacity: 0.7;
+        width: 6%;
+        height: 6%;
+        margin: 10px;
+        border-radius: 3px;
+        box-shadow: 2px 2px 2px $gray;
+        border: none;
+        font-size: 2rem;
+
+        @include media-desktop {
+            height: 5%;
+        }
+
+        @include media-tablet {
+            width: 13%;
+        }
+
+        @include media-mobile {
+            font-size: 1rem;
+            width: 15%;
+            height: 5%;
+        }       
+    }
+
+    .rocks {
+        height: 20%;
+        width: 100%;
+        bottom: 10%;
+        background: url("../assets/images/rocks.png") top no-repeat;
+        background-size: 20%;
+        position: absolute;
+        z-index: 1;
+
+        @include media-desktop {
+            background-size: 40%; 
+        }
+
+        @include media-tablet {
+            bottom: 3%; 
+            background-size: 50%; 
+        }
+
+        @include media-mobile {
+            bottom: -4%; 
+            background-size: 60%; 
+        }
+
+        @include media-small-mobile {
+            bottom: -5%; 
+        }
+    }
+
+    .drop {
+        background: url("../assets/images/drop.png") no-repeat;
+        background-size: contain;
+        width: 60px;
+        height: 80px;
+        font-size: 1.8rem;
+        font-weight: bold;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $black;
+        position: absolute;
+        z-index: 2;
+
+        @include media-desktop {
+            width: 100px;
+            height: 130px; 
+            font-size: 2.8rem;
+        }
+
+        @include media-tablet {
+            width: 70px;
+            height: 100px; 
+            font-size: 2.2rem;
+        }
+
+        @include media-big-mobile {
+            width: 50px;
+            height: 70px; 
+            font-size: 1.4rem;
+        }
+
+        @include media-small-mobile {
+            width: 40px;
+            height: 60px; 
+            font-size: 1rem;
+        }
+    }
+}
+
+.numbers-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.waves {
+    height: 20px;
+    overflow: hidden;
+
+    .wave1 {
+        left: -10%; 
+        top: 80%;
+        background-color: $very-soft-blue; 
+        border-radius: 110%;  
+        animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) 1s infinite alternate, swell 7s ease 1s infinite alternate;
+        
+        @include media-desktop {
+            left: -30%;
+        }
+
+        @include media-tablet {
+            top: 85%;
+            left: -50%;
+        }
+
+        @include media-mobile {
+            top: 90%;
+            left: -70%
+        }        
+    } 
+
+    .wave2 {
+        left: -60%;  
+        top: 80%;
+        background-color: $soft-blue; 
+        border-radius: 120%;
+        animation: wave 5s cubic-bezier( 0.36, 0.45, 0.63, 0.53) 1s infinite alternate, swell 5s ease 1s infinite alternate;
+       
+        @include media-desktop {
+            left: -90%;
+        }
+
+        @include media-tablet {
+            top: 85%;
+            left: -120%
+        }
+
+        @include media-mobile {
+            top: 90%;
+            left: -200%
+        }
+    }
+}
+
+.wave1, .wave2 {
+    position: absolute;
+    z-index: 2;
+    width: 165%;
+    height: 200%;
+
+    @include media-desktop {
+        height: 80%; 
+        width: 210%;
+    }
+
+    @include media-tablet {
+        height: 130%; 
+        width: 350%;
+    }
+
+    @include media-mobile {
+        height: 120%; 
+        width: 400%;
+    }
+}
+
+@keyframes wave {
+    0% {
+        margin-left: 10px;
+    }
+    50% {
+        margin-left: -50px; 
+    }
+    100% {
+        margin-left: -120px;
+    }
+}
+
+@keyframes swell {
+    0%, 100% {
+      transform: translate3d(0,-25px,0);
+    }
+    50% {
+      transform: translate3d(0,5px,0);
+    }
+
+}
+
+.correct-answer {
+    background: url("../assets/images/water.png") no-repeat;
+    background-size: contain;
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $black;
+    position: absolute;
+    z-index: 2;
+
+    @include media-desktop {
+        width: 110px;
+        height: 110px; 
+        font-size: 2.8rem;
+    }
+
+    @include media-tablet {
+        width: 100px;
+        height: 100px; 
+        font-size: 2.2rem;
+    }
+
+    @include media-big-mobile {
+        width: 70px;
+        height: 70px; 
+        font-size: 1.6rem;
+    }
+
+    @include media-mobile {
+        width: 60px;
+        height: 60px; 
+        font-size: 1.4rem;
+    }
+
+    @include media-small-mobile {
+        width: 50px;
+        height: 50px; 
+        font-size: 1rem;
+    }
+}
+
+.sun {  
+    background: url("../assets/images/sun.png") no-repeat;
+    background-size: contain;
+    width: 80px;
+    height: 80px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $black;
+    position: absolute;
+    z-index: 2;  
+
+    @include media-desktop {
+        width: 100px;
+        height: 100px; 
+        font-size: 2.8rem;
+    }
+
+    @include media-tablet {
+        width: 90px;
+        height: 90px; 
+        font-size: 2.2rem;
+    }
+
+    @include media-big-mobile {
+        width: 60px;
+        height: 60px; 
+        font-size: 1.4rem;
+    }
+
+    @include media-small-mobile {
+        width: 50px;
+        height: 50px; 
+        font-size: 1rem;
+    }
+}
+
+.drop-field {
+    display: flex;
+    overflow: hidden;
+    height: 70%;   
+
+    .sector {
+        flex: 20%;  
+        position: relative;      
+    }
+
+    @include media-tablet {
+        height: 75%; 
+    }
+
+    @include media-tablet {
+        height: 80%; 
+    }
+}
