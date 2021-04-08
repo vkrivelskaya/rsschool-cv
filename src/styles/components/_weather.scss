@@ -5,10 +5,11 @@
     text-transform: uppercase;
 }
 
-.time {
+.time, .date {
     font-weight: 600;
     font-size: 2.4rem;
     line-height: 2.9rem;
+    margin-right: 5px;
 }
 
 .weather-today {
@@ -26,18 +27,27 @@
             content: "°";
             font-size: 10rem;
             position: absolute;
-            top: -70px;
+            top: -75px;
+            left: 350px;
 
             @include media-desktop {
                 top: -60px;
+                left: 280px;
             }
 
             @include media-tablet {
                 top: -45px;
+                left: 215px;
             }
 
             @include media-big-mobile {
                 top: -18px;
+                left: 115px;
+            }
+
+            @include media-small-mobile {
+                top: -18px;
+                left: 90px;
             }
         }
     }
