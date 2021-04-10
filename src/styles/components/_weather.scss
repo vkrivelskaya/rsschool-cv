@@ -28,26 +28,22 @@
             font-size: 10rem;
             position: absolute;
             top: -75px;
-            left: 350px;
+            left: 110%;
 
             @include media-desktop {
                 top: -60px;
-                left: 280px;
             }
 
             @include media-tablet {
                 top: -45px;
-                left: 215px;
             }
 
             @include media-big-mobile {
                 top: -18px;
-                left: 115px;
             }
 
             @include media-small-mobile {
                 top: -18px;
-                left: 90px;
             }
         }
     }
@@ -66,6 +62,10 @@
 
             .summary, .apparent-temperature, .wind, .humidity {
                 margin: 10px 0;
+
+                .wind-value {
+                    text-transform: lowercase;
+                }
 
                 @include media-desktop {
                     margin: 8px 0;
@@ -102,7 +102,6 @@
         }
         
         .weather-icon {
-            background: url("../assets/images/weather-icon.svg") no-repeat;
             background-size: contain;
             width: 163px;
             height: 103px;
@@ -154,7 +153,6 @@
             }
             
             .forecast-weather-icon {
-                background: url("../assets/images/weather-icon.svg") no-repeat;
                 background-size: contain;
                 width: 66px;
                 height: 42px;
