@@ -21,7 +21,7 @@ html {
 body {
     font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
-    background: linear-gradient(180deg, $mostly-black-blue 0%, $very-dark-blue 100%), url("../assets/images/bg.svg") bottom center no-repeat;
+    //background: linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%), url("../assets/images/bg.svg") bottom center no-repeat;
     background-size: cover;
     color: $white;
 }
