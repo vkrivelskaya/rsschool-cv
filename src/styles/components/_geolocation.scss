@@ -66,6 +66,8 @@ input::placeholder {
 
     @include media-mobile {
         width: 30px;
+        font-size: 1.6rem;
+        
     }
 
     @include media-small-mobile {
@@ -78,10 +80,12 @@ input::placeholder {
     height: 398px;
     margin-bottom: 20px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 100% 75%, 100% 100%, 90% 95%, 0% 95%);
+    border-radius: 8px;
 
     @include media-desktop {
         width: 300px;
-        height: 38px;
+        height: 307px;
+        margin-bottom: 0px;
     }
 
     @include media-tablet {
@@ -91,14 +95,12 @@ input::placeholder {
 
     @include media-big-mobile {
         width: 130px;
-        height: 138px;
-        margin-bottom: 15px;
+        height: 115px;
     }
 
     @include media-small-mobile {
         width: 100px;
-        height: 106px;
-        margin-bottom: 10px;        
+        height: 105px;        
     }    
 }
 
@@ -107,6 +109,9 @@ input::placeholder {
     font-size: 2.0rem;
     text-align: right;
     padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 
     .degrees::after {
         content: "°";
@@ -121,4 +126,27 @@ input::placeholder {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.latitude-description, .longitude-description {
+    display: flex;
+    align-items: center;
+}
+
+.latitude, .longitude {
+    padding-right: 5px;
+}
+.search {
+    display: flex;
+    flex-direction: column;
+}
+.error-message {
+    display: none;
+    padding: 10px 20px;
+    border: 1px solid $very-dark-grayish-blue;
+    border-radius: 4px;
+    text-align: center;
+    background: $very-light-gray;
+    font-size: 2rem;
+    font-weight: bold;
 }

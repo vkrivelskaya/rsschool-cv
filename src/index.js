@@ -1,6 +1,7 @@
 import 'regenerator-runtime/runtime';
 import './styles/style.scss';
 import { weatherIcons } from './js/weather-icons';
+import { translation } from './js/translation';
 
 const selectors = {
     LATITUDE_DEGREES: '.latitude-degrees',
@@ -32,6 +33,8 @@ const selectors = {
     BUTTONS_CONTAINER: '.buttons-container',
     SEARCH_FORM: '.search-container',
     SEARCH_INPUT_FIELD: '.input-field',
+    LANGUAGE_BTN: '.language-button',
+    ERROR_MESSAGE:'.error-message',
 };
 
 const classes = {
@@ -49,26 +52,28 @@ const thirdDaysTemperatureElement = document.querySelector(selectors.TEMPERATURE
 const todaysApparentTemperatureElement = document.querySelector(selectors.APPARENT_TEMPERATURE);
 const fahrenheitTemperatureButtonElement = document.querySelector(selectors.FAHRENHEIT_TEMPERATURE_BTN);
 const celsiusTemperatureButtonElement = document.querySelector(selectors.CELSIUS_TEMPERATURE_BTN);
+const languageButtonElement = document.querySelector(selectors.LANGUAGE_BTN);
 const LOCATION_ELEMENT = document.querySelector(selectors.LOCATION);
+const searchInputElement = document.querySelector(selectors.SEARCH_INPUT_FIELD);
 const celsiusPerKelvin = 273.15;
 const overlayColorStyle = 'linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%)';
 
-let map;
 let latitude; 
 let longitude;
 let timeZone;
 let degreeUnit = 'celsius';
+let language = 'en';
+let currentLocation;
 
 function showMap() {
     const mapboxgl = window.mapboxgl;
     mapboxgl.accessToken = 'pk.eyJ1IjoidmFsZW50aW5hLWtyIiwiYSI6ImNrbjdzenB4bTBiaG8ycHFuNTF2ZGg5bGQifQ.bzp7eMwGHnb9ZFfDNggXCA';
-    map = new mapboxgl.Map({
+    new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11', 
         center: [longitude, latitude], 
         zoom: 8 
     });
-    console.log(map);
 }
 
 function setCoordinates(lat, long) {
@@ -108,14 +113,14 @@ function updateDate() {
         dateOptions.timeZone = timeZone;
     }
     let currentDate = new Date();
-    dateElement.innerHTML = currentDate.toLocaleString('en-GB', dateOptions).replace(',', '');    
+    dateElement.innerHTML = currentDate.toLocaleString(`${language}-GB`, dateOptions).replace(',', '');    
 }
   
 function updateTime() {
     const timeElement = document.querySelector(selectors.TIME);
     let currentTime = new Date();
     if (timeZone) {
-        currentTime = new Date(currentTime.toLocaleString('en-GB', {timeZone: timeZone}));
+        currentTime = new Date(currentTime.toLocaleString('en-US', {timeZone: timeZone}));
     }
     let hour = currentTime.getHours();
     let min = addZeroToFormat(currentTime.getMinutes());
@@ -125,13 +130,11 @@ function updateTime() {
     setTimeout(updateTime, 1000);
 }
 
-async function showLocation() {    
-    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
-    regionNames.of('US');
+async function showLocation() {
     let response = await fetch('https://ipinfo.io/json?token=edaa4c28dad526');
     response = await response.json();
-    determineCoordinates(showWeather);
-    LOCATION_ELEMENT.innerHTML = `${response.city}, ${regionNames.of(response.country)}`;      
+    setLocation(response.city);  
+    currentLocation = response.city; 
 }
 
 function recalculateTemperatureFromCelsiusInFahrenheit(temperatureInCelsius) {
@@ -189,7 +192,8 @@ function showTemperatureForecast(data) {
 }
 
 function showNextDaysOfWeek(data) {
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const daysEn = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const daysRu = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
     const tomorrowDayOfWeekElement = document.querySelector(selectors.TOMORROW);
     const secondDayOfWeekElement = document.querySelector(selectors.SECOND_DAY);
     const thirdDayOfWeekElement = document.querySelector(selectors.THIRD_DAY);
@@ -205,9 +209,15 @@ function showNextDaysOfWeek(data) {
     const secondDayDate = new Date(timestampSecondDay * 1000);
     const thirdDayDate = new Date(timestampThirdDay * 1000);
 
-    tomorrowDayOfWeekElement.innerHTML = days[tomorrowDate.getDay()];
-    secondDayOfWeekElement.innerHTML = days[secondDayDate.getDay()];
-    thirdDayOfWeekElement.innerHTML = days[thirdDayDate.getDay()]; 
+    if (language === 'en') {
+        tomorrowDayOfWeekElement.innerHTML = daysEn[tomorrowDate.getDay()];
+        secondDayOfWeekElement.innerHTML = daysEn[secondDayDate.getDay()];
+        thirdDayOfWeekElement.innerHTML = daysEn[thirdDayDate.getDay()]; 
+    } else if (language === 'ru') {
+        tomorrowDayOfWeekElement.innerHTML = daysRu[tomorrowDate.getDay()];
+        secondDayOfWeekElement.innerHTML = daysRu[secondDayDate.getDay()];
+        thirdDayOfWeekElement.innerHTML = daysRu[thirdDayDate.getDay()]; 
+    }    
 }
 
 function showWeatherIcons(data) {
@@ -239,17 +249,18 @@ function showWeatherIcons(data) {
     thirdDayWeatherIcon.style.backgroundSize = 'cover';
 }
 
-function showWeather() {
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=afba4e3563e6d79fdbe184a899275267`)    
-    .then((response) => response.json())
-    .then((jsonResponse) => {
-        const todayWeatherData = jsonResponse.current;
+async function loadWeather() {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=${language}&exclude=minutely,hourly,alerts&appid=afba4e3563e6d79fdbe184a899275267`);    
+    return await response.json();
+}
+
+function showLoadedWeather(response) {
+    const todayWeatherData = response.current;
         
-        showTodaysWeatherDescription(todayWeatherData);
-        showTemperatureForecast(jsonResponse);  
-        showNextDaysOfWeek(jsonResponse);  
-        showWeatherIcons(jsonResponse); 
-    }); 
+    showTodaysWeatherDescription(todayWeatherData);
+    showTemperatureForecast(response);  
+    showNextDaysOfWeek(response);  
+    showWeatherIcons(response); 
 }
 
 function showTemperatureInCelsius() {
@@ -317,37 +328,86 @@ function determineClickedButton(e) {
     } 
 } 
 
-function showInputLocationTime(lat, long) {
-    fetch(` http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${long}&username=geoloky`)
-    .then((response) => response.json())
-    .then((jsonResponse) => {
-        timeZone = jsonResponse.timezoneId;
-        updateDate();
-    });     
+async function loadLocationTime(lat, long) {
+    const response = await fetch(` http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${long}&username=geoloky`);
+    return await response.json();
 }
 
-function onLocationChange() {
-    const searchInputElement = document.querySelector(selectors.SEARCH_INPUT_FIELD);
-    event.preventDefault();
-    fetch (`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchInputElement.value}.json?types=place&fuzzyMatch=false&language=ru&access_token=pk.eyJ1IjoidmFsZW50aW5hLWtyIiwiYSI6ImNrbjdzenB4bTBiaG8ycHFuNTF2ZGg5bGQifQ.bzp7eMwGHnb9ZFfDNggXCA`)
-    .then((response) => response.json())
-    .then((jsonResponse) => {
-        const placeName = jsonResponse.features[0]?.place_name;
-        if (placeName) {
-            const country = jsonResponse.features[0].context.find(el => el.id.includes('country'));
-            LOCATION_ELEMENT.innerHTML = `${jsonResponse.features[0].context[0].text}, ${country.text}`;
-            setCoordinates(jsonResponse.features[0].center[1], jsonResponse.features[0].center[0]);
-            showInputLocationTime(jsonResponse.features[0].center[1], jsonResponse.features[0].center[0]);
-            showWeather();
-            showMap();
-        }        
-        console.log(jsonResponse);
-    });     
+function applyLocationTimeResponse(response) {
+    timeZone = response.timezoneId;
+    updateDate();
+    updateTime();
+}
+
+function showErrorMessage() {
+    const errorMessageElement = document.querySelector(selectors.ERROR_MESSAGE);
+    errorMessageElement.style.display = 'block';
+
+    setTimeout(() => {
+        errorMessageElement.style.display = 'none';
+    }, 3000);    
+}
+
+async function setLocation(location) {
+    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?types=place&autocomplete=false&fuzzyMatch=false&language=${language}&access_token=pk.eyJ1IjoidmFsZW50aW5hLWtyIiwiYSI6ImNrbjdzenB4bTBiaG8ycHFuNTF2ZGg5bGQifQ.bzp7eMwGHnb9ZFfDNggXCA`);
+    const jsonResponse = await response.json();
+
+    const placeName = jsonResponse.features[0]?.place_name;
+    if (placeName) {
+        const lat = jsonResponse.features[0].center[1];
+        const long = jsonResponse.features[0].center[0];
+
+        const responses = await Promise.all([
+            loadLocationTime(lat, long),
+            loadWeather()
+        ]);
+
+        const country = jsonResponse.features[0].context.find(el => el.id.includes('country'));
+        LOCATION_ELEMENT.innerHTML = `${jsonResponse.features[0].text}, ${country.text}`;
+        setCoordinates(lat, long);
+
+        showMap();
+        applyLocationTimeResponse(responses[0]);
+        showLoadedWeather(responses[1]);
+
+    } else {
+        showErrorMessage();  
+    }   
+}
+
+function onLocationChange(e) {    
+    e.preventDefault();
+    setLocation(searchInputElement.value);
+    currentLocation = searchInputElement.value;
+}
+
+function setLanguage(language) {
+    const selectedLanguageElement = document.querySelector(`[value=${language}]`);
+    selectedLanguageElement.setAttribute('selected', 'selected');
+    translateContent();
+}
+
+function changeLanguage(e) {
+    language = e.target.value;
+    localStorage.setItem('language', language);
+    setLanguage(e.target.value);
+    updateDate();
+    setLocation(currentLocation);
+}
+
+function translateContent() {
+    const stringsToBeResolved = document.querySelectorAll('[data-content]');
+    stringsToBeResolved.forEach(el => {
+        el.textContent = translation[el.attributes['data-content'].value][language];
+    });
+
 }
 
 function init() {
     const buttonsContainer = document.querySelector(selectors.BUTTONS_CONTAINER);
     const searchLocationElement = document.querySelector(selectors.SEARCH_FORM);
+    language = localStorage.getItem('language') || language;   
+    setLanguage(language); 
 
     window.addEventListener('load', () => {
         determineCoordinates(showMap);
@@ -359,6 +419,7 @@ function init() {
     initTemperatureButton();
     buttonsContainer.addEventListener('click', determineClickedButton);
     searchLocationElement.addEventListener('submit', onLocationChange);
+    languageButtonElement.addEventListener('change', changeLanguage);    
 }
 
 init();

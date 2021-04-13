@@ -48,17 +48,6 @@ select {
     justify-content: space-around;
     margin-right: 10px;
 
-    // .arrow {
-    //     background: url("../assets/images/stroke.svg")  right 27% bottom 50% no-repeat;
-    //     background-size: 70%;
-    //     width: 9.68px;
-    //     height: 5.87px;
-
-    //     @include media-big-mobile {
-    //         background-size: 60%;
-    //     }
-    // }
-
     @include media-desktop {
         width: 57px;
         height: 35px;
@@ -70,7 +59,7 @@ select {
     }
 
     @include media-big-mobile {
-        width: 28px;
+        width: 32px;
         height: 18px;
         font-size: 1.6rem;
     }
@@ -86,6 +75,10 @@ select {
         font-weight: bold;
         font-size: 1.4rem;
         color: $white;
+
+        @include media-mobile {
+            font-size: 1.6rem;
+        }
     }
 
     .fahrenheit-temperature {
