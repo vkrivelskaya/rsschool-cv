@@ -1,3 +1,5 @@
+import { requests } from './constants/request-info';
+
 export class Location {
     constructor(lat, long, language, cityName, country) {
         this.latitude = lat;
@@ -9,7 +11,7 @@ export class Location {
     }
 
     static async getLocationByName(cityName, language) {
-        const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${cityName}.json?types=place&autocomplete=false&fuzzyMatch=false&language=${language}&access_token=pk.eyJ1IjoidmFsZW50aW5hLWtyIiwiYSI6ImNrbjdzenB4bTBiaG8ycHFuNTF2ZGg5bGQifQ.bzp7eMwGHnb9ZFfDNggXCA`);
+        const response = await fetch(`${requests.map}/${cityName}.json?types=place&autocomplete=false&fuzzyMatch=false&language=${language}&access_token=pk.eyJ1IjoidmFsZW50aW5hLWtyIiwiYSI6ImNrbjdzenB4bTBiaG8ycHFuNTF2ZGg5bGQifQ.bzp7eMwGHnb9ZFfDNggXCA`);
         const jsonResponse = await response.json();
         const placeName = jsonResponse.features[0]?.place_name;
 
@@ -24,11 +26,11 @@ export class Location {
     }
  
     addZeroToFormat(value) {
-        return value < 10 ? '0' + value : value;
+        return value < 10 ? `0${value}` : value;
     }
 
     async loadLocationTimezone() {
-        let response = await fetch(`http://api.geonames.org/timezoneJSON?lat=${this.latitude}&lng=${this.longitude}&username=geoloky`);
+        let response = await fetch(`${requests.timeZone}/timezoneJSON?lat=${this.latitude}&lng=${this.longitude}&username=geoloky`);
         response = await response.json();
         this.timeZone = response.timezoneId;
     }
@@ -45,15 +47,14 @@ export class Location {
     }
       
     getTime() {        
-        let currentTime = new Date();
+        const currentTime = this.timeZone 
+        ? new Date((new Date()).toLocaleString('en-US', { timeZone: this.timeZone }))
+        : new Date();
 
-        if (this.timeZone) {
-            currentTime = new Date(currentTime.toLocaleString('en-US', {timeZone: this.timeZone}));
-        }
-        
-        let hour = currentTime.getHours();
-        let min = this.addZeroToFormat(currentTime.getMinutes());
-        let sec = this.addZeroToFormat(currentTime.getSeconds());
+
+        const hour = currentTime.getHours();
+        const min = this.addZeroToFormat(currentTime.getMinutes());
+        const sec = this.addZeroToFormat(currentTime.getSeconds());
         return `${hour}:${min}:${sec}`;
     }    
 }

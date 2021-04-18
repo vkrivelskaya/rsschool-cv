@@ -12,6 +12,8 @@ module.exports = {
         "semi": ["error", "always"],
         "quotes": ["error", "single"],
         "default-case": ["error", { "commentPattern": "^skip\\sdefault" }],
-        "keyword-spacing": ["error", { "after": true }]
+        "keyword-spacing": ["error", { "after": true }],
+        "eqeqeq": ["error", "always"],
+        "object-curly-spacing": ["error", "always"],
     }
 };

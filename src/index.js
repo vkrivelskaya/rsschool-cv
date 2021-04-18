@@ -3,9 +3,13 @@ import './styles/style.scss';
 
 import { Application } from './js/application';
 
-function init() {
+function initApplication() {
     const application = new Application();
-    window.addEventListener('load', application.init.bind(application));    
+    application.init();
+}
+
+function init() {    
+    window.addEventListener('DOMContentLoaded', initApplication);    
 }
 
 init();
