@@ -2,13 +2,15 @@ import { DailyWeather } from './daily-weather';
 import { requests } from './constants/request-info';
 
 export class WeatherForecast {
-    constructor(location) {
-        this.location = location;
+    constructor(lat, long, language) {
+        this.latitude = lat;
+        this.longitude = long;
+        this.language = language;
         this.forecast = [];
     }
 
     async loadWeather() {
-        const response = await fetch(`${requests.weatherForecast}/onecall?lat=${this.location.latitude}&lon=${this.location.longitude}&lang=${this.location.language}&exclude=minutely,hourly,alerts&appid=afba4e3563e6d79fdbe184a899275267`);    
+        const response = await fetch(`${requests.weatherForecast}/onecall?lat=${this.latitude}&lon=${this.longitude}&lang=${this.language}&exclude=minutely,hourly,alerts&appid=afba4e3563e6d79fdbe184a899275267`);    
         const { current, daily } = await response.json();
 
         this.forecast.push(new DailyWeather(

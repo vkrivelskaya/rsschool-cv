@@ -5,8 +5,8 @@ import { WeatherForecast } from './weather-forecast';
 import { weatherIcons } from './constants/weather-icons';
 import { translation } from './constants/translation';
 import { degreeUnits, localStorageItems, languages, daysOfWeek } from './constants/constants';
-import { requests } from './constants/request-info';
-
+import { requests, mapBoxAccessToken } from './constants/request-info';
+import { Time } from './time';
 
 export class Application {
     constructor() {
@@ -14,7 +14,8 @@ export class Application {
         this.language = languages.en;
 
         this.currentLocation = null;
-        this.currentWeather = null;
+        this.currentWeather = null; 
+        this.time = null;       
     }
 
     init() { 
@@ -57,26 +58,30 @@ export class Application {
         e.preventDefault();
 
         const searchInputElement = document.querySelector(selectors.SEARCH_INPUT_FIELD);
-        const location = await Location.getLocationByName(searchInputElement.value, this.language);
+        const location = new Location();
+        await location.defineLocationByName(searchInputElement.value, this.language);
+        this.currentLocation = location.getLocationData(); 
 
-        if (location) {
-            await location.loadLocationTimezone();
-            await this.setLocation(location);
+        if (this.currentLocation.cityName) {
+            this.time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language);
+            await this.time.loadLocationTimezone();
+            const timeZone = this.time.getTimeZone();
+            await this.setLocation(this.currentLocation, timeZone);
         } else {
             this.showErrorMessage();
         }
     }
 
     showDate() {
-        const dateElement = document.querySelector(selectors.DATE);
+        const dateElement = document.querySelector(selectors.DATE);      
 
-        dateElement.innerHTML = this.currentLocation.getDate();
+        dateElement.innerHTML = this.time.getDate();
     }
 
     showTime() {
         const timeElement = document.querySelector(selectors.TIME);
 
-        timeElement.innerHTML = this.currentLocation.getTime();
+        timeElement.innerHTML = this.time.getTime();
         setTimeout(this.showTime.bind(this), 1000);
     }
 
@@ -84,25 +89,26 @@ export class Application {
         let response = await fetch(requests.locationByIpUrl);
 
         response = await response.json();
-        const location = await Location.getLocationByName(response.city, this.language);
-        if (location) {
-            await this.setLocation(location);
-        }
+        const location = new Location();
+        await location.defineLocationByName(response.city, this.language);
+        this.currentLocation = location.getLocationData(); 
+       
+        await this.setLocation(this.currentLocation);        
     }
 
-    async setLocation(location) { 
-        this.currentWeather = new WeatherForecast(location);
+    async setLocation({ latitude, longitude, language, cityName, country }, timezone) { 
+        this.currentWeather = new WeatherForecast(latitude, longitude, language);
+        this.time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language, timezone);
         await this.currentWeather.loadWeather();
-        this.currentLocation = location;        
            
-        this.showCoordinates(location);
+        this.showCoordinates(latitude, longitude, cityName, country);
         this.showMap();
         this.showDate();
         this.showTime();
         this.showLoadedWeather();
     }
 
-    showCoordinates(location) {
+    showCoordinates(latitude, longitude, cityName, country) {
         const latitudeDegreeElement = document.querySelector(selectors.LATITUDE_DEGREES);
         const longitudeDegreeElement = document.querySelector(selectors.LONGITUDE_DEGREES);
         const latitudeMinutesElement = document.querySelector(selectors.LATITUDE_MINUTES);
@@ -110,16 +116,16 @@ export class Application {
         const locationElement = document.querySelector(selectors.LOCATION);
         const minutesPerDegree = 60;
 
-        latitudeDegreeElement.innerHTML = Math.round(location.latitude);
-        longitudeDegreeElement.innerHTML = Math.round(location.longitude);
-        latitudeMinutesElement.innerHTML = Math.round((location.latitude - Math.trunc(location.latitude)) * minutesPerDegree);
-        longitudeMinutesElement.innerHTML = Math.round((location.longitude - Math.trunc(location.longitude)) * minutesPerDegree);
-        locationElement.innerHTML = `${this.currentLocation.cityName}, ${this.currentLocation.country}`;
+        latitudeDegreeElement.innerHTML = Math.round(latitude);
+        longitudeDegreeElement.innerHTML = Math.round(longitude);
+        latitudeMinutesElement.innerHTML = Math.round((latitude - Math.trunc(latitude)) * minutesPerDegree);
+        longitudeMinutesElement.innerHTML = Math.round((longitude - Math.trunc(longitude)) * minutesPerDegree);
+        locationElement.innerHTML = `${cityName}, ${country}`;
     }
 
     showMap() {
         const { mapboxgl } = window;        
-        mapboxgl.accessToken = 'pk.eyJ1IjoidmFsZW50aW5hLWtyIiwiYSI6ImNrbjdzenB4bTBiaG8ycHFuNTF2ZGg5bGQifQ.bzp7eMwGHnb9ZFfDNggXCA';
+        mapboxgl.accessToken = mapBoxAccessToken;
         new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11', 
@@ -234,19 +240,21 @@ export class Application {
         this.showWeatherIcons(this.currentWeather); 
     }
 
-    setLanguage(language, updateLocation = true) {
+    async setLanguage(language, updateLocation = true) {
         this.language = language;
         const selectLanguageElement = document.querySelector(`[value=${this.language}]`);
         selectLanguageElement.setAttribute('selected', 'selected');
 
         this.translateContent();
         if (updateLocation) {
+            const location = new Location();
+            await location.defineLocationByName(this.currentLocation.cityName, this.language);
+            this.currentLocation = location.getLocationData(); 
             
-            Location.getLocationByName(this.currentLocation.cityName, this.language)
-            .then(async (location) => {
-                await location.loadLocationTimezone();
-                await this.setLocation(location);
-            });            
+            const time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language);
+            await time.loadLocationTimezone();
+            const timeZone = time.getTimeZone();
+            await this.setLocation(this.currentLocation, timeZone);                        
         }
     }
     
@@ -281,7 +289,10 @@ export class Application {
         if (this.degreeUnit === degreeUnits.fahrenheit) {
             this.markAsNotActive(celsiusTemperatureBtn);
             this.markAsActive(fahrenheitTemperatureBtn);
-        } 
+        } else {
+            this.markAsNotActive(fahrenheitTemperatureBtn);
+            this.markAsActive(celsiusTemperatureBtn);
+        }
     }
 
     determineClickedButton(e) {
