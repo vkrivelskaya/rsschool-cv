@@ -21,20 +21,20 @@ export class Time {
     getTimeZone() {
         return this.timeZone;
     }
-    
-    getDate() {        
+
+    getDate() {
         const dateOptions = { weekday: 'short', month: 'long', day: 'numeric' };
 
         if (this.timeZone) {
             dateOptions.timeZone = this.timeZone;
         }
-        
+
         let currentDate = new Date();
-        return currentDate.toLocaleString(`${this.language}-GB`, dateOptions).replace(',', '');            
+        return currentDate.toLocaleString(`${this.language}-GB`, dateOptions).replace(',', '');
     }
-      
-    getTime() {        
-        const currentTime = this.timeZone 
+
+    getTime() {
+        const currentTime = this.timeZone
         ? new Date((new Date()).toLocaleString('en-US', { timeZone: this.timeZone }))
         : new Date();
 
@@ -42,5 +42,5 @@ export class Time {
         const min = this.addZeroToFormat(currentTime.getMinutes());
         const sec = this.addZeroToFormat(currentTime.getSeconds());
         return `${hour}:${min}:${sec}`;
-    }    
+    }
 }

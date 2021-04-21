@@ -14,16 +14,16 @@ export class Application {
         this.language = languages.en;
 
         this.currentLocation = null;
-        this.currentWeather = null; 
-        this.time = null;       
+        this.currentWeather = null;
+        this.time = null;
     }
 
-    init() { 
+    init() {
         this.initActiveDegreeButton();
         this.loadLocationByIP();
-        this.listenButtonsAndInputChanges();        
+        this.listenButtonsAndInputChanges();
         this.changeBackground();
-        this.initLanguage();               
+        this.initLanguage();
     }
 
     initLanguage() {
@@ -31,15 +31,15 @@ export class Application {
 
         if (savedLanguage && savedLanguage !== this.language) {
             this.setLanguage(savedLanguage, false);
-        } 
+        }
     }
 
     listenButtonsAndInputChanges() {
         const searchLocationElement = document.querySelector(selectors.SEARCH_FORM);
-        searchLocationElement.addEventListener('submit', this.onLocationChange.bind(this));  
+        searchLocationElement.addEventListener('submit', this.onLocationChange.bind(this));
 
         const languageButtonElement = document.querySelector(selectors.LANGUAGE_BTN);
-        languageButtonElement.addEventListener('change', this.changeLanguage.bind(this)); 
+        languageButtonElement.addEventListener('change', this.changeLanguage.bind(this));
 
         const buttonsContainer = document.querySelector(selectors.BUTTONS_CONTAINER);
         buttonsContainer.addEventListener('click', this.determineClickedButton.bind(this));
@@ -48,32 +48,40 @@ export class Application {
     showErrorMessage() {
         const errorMessageElement = document.querySelector(selectors.ERROR_MESSAGE);
         errorMessageElement.style.display = 'block';
-    
+
         setTimeout(() => {
             errorMessageElement.style.display = 'none';
-        }, 3000);    
+        }, 3000);
     }
 
-    async onLocationChange(e) {    
+    async defineLocation(city) {
+        const location = new Location();
+        await location.defineLocationByName(city, this.language);
+        this.currentLocation = location.getLocationData();
+    }
+
+    async defineTimeZone() {
+        this.time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language);
+        await this.time.loadLocationTimezone();
+        const timeZone = this.time.getTimeZone();
+        await this.setLocation(this.currentLocation, timeZone);
+    }
+
+    async onLocationChange(e) {
         e.preventDefault();
 
         const searchInputElement = document.querySelector(selectors.SEARCH_INPUT_FIELD);
-        const location = new Location();
-        await location.defineLocationByName(searchInputElement.value, this.language);
-        this.currentLocation = location.getLocationData(); 
+        await this.defineLocation(searchInputElement.value);
 
         if (this.currentLocation.cityName) {
-            this.time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language);
-            await this.time.loadLocationTimezone();
-            const timeZone = this.time.getTimeZone();
-            await this.setLocation(this.currentLocation, timeZone);
+            await this.defineTimeZone();
         } else {
             this.showErrorMessage();
         }
     }
 
     showDate() {
-        const dateElement = document.querySelector(selectors.DATE);      
+        const dateElement = document.querySelector(selectors.DATE);
 
         dateElement.innerHTML = this.time.getDate();
     }
@@ -91,16 +99,16 @@ export class Application {
         response = await response.json();
         const location = new Location();
         await location.defineLocationByName(response.city, this.language);
-        this.currentLocation = location.getLocationData(); 
-       
-        await this.setLocation(this.currentLocation);        
+        this.currentLocation = location.getLocationData();
+
+        await this.setLocation(this.currentLocation);
     }
 
-    async setLocation({ latitude, longitude, language, cityName, country }, timezone) { 
+    async setLocation({ latitude, longitude, language, cityName, country }, timezone) {
         this.currentWeather = new WeatherForecast(latitude, longitude, language);
         this.time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language, timezone);
         await this.currentWeather.loadWeather();
-           
+
         this.showCoordinates(latitude, longitude, cityName, country);
         this.showMap();
         this.showDate();
@@ -124,13 +132,13 @@ export class Application {
     }
 
     showMap() {
-        const { mapboxgl } = window;        
+        const { mapboxgl } = window;
         mapboxgl.accessToken = mapBoxAccessToken;
         new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11', 
-            center: [this.currentLocation.longitude, this.currentLocation.latitude], 
-            zoom: 8 
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [this.currentLocation.longitude, this.currentLocation.latitude],
+            zoom: 8
         });
     }
 
@@ -138,33 +146,33 @@ export class Application {
         const bodyElement = document.querySelector(selectors.BODY);
         const overlayColorStyle = 'linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%)';
 
-        let response = await fetch(requests.randomPhoto);   
+        let response = await fetch(requests.randomPhoto);
         response = await response.json();
-        
+
         bodyElement.style.background = `${overlayColorStyle}, url("${response.urls.regular}")`;
-        bodyElement.style.backgroundSize = 'cover';         
+        bodyElement.style.backgroundSize = 'cover';
     }
 
-    showTodaysWeatherDescription(todayWeather) {    
-        const todaysWeatherSummaryElement = document.querySelector(selectors.SUMMARY);    
+    showTodaysWeatherDescription(todayWeather) {
+        const todaysWeatherSummaryElement = document.querySelector(selectors.SUMMARY);
         const todaysWindElement = document.querySelector(selectors.WIND);
-        const todaysHumidityElement = document.querySelector(selectors.HUMIDITY_VALUE); 
-        const todaysTemperatureElement = document.querySelector(selectors.TEMPERATURE);        
+        const todaysHumidityElement = document.querySelector(selectors.HUMIDITY_VALUE);
+        const todaysTemperatureElement = document.querySelector(selectors.TEMPERATURE);
         const todaysApparentTemperatureElement = document.querySelector(selectors.APPARENT_TEMPERATURE);
-        
+
         if (this.degreeUnit === degreeUnits.celsius) {
             todaysTemperatureElement.innerHTML = todayWeather.temperatureInCelsius;
-            todaysApparentTemperatureElement.innerHTML = ` ${todayWeather.apparentTemperatureInCelsius} °`; 
+            todaysApparentTemperatureElement.innerHTML = ` ${todayWeather.apparentTemperatureInCelsius} °`;
         } else {
             todaysTemperatureElement.innerHTML = todayWeather.temperatureInFahrenheit;
-            todaysApparentTemperatureElement.innerHTML = ` ${todayWeather.apparentTemperatureInFahrenheit} °`;    
+            todaysApparentTemperatureElement.innerHTML = ` ${todayWeather.apparentTemperatureInFahrenheit} °`;
         }
-               
+
         todaysHumidityElement.innerHTML = `${todayWeather.humidity} %`;
         todaysWeatherSummaryElement.innerHTML = todayWeather.summary;
         todaysWindElement.innerHTML = `${todayWeather.wind} m/s`;
     }
-    
+
     showTemperatureForecast(weather) {
         [
             {
@@ -180,13 +188,13 @@ export class Application {
                 weather: weather.getForecastForDay(3),
             },
         ].forEach(({ temperatureElement, weather }) => {
-            temperatureElement.innerHTML = this.degreeUnit === degreeUnits.celsius 
-            ? `${weather.temperatureInCelsius}°` 
+            temperatureElement.innerHTML = this.degreeUnit === degreeUnits.celsius
+            ? `${weather.temperatureInCelsius}°`
             : `${weather.temperatureInFahrenheit}°`;
         });
     }
-    
-    showNextDaysOfWeek(weather) {        
+
+    showNextDaysOfWeek(weather) {
         const days = this.language === languages.en ? daysOfWeek.en : daysOfWeek.ru;
 
         [
@@ -206,7 +214,7 @@ export class Application {
             dayElement.innerHTML = days[date.getDay()];
         });
     }
-    
+
     showWeatherIcons(weather) {
         [
             {
@@ -228,16 +236,16 @@ export class Application {
         ].forEach(({ iconElement, weather }) => {
             const iconFile = weatherIcons[weather.icon];
 
-            iconElement.style.background = `center no-repeat url("../assets/images/weather icons/${iconFile}")`;            
+            iconElement.style.background = `center no-repeat url("../assets/images/weather icons/${iconFile}")`;
             iconElement.style.backgroundSize = 'cover';
-        });        
+        });
     }
-    
-    showLoadedWeather() { 
+
+    showLoadedWeather() {
         this.showTodaysWeatherDescription(this.currentWeather.getForecastForDay());
-        this.showTemperatureForecast(this.currentWeather);  
-        this.showNextDaysOfWeek(this.currentWeather);  
-        this.showWeatherIcons(this.currentWeather); 
+        this.showTemperatureForecast(this.currentWeather);
+        this.showNextDaysOfWeek(this.currentWeather);
+        this.showWeatherIcons(this.currentWeather);
     }
 
     async setLanguage(language, updateLocation = true) {
@@ -247,23 +255,17 @@ export class Application {
 
         this.translateContent();
         if (updateLocation) {
-            const location = new Location();
-            await location.defineLocationByName(this.currentLocation.cityName, this.language);
-            this.currentLocation = location.getLocationData(); 
-            
-            const time = new Time(this.currentLocation.latitude, this.currentLocation.longitude, this.currentLocation.language);
-            await time.loadLocationTimezone();
-            const timeZone = time.getTimeZone();
-            await this.setLocation(this.currentLocation, timeZone);                        
+            await this.defineLocation(this.currentLocation.cityName);
+            await this.defineTimeZone();
         }
     }
-    
+
     changeLanguage(e) {
         const language = e.target.value;
         localStorage.setItem(localStorageItems.language, language);
-        this.setLanguage(language); 
+        this.setLanguage(language);
     }
-    
+
     translateContent() {
         const stringsToBeResolved = document.querySelectorAll('[data-content]');
 
@@ -276,7 +278,7 @@ export class Application {
         el.classList.remove(classes.ACTIVE);
         el.classList.add(classes.NOT_ACTIVE);
     }
-    
+
     markAsActive(el) {
         el.classList.remove(classes.NOT_ACTIVE);
         el.classList.add(classes.ACTIVE);
@@ -297,21 +299,22 @@ export class Application {
 
     determineClickedButton(e) {
         const temperatureButtons = document.querySelectorAll(selectors.TEMPERATURE_BTN);
-        
-        if (e.target.className.includes(classes.CELSIUS) ||
-            e.target.className.includes(classes.FAHRENHEIT)) {                
+        const clickedButtonClassName = e.target.className;
+
+        if (clickedButtonClassName.includes(classes.CELSIUS) || (clickedButtonClassName.includes(classes.FAHRENHEIT))) {
                 temperatureButtons.forEach((el) => {
                     this.markAsNotActive(el);
 
-                    if (el.className.includes(e.target.className)) {
+                    if (el.className.includes(clickedButtonClassName)) {
                         this.markAsActive(el);
-                    }                  
+                    }
                 });
-                this.degreeUnit = e.target.className;
+
+                this.degreeUnit = clickedButtonClassName;
                 localStorage.setItem(localStorageItems.degreeUnit, this.degreeUnit);
                 this.showLoadedWeather();
-        } else if (e.target.className.includes(classes.REFRESH_BTN)) {
+        } else if (clickedButtonClassName.includes(classes.REFRESH_BTN)) {
             this.changeBackground();
-        } 
-    } 
+        }
+    }
 }
