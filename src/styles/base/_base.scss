@@ -1,0 +1,64 @@
+html {
+    font-size: 9px;
+
+    @include media-desktop {
+        font-size: 8px;
+    }
+
+    @include media-tablet {
+        font-size: 6px;
+    }
+
+    @include media-big-mobile {
+        font-size: 3px;
+    }  
+
+    @include media-mobile {
+        font-size: 2.6px;
+    }
+    
+    @include media-small-mobile {
+        font-size: 2.5px;
+    } 
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;    
+    background-size: cover;
+    color: $white; 
+    transition: background 2s ease-in-out;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 90px 96px 93px;
+    margin: auto;
+    max-width: $content-width;
+    
+    .weather-data-container {
+        flex: auto;
+    }
+
+    .geolocation-data-container {
+        flex: auto;
+        align-items: flex-end;
+    }
+
+    @include media-desktop {
+        padding: 40px 45px 96px 46px;
+    }
+
+    @include media-tablet {
+        padding: 40px 30px;
+    }
+
+    @include media-big-mobile {
+        padding: 40px 20px;
+    }
+
+    @include media-mobile {
+        padding: 25px 15px;
+    }
+}

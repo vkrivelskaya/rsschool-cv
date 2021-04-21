@@ -1,0 +1,101 @@
+.buttons-container {
+    display: flex;
+    margin-bottom: 57px;   
+
+    .button {
+        height: 44px;
+        width: 44px;
+        border: none;
+
+        @include media-desktop {
+            width: 35px;
+            height: 35px;
+        }
+    
+        @include media-tablet {
+            width: 26px;
+            height: 26px;
+        }
+    
+        @include media-big-mobile {
+            width: 18px;
+            height: 18px;
+        }
+    }    
+}
+
+.refresh-button {        
+    border-radius: 3px;
+    background-image: url("../assets/images/Refresh BG.svg");
+    background-size: contain;
+    margin-right: 10px;        
+}  
+
+select {
+    display: none;
+}
+
+.language-button {
+    background-color: $grey;
+    border-radius: 3px;
+    width: 71px;
+    height: 44px;
+    border: none;
+    color:  $white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 10px;
+
+    @include media-desktop {
+        width: 57px;
+        height: 35px;
+    }
+
+    @include media-tablet {
+        width: 43px;
+        height: 26px;
+    }
+
+    @include media-big-mobile {
+        width: 32px;
+        height: 18px;
+        font-size: 1.6rem;
+    }
+}    
+
+.temperature {
+    display: flex;
+
+    .temperature-button {          
+        display: flex;
+        align-items: center;            
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: $white;
+
+        @include media-mobile {
+            font-size: 1.6rem;
+        }
+    }
+
+    .fahrenheit-temperature {
+        border-radius: 3px 0px 0px 3px;                    
+    }
+
+    .celsius-temperature {
+        border-radius: 0px 3px 3px 0px;         
+    }  
+    
+    .active-button {
+        background-color: $grey;
+    }
+
+    .not-active-button {
+        background-color: $dark-grey;         
+        opacity: 0.4; 
+    }
+}

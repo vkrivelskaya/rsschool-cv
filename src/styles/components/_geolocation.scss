@@ -1,0 +1,158 @@
+.input-field {
+    width: 274px;
+    height: 44px;
+    background: url("../assets/images/voice-input-icon.svg") right 5.47% bottom 50% no-repeat, $very-dark-grayish-blue;
+    background-size: 7%;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid $very-light-gray;
+    padding: 13px 15px;
+    font-size: 1.4rem;
+
+    @include media-desktop {
+        width: 228px;
+        height: 35px;
+    }
+
+    @include media-tablet {
+        width: 171px;        
+        height: 26px;
+        padding: 0px 15px;
+    }
+
+    @include media-big-mobile {
+        width: 95px;
+        height: 18px;
+        font-size: 1.6rem;
+    }
+
+    @include media-mobile {
+        width: 100px;        
+    }
+
+    @include media-small-mobile {
+        width: 75px;
+    }      
+}
+
+input::placeholder {
+    color: $white;
+}
+
+.search-container {
+    display: flex;
+}
+
+.search-button {
+    background: $grey;
+    border: none;
+    border-radius: 0 3px 3px 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 0 20px;
+    width: 101px;
+
+    @include media-desktop {
+        width: 72px;
+    }
+
+    @include media-tablet {
+        width: 54px;
+        padding: 0;
+    }
+
+    @include media-big-mobile {
+        width: 35px;
+    }
+
+    @include media-mobile {
+        width: 30px;
+        font-size: 1.6rem;        
+    }
+
+    @include media-small-mobile {
+        width: 25px;
+    }
+}
+
+.map {
+    width: 375px;
+    height: 398px;
+    margin-bottom: 5px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 100% 75%, 100% 100%, 90% 95%, 0% 95%);
+    border-radius: 8px;
+
+    @include media-desktop {
+        width: 300px;
+        height: 307px;
+        margin-bottom: 0px;
+    }
+
+    @include media-tablet {
+        width: 225px;
+        height: 239px;
+    }
+
+    @include media-big-mobile {
+        width: 130px;
+        height: 115px;
+    }
+
+    @include media-small-mobile {
+        width: 100px;
+        height: 105px;        
+    }    
+}
+
+.coordinates {
+    font-weight: 600;
+    font-size: 2.0rem;
+    text-align: right;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .degrees::after {
+        content: "°";
+    }
+
+    .minutes::after {
+        content: "'";
+    }
+}
+
+.geolocation-data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.latitude-description, .longitude-description {
+    display: flex;
+    align-items: center;
+}
+
+.latitude, .longitude {
+    padding-right: 5px;
+    margin: 5px;
+
+    @include media-mobile {
+        margin: 3px;
+    }
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-message {
+    display: none;
+    padding: 10px 20px;
+    border: 1px solid $very-dark-grayish-blue;
+    border-radius: 4px;
+    text-align: center;
+    background: $very-light-gray;
+    font-size: 2rem;
+    font-weight: bold;
+}

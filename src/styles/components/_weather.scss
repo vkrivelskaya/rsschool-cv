@@ -1,0 +1,214 @@
+.location {
+    font-weight: bold;
+    font-size: 4.4rem;
+    line-height: 5.4rem;
+    text-transform: uppercase;
+}
+
+.time, .date {
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    margin-right: 5px;
+}
+
+.weather-today {
+    display: flex;
+    align-items: flex-start;
+
+    .temperature {
+        font-weight: bold;
+        font-size: 20rem;
+        line-height: 37.3rem;
+        text-transform: uppercase;
+        position: relative;
+
+        &:after {
+            content: "°";
+            font-size: 10rem;
+            position: absolute;
+            top: -75px;
+            left: 110%;
+
+            @include media-desktop {
+                top: -60px;
+            }
+
+            @include media-tablet {
+                top: -45px;
+            }
+
+            @include media-big-mobile {
+                top: -18px;
+            }
+
+            @include media-small-mobile {
+                top: -18px;
+            }
+        }
+    }
+
+    .weather-description-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .weather-description {
+            font-weight: bold;
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-left: 90px;
+            margin-top: 12px;
+
+            .summary-description, .apparent-temperature-description, .wind-description, .humidity-description {
+                margin: 10px 0;
+                display: flex;
+
+                .wind-value {
+                    text-transform: lowercase;
+                }
+
+                .summary, .apparent-temperature, .wind, .humidity {
+                    margin: 0 5px 0 0;
+                }
+
+                @include media-desktop {
+                    margin: 8px 0;
+                }
+
+                @include media-tablet {
+                    margin: 6px 0;
+                }
+
+                @include media-big-mobile {
+                    margin: 4px 0;
+                }
+
+                @include media-mobile {
+                    margin: 2px 0;
+                }
+            }
+
+            @include media-desktop {
+                margin-left: 72px;
+                margin-top: 20px;
+            }
+
+            @include media-tablet {
+                margin-left: 54px;
+                margin-top: 15px;
+            }
+
+            @include media-big-mobile {
+                margin-left: 25px;
+                margin-top: 2px;
+            }
+
+            @include media-mobile {
+                margin-left: 25px;
+                margin-top: 0px;
+                font-size: 1.8rem;
+            }
+
+            @include media-small-mobile {
+                margin-left: 20px;
+                margin-top: 6px;
+            }
+        }
+        
+        .weather-icon {
+            background-size: contain;
+            width: 163px;
+            height: 103px;
+
+            @include media-desktop {
+                width: 130px;
+                height: 82px;
+            }
+
+            @include media-tablet {
+                width: 98px;
+                height: 62px;
+            }
+
+            @include media-big-mobile {
+                width: 60px;
+                height: 38px;
+            }
+
+            @include media-small-mobile {
+                width: 45px;
+                height: 28px;
+            }
+        }
+    }
+}
+
+.weather-forecast-container {
+    display: flex;
+
+    .weather-tomorrow, .weather-second-day, .weather-third-day {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-right: 40px;
+
+        .day {
+            font-weight: bold;
+            font-size: 2.2rem;
+        }
+
+        .weather-forecast {
+            display: flex;
+            align-items: flex-start;
+
+            .forecast-temperature {
+                font-weight: 600;
+                font-size: 8.0rem;
+            }
+            
+            .forecast-weather-icon {
+                background-size: contain;
+                width: 66px;
+                height: 42px;
+                margin-top: 5px;
+                margin-left: 10px;
+
+                @include media-desktop {
+                    width: 53px;
+                    height: 34px;
+                }
+
+                @include media-tablet {
+                    width: 40px;
+                    height: 25px;
+                    margin-left: 8px;
+                }
+
+                @include media-big-mobile {
+                    width: 20px;
+                    height: 13px;
+                    margin-left: 5px;
+                }
+
+                @include media-small-mobile {
+                    width: 15px;
+                    height: 10px;
+                    margin-left: 3px;
+                }
+            }
+        }
+
+        @include media-desktop {
+            margin-right: 30px;
+        }
+
+        @include media-tablet {
+            margin-right: 25px;
+        }
+
+        @include media-big-mobile {
+            margin-right: 12px;
+        }
+    }
+}

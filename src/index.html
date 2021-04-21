@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy-weather</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">   
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script defer src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="weather-data-container">
+            <div class="buttons-container">
+                <button class="refresh-button button"></button>
+                <select class="language-button">
+                    <option class="language" selected value="en">EN</option>
+                    <option class="language" value="ru">RU</option>                    
+                </select>
+                <div class="temperature">
+                    <button class="fahrenheit-temperature temperature-button not-active-button button">
+                        <span class="fahrenheit">°F</span>
+                    </button>
+                    <button class="celsius-temperature temperature-button active-button button">
+                        <span class="celsius">°C</span>
+                    </button>
+                </div> 
+            </div>
+            <div class="location"></div>
+            <time class="date"></time>   
+            <time class="time"></time>
+            <div class="weather-today">
+                <div class="temperature">
+                    <span class="today-temperature"></span>
+                </div>
+                <div class="weather-description-container">
+                    <div class="weather-icon-today weather-icon"></div>
+                    <div class="weather-description">
+                        <div class="summary-description">
+                            <span class="summary-value"></span>
+                        </div>                                                
+                        <div class="apparent-temperature-description">
+                            <p data-content="Feels like" class="apparent-temperature">Feels like:                                 
+                            </p> 
+                            <span class="apparent-temperature-value"></span> 
+                        </div>                       
+                        <div class="wind-description">
+                            <p data-content="Wind" class="wind">Wind:                                 
+                            </p>
+                            <span class="wind-value"></span> 
+                        </div>                       
+                        <div class="humidity-description">
+                            <p data-content="Humidity" class="humidity">Humidity:                                 
+                            </p>
+                            <span class="humidity-value"></span>  
+                        </div>                      
+                    </div>
+                </div>                
+            </div>
+            <div class="weather-forecast-container">
+                <div class="weather-tomorrow">
+                    <div class="day tomorrow">Tuesday</div>
+                    <div class="weather-forecast">
+                        <div class="forecast-temperature">
+                            <span class="forecast-temperature-tomorrow"></span>
+                        </div>
+                        <div class="weather-icon-tomorrow forecast-weather-icon"></div>
+                    </div>                    
+                </div>
+                <div class="weather-second-day">
+                    <div class="day second-day">Wednesday</div>
+                    <div class="weather-forecast">
+                        <div class="forecast-temperature">
+                            <span class="forecast-temperature-second-day"></span>
+                        </div>
+                        <div class="weather-icon-second-day forecast-weather-icon"></div>
+                    </div>                    
+                </div>
+                <div class="weather-third-day">
+                    <div class="day third-day">Thursday</div>
+                    <div class="weather-forecast">
+                        <div class="forecast-temperature">
+                            <span class="forecast-temperature-third-day"></span> 
+                        </div>
+                        <div class="weather-icon-third-day forecast-weather-icon"></div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="geolocation-data-container">
+            <div class="search">
+                <form class="search-container" action="/">
+                    <input class="input-field" type="search" name="search-input-field" placeholder="Search city">
+                    <input class="search-button" type="submit" value="Search">
+                </form> 
+                <div class="error-message">Location not found</div>
+            </div>
+            <div class="map-container">
+                <div class="map" id="map"></div> 
+                <div class="coordinates">
+                    <div class="latitude-description">
+                        <p data-content="Latitude" class="latitude">Latitude: </p> 
+                        <span class="latitude-degrees degrees">53</span>
+                        <span class="latitude-minutes minutes">54</span>
+                    </div>
+                    <div class="longitude-description">
+                        <p data-content="Longitude" class="longitude">Longitude: </p>
+                        <span class="longitude-degrees degrees">27</span>
+                        <span class="longitude-minutes minutes">34</span>
+                    </div>
+                </div>
+            </div>             
+        </div>
+    </div>
+</body>
+</html>
