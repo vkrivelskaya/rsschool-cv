@@ -1,0 +1,70 @@
+.username-container, .message-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 1rem;
+
+    @include media-big-mobile {
+        font-size: 0.7rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.5rem;
+    }
+}
+
+.username-container {
+    width: 70%;
+    background-color: $grayish-blue;
+    border-radius: 5px;
+}
+
+.username {
+    display: inline-block;
+    padding: 2px;
+    width: 60%;
+}
+
+.chatroom {
+    padding: 5px;
+    border: 3px inset $grayish-blue;
+    height: 300px;
+    font-size: 1rem;
+    overflow-y: auto;
+    word-wrap: break-word;
+
+    .message-line {
+        margin: 2px;
+        display: block;
+    }
+}
+
+.message-container {
+    text-align: center;
+    background-color: $dark-blue;
+}
+
+.message-input {
+    display: inline-block;
+    width: 89%;
+    height: 80%;
+    font-size: 2vh;
+}
+
+.send-message-btn {
+    height: 80%;
+    width: 10%;
+}
+
+.button {
+    border-radius: 5px;
+    padding: 5px 3px;
+    font-weight: bold;
+    box-shadow: 2px 2px 6px;
+}
+
+.change-username-btn {
+    height: 80%;
+    width: 30%;
+}

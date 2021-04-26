@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script defer src="chat.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <title>Chat on socket</title>
+</head>
+<body>
+    <header>
+        <h1 class="header">Chat</h1>
+    </header>
+    <main>
+        <section>
+            <div class="username-container" id="change_username">
+                <input type="text" class="username" id="username">
+                <button id="send-username" class="change-username-btn button" type="button">Change username</button>
+            </div>
+        </section>
+        <section class="chatroom" id="chatroom">
+            <div id="feedback"></div>
+        </section>
+        <section class="message-container" id="input_zone">
+            <input id="message" class="message-input message" type="text">
+            <button id="send-message" class="send-message-btn message button" type="button">Send</button>
+        </section>
+    </main>
+</body>
+</html>
