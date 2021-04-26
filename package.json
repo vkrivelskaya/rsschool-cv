@@ -1,0 +1,24 @@
+{
+  "name": "chat_on_socket",
+  "version": "1.0.0",
+  "description": "This project is a simple chat application for sending / receiving messages in real time, which has a client and server part of the code.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkrivelskaya/rsschool-cv.git"
+  },
+  "author": "vkrivelskaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vkrivelskaya/rsschool-cv/issues"
+  },
+  "homepage": "https://github.com/vkrivelskaya/rsschool-cv#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "socket.io": "^2.2.0"
+  }
+}
